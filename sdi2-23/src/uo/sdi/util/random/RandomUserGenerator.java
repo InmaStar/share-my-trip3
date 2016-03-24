@@ -9,8 +9,7 @@ public class RandomUserGenerator {
     private static String[] nombres = {"Mari Pili", "Julian", "Luisa", "Paco", "Oswaldo", "Margarita"};
     
    private static Long newUserId(){
-	users++;
-	return users + USER_ID_INIT_VALUE;
+	return ++users + USER_ID_INIT_VALUE;
     }
     
     public static UserDTO generateUser(){
@@ -19,7 +18,7 @@ public class RandomUserGenerator {
 	Long userId = newUserId();
 	newUser.setId(userId);
 	
-	String login = "usuario" + userId;
+	String login = "usuario" + users;
 	newUser.setLogin(login);
 	newUser.setPassword(login);
 	

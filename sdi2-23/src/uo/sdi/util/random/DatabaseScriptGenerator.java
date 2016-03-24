@@ -8,23 +8,19 @@ import uo.sdi.transport.UserDTO;
 
 public class DatabaseScriptGenerator {
     private static final String USER_TEMPLATE = "INSERT INTO TUSERS VALUES"
-	    + "(%d, %s, %s, %s, %s, %d, %s)";
-    private static final String TRIP_TEMPLATE = "INSERT INTO TTRIPS VALUES "
-	    + "(%d, %tY-%<tm-%<td %<tH:%<tM:0.000000, %d, "
-	    + "%tY-%<tm-%<td %<tH:%<tM:0.000000, %s, %s, %s, %s, %s, %e, %e, "
-	    + "%d, %tY-%<tm-%<td %<tH:%<tM:0.000000, %s, %s, %s, %s, %e, %e, "
-	    + "%d, %e, %d, %d, %d";
+	    + "(%d, '%s', '%s', '%s', '%s', %d, '%s');";
+    private static final String TRIP_TEMPLATE = "INSERT INTO TTRIPS VALUES"
+	    + "(%d, '%tY-%<tm-%<td %<tH:%<tM:0.000000', %d, "
+	    + "'%tY-%<tm-%<td %<tH:%<tM:0.000000', '%s', '%s', '%s', '%s', "
+	    + "'%s', %e, %e, '%s', "
+	    + "'%tY-%<tm-%<td %<tH:%<tM:0.000000', '%s', '%s', '%s', '%s', "
+	    + "%e, %e, '%s', %e, %d, %d, %d;";
     private static PrintWriter writer;
-
-    public DatabaseScriptGenerator() throws FileNotFoundException,
-	    UnsupportedEncodingException {
-	writer = new PrintWriter("DB", "UTF-8");
-    }
 
     private static String formatUser(UserDTO user) {
 	return String.format(USER_TEMPLATE, user.getId(), user.getEmail(),
 		user.getLogin(), user.getName(), user.getPassword(),
-		user.getStatus(), user.getSurname());
+		user.getStatus().ordinal(), user.getSurname());
     }
 
     private static String formatTrip(TripDTO trip) {
@@ -40,14 +36,14 @@ public class DatabaseScriptGenerator {
 		trip.getDestination().getState(), 
 		trip.getDestination().getLat(), trip.getDestination().getLon(),
 		trip.getDestination().getZipCode(), trip.getEstimatedCost(),
-		trip.getMaxPax(), trip.getStatus(), trip.getPromoter().getId());
+		trip.getMaxPax(), trip.getStatus().ordinal(), 
+		trip.getPromoter().getId());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, 
+    						UnsupportedEncodingException {
 	UserDTO user;
-
-	// test user
-	writer.println(formatUser(RandomUserGenerator.generateTestUser()));
+	writer = new PrintWriter("src/uo/sdi/util/random/DB", "UTF-8");
 
 	// 3 users
 	for (int i = 0; i < 3; i++) {
@@ -61,6 +57,9 @@ public class DatabaseScriptGenerator {
 	    }
 	}
 
+	// test user
+	writer.println(formatUser(RandomUserGenerator.generateTestUser()));
+	
 	writer.close();
     }
 

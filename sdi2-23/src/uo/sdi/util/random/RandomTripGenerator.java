@@ -2,6 +2,8 @@ package uo.sdi.util.random;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -95,12 +97,14 @@ public class RandomTripGenerator {
 	newTrip.setDeparture(departure);
 	newTrip.setDestination(destination);
 	
+	newTrip.setStatus(TripStatus.OPEN);
+	newTrip.setComments("");
+	
 	return newTrip;
     }
 
     private static Long newTripId(){
-	trips++;
-	return trips + TRIP_ID_INIT_VALUE;
+	return ++trips + TRIP_ID_INIT_VALUE;
     }
 
     public static TripDTO generateTrip(UserDTO userDTO) {
