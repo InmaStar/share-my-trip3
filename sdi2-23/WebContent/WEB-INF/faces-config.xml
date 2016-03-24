@@ -8,9 +8,7 @@
 		<managed-bean-class>uo.sdi.presentation.BeanLocaleSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-
-<!-- Configuracion de un proyecto distinto  -->
-<!-- 
+	
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
@@ -18,6 +16,8 @@
 		</resource-bundle>
 	</application>
 
+<!-- Configuracion de un proyecto distinto  -->
+<!-- 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
