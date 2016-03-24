@@ -4,16 +4,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 	<managed-bean>
-		<managed-bean-name>controller</managed-bean-name>
-		<managed-bean-class>com.sdi.presentation.BeanAlumnos</managed-bean-class>
+		<managed-bean-name>localeSettings</managed-bean-name>
+		<managed-bean-class>uo.sdi.presentation.BeanLocaleSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>settings</managed-bean-name>
-		<managed-bean-class>com.sdi.presentation.BeanSettings</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-
+	
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
@@ -21,6 +16,8 @@
 		</resource-bundle>
 	</application>
 
+<!-- Configuracion de un proyecto distinto  -->
+<!-- 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -87,9 +84,12 @@
 		</navigation-case>
 	</navigation-rule>
 	
-<lifecycle>
-<phase-listener>
-com.sdi.presentation.listener.LoginListener
-</phase-listener>
-</lifecycle>
+	<lifecycle>
+		<phase-listener>
+			com.sdi.presentation.listener.LoginListener
+		</phase-listener>
+	</lifecycle>
+ -->
+ 
 </faces-config>
+
