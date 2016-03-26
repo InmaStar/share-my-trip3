@@ -8,15 +8,34 @@
 
 <f:view locale="#{localeSettings.locale}">
 	<h:head>
-		<title>
-			<h:outputFormat value="#{msgs.app_title}">
+		<title><h:outputFormat value="#{msgs.app_title}">
 				<ui:insert name="titleParam">
 					<f:param value="#{msgs.default_title}" />
 				</ui:insert>
-			</h:outputFormat>
-		</title>
+				<f:param value="#{msgs.app_name}" />
+			</h:outputFormat></title>
 	</h:head>
 	<h:body>
+		
+		<h:form>
+		<p:menubar id="navbar">
+			<p:menuitem disabled="true" id="nombre_app"> 
+				<strong>#{msgs.app_name}</strong> 
+			</p:menuitem>
+
+			<ui:insert name="menu_usuario">
+				<ui:include src="/pages/snippets/opcionesPublico.xhtml" />
+			</ui:insert>
+
+			<p:submenu style="float:right" label="#{msgs.language}">
+				<p:menuitem id="linkespa" value="#{msgs.spanish_link}"
+					actionListener="#{localeSettings.setSpanish}" update="@all" />
+				<p:menuitem id="linkingles" value="#{msgs.english_link}"
+					actionListener="#{localeSettings.setEnglish}" update="@all" />
+			</p:submenu>
+		</p:menubar>
+		</h:form>
+		
 		<ui:insert name="cuerpo">
 		</ui:insert>
 	</h:body>

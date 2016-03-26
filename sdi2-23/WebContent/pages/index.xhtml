@@ -5,11 +5,14 @@
 	template="/pages/templates/plantillaGeneral.xhtml">
 	
 <ui:define name="titleParam">
-<f:param value="#{msgs.index_title}" />
+	<f:param value="#{msgs.index_title}" />
 </ui:define>
 	
 <ui:define name="cuerpo">
 	<h1>#{msgs.welcome}</h1>
-	<a id="listarViajes" href="#">#{msgs.check_trips}</a>
+	<h:form>
+		<h:commandLink id="listarViajes">#{msgs.check_trips}</h:commandLink>
+	</h:form>
 </ui:define>
+
 </ui:composition>
