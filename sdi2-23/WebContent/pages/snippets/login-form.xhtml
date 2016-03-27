@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h1>#{msgs.login_form_title}</h1>
+	<p:panelGrid id="grid" columns="2" cellpadding="5">
+		#{msgs.login_form_login_label}: 
+		<h:panelGroup>
+			<p:inputText id="login" value="#{login.name}" required="true"
+				requiredMessage="#{msgs.login_form_login_required}" />
+			<p:message for="login" />
+		</h:panelGroup>
+  
+		#{msgs.login_form_password_label}: 
+		<h:panelGroup>
+			<p:password id="password" value="#{login.password}" required="true"
+				requiredMessage="#{msgs.login_form_password_required}" />
+			<p:message for="password" />
+		</h:panelGroup>
+
+		<p:commandButton value="#{msgs.button_send}"
+			action="#{login.validar}">
+		</p:commandButton>
+	</p:panelGrid>
+
+</ui:composition>
