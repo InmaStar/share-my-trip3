@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+		<p:menubar id="navbar">
+			<p:menuitem disabled="true" id="nombre_app"> 
+				<strong>#{msgs.app_name}</strong> 
+			</p:menuitem>
+
+			<ui:include src="#{true ? '/pages/snippets/opcionesPublico.xhtml' : '/pages/snippets/opcionesRegistrado.xhtml'}" />
+			
+			<p:submenu style="float:right" label="#{msgs.language}">
+				<p:menuitem id="linkespa" value="#{msgs.spanish_link}"
+					actionListener="#{localeSettings.setSpanish}" update="@all" />
+				<p:menuitem id="linkingles" value="#{msgs.english_link}"
+					actionListener="#{localeSettings.setEnglish}" update="@all" />
+			</p:submenu>
+		</p:menubar>
+
+</ui:composition>

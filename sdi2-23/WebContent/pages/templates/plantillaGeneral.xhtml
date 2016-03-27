@@ -18,22 +18,7 @@
 	<h:body>
 		
 		<h:form>
-		<p:menubar id="navbar">
-			<p:menuitem disabled="true" id="nombre_app"> 
-				<strong>#{msgs.app_name}</strong> 
-			</p:menuitem>
-
-			<ui:insert name="menu_usuario">
-				<ui:include src="/pages/snippets/opcionesPublico.xhtml" />
-			</ui:insert>
-
-			<p:submenu style="float:right" label="#{msgs.language}">
-				<p:menuitem id="linkespa" value="#{msgs.spanish_link}"
-					actionListener="#{localeSettings.setSpanish}" update="@all" />
-				<p:menuitem id="linkingles" value="#{msgs.english_link}"
-					actionListener="#{localeSettings.setEnglish}" update="@all" />
-			</p:submenu>
-		</p:menubar>
+			<ui:include src="/pages/snippets/barraDeUsuario.xhtml" />
 		</h:form>
 		
 		<ui:insert name="cuerpo">
