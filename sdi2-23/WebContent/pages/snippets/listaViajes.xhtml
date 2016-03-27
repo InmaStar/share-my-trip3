@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<p:panel header="#{msgs.list_of_trips}">
+		<p:dataTable id="listadoViajesDisponibles" var="trip"
+				value="#{trips.availableTrips}" border="1">
+		<p:column>
+			<f:facet name="header">#{msgs.departure}</f:facet>#{trip.departure.city}</p:column>
+		<p:column>
+			<f:facet name="header">#{msgs.destination}</f:facet>#{trip.destination.city}</p:column>
+		<p:column> 
+			<f:facet name="header">#{msgs.available_seats}</f:facet>#{trip.availablePax}</p:column>
+		<p:column>
+			<f:facet name="header">#{msgs.promoter}</f:facet>#{trip.promoter.login}</p:column>
+		<p:column rendered="#{!user.publico}">
+			<p:commandLink action="#{trip.cancelarPlaza }" inmediate="true" 
+				rendered="#{trip.pending(user.id)}"
+				id="cancelarPlaza#{trip.id}">#{msgs.cancel_seat }</p:commandLink>
+			<p:commandLink action="#{trip.solicitarPlaza }" inmediate="true"
+				rendered="#{!trip.pending(user.id)}" id="solicitarPlaza#{trip.id}">
+				#{msgs.request_seat}</p:commandLink>
+		</p:column>
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>

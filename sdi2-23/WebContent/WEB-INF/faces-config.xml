@@ -11,6 +11,18 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>user</managed-bean-name>
+		<managed-bean-class>uo.sdi.presentation.BeanUser</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>trips</managed-bean-name>
+		<managed-bean-class>uo.sdi.presentation.BeanTrips</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
