@@ -2,17 +2,24 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	template="/pages/templates/plantillaGeneral.xhtml">
-	
-<ui:define name="titleParam">
-	<f:param value="#{msgs.index_title}" />
-</ui:define>
-	
-<ui:define name="cuerpo">
-	<h1>#{msgs.welcome}</h1>
-	<h:form>
-		<h:commandLink id="listarViajes">#{msgs.check_trips}</h:commandLink>
-	</h:form>
-</ui:define>
+
+	<ui:define name="titleParam">
+		<f:param value="#{msgs.index_title}" />
+	</ui:define>
+
+	<ui:define name="cuerpo">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<h1>#{msgs.welcome}</h1>
+					<h:form>
+						<div class="well well-sm">
+							<h:commandLink id="listarViajes">#{msgs.check_trips}</h:commandLink>
+						</div>
+					</h:form>
+				</div>
+			</div>
+	</ui:define>
 
 </ui:composition>
