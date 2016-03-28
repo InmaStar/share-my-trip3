@@ -16,6 +16,10 @@ public class BeanTrip {
     
     private TripDTO viaje;
     
+    public void setViaje(TripDTO viaje){
+	this.viaje = viaje;
+    }
+    
     public Long getId(){
 	return viaje.getId();
     }

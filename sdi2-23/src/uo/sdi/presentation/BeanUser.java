@@ -3,7 +3,6 @@ package uo.sdi.presentation;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import uo.sdi.transport.TripDTO;
@@ -13,8 +12,6 @@ import uo.sdi.transport.UserDTO;
 @SessionScoped
 public class BeanUser {
 
-    @ManagedProperty(value = "#{trip}")
-    private BeanTrip viaje;
     private UserDTO user;
     
     public boolean isPublico(){
