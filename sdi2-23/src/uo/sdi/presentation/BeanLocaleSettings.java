@@ -25,7 +25,12 @@ public class BeanLocaleSettings {
 	   /* si el idioma del navegador no esta soportado 
 	    * se cambia locale a ingles
 	    */
-	   if(!locale.equals(ENGLISH) && !locale.equals(SPANISH)){
+	   if(locale.getISO3Language().equals(SPANISH.getISO3Language())){
+	       locale = SPANISH;
+	   }
+	   else if(locale.getISO3Language().equals(ENGLISH.getISO3Language())){
+	       locale = ENGLISH; 
+	   } else {
 	       locale = ENGLISH; 
 	   }
 	   Log.info("Se ha establecido el idioma como [%s]", 
