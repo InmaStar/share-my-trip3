@@ -9,21 +9,10 @@
 		<f:param value="#{msgs.trips_list_title}" />
 	</ui:define>
 	
-	<ui:define name="cuerpo">
-	
-		<h:form>
-			<p:commandButton action="" inmediate="true">
-			#{msgs.register_trip }</p:commandButton>
-		</h:form>
-	
-        <h:form>
-        	<ui:include src="/pages/snippets/listaViajes.xhtml" />
-        </h:form>
-        
-        <h:form>
-        	<ui:include src="/pages/snippets/viajesPromotor.xhtml" />
-        </h:form>
-        
+    <ui:define name="cuerpo">
+        	 <ui:include src="#{user.publico ? 
+        	'/pages/snippets/listaViajesPublico.xhtml' : 
+        	'/pages/snippets/listaViajesRegistrado.xhtml'}" />
     </ui:define>
     
 </ui:composition>

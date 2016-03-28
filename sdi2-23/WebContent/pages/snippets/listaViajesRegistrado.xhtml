@@ -4,15 +4,18 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/templates/plantillaGeneral.xhtml">
+
+		<h:form>
+			<p:commandButton action="#{trip.register}" inmediate="true">
+			#{msgs.register_trip }</p:commandButton>
+		</h:form>
 	
-	<ui:define name="titleParam">
-		<f:param value="#{msgs.trips_list_title}" />
-	</ui:define>
-	
-    <ui:define name="cuerpo">
         <h:form>
-        	<ui:include src="/pages/snippets/listaViajes.xhtml" />
+        	<ui:include src="/pages/snippets/viajes.xhtml" />
         </h:form>
-    </ui:define>
-    
+        
+        <h:form>
+        	<ui:include src="/pages/snippets/viajesPromotor.xhtml" />
+        </h:form>
+        
 </ui:composition>

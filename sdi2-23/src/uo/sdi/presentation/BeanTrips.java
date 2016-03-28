@@ -5,6 +5,6 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "trips")
 @SessionScoped
-public class BeanTrips {
-
+public class BeanTrips {    
+    
 }

@@ -23,10 +23,99 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
+	<managed-bean>
+		<managed-bean-name>login</managed-bean-name>
+		<managed-bean-class>uo.sdi.presentation.BeanLogin</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
+		<managed-bean>
+		<managed-bean-name>signup</managed-bean-name>
+		<managed-bean-class>uo.sdi.presentation.BeanSignup</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
 			<var>msgs</var>
 		</resource-bundle>
 	</application>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/pages/error.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<!-- 
+	<navigation-rule>
+		<from-view-id>/pages/index.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{controller.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/altaForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/listado.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{controller.baja(valumno)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>editar</from-outcome>
+			<to-view-id>/editForm.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{controller.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/altaForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/altaForm.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{controller.salva}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{controller.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/altaForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/editForm.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{controller.salva}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{controller.listado}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/listado.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>alta</from-outcome>
+			<to-view-id>/altaForm.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	 -->
 </faces-config>
