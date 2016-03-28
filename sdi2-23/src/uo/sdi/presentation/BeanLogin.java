@@ -1,6 +1,7 @@
 package uo.sdi.presentation;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -8,6 +9,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "login")
 @ViewScoped
 public class BeanLogin {
+    @ManagedProperty("#{user}")
+    private BeanUser user;
     private String username;
     private String password;
     
@@ -35,6 +38,8 @@ public class BeanLogin {
     }
     
     public String validar(){
+	//readFromDB
+	//user.setCurrentUser();
 	return null; //TODO
     }
 }
