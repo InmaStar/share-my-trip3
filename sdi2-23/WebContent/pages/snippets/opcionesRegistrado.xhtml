@@ -5,6 +5,10 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 		<p:menuitem id="rol" value="#{user.login}" disabled="true"/>
+		<p:menuitem id="viajesRelacionados" value="#{msgs.related_trips}"
+			action="#{trips.listadoRelacionados}" inmediate="true"/>
+		<p:menuitem id="viajesRelacionados" value="#{msgs.promoter_trips}"
+			action="#{trips.listadoPromotor}" inmediate="true"/>
 		<p:menuitem id="nuevoViaje" action="registrarViaje" 
 			inmediate="true" value="#{msgs.new_trip}">
 			<f:setPropertyActionListener target="#{trip.viaje}"
