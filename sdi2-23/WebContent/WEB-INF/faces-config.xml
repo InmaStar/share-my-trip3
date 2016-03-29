@@ -56,20 +56,24 @@
 		<navigation-case>
 			<from-action>#{trips.listado}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/pages/listaViajes.xhtml</from-view-id>
+		<from-view-id>/pages/listaViajesDisponibles.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{user.cancelarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{user.solicitarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
@@ -96,7 +100,7 @@
 		<navigation-case>
 			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -104,7 +108,7 @@
 		<navigation-case>
 			<from-action>#{login.validar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
@@ -120,7 +124,7 @@
 		<navigation-case>
 			<from-action>#{signup.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
@@ -136,7 +140,7 @@
 		<navigation-case>
 			<from-action>#{trip.modificar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{trips.listadoRelacionados}</from-action>
@@ -155,7 +159,7 @@
 		<navigation-case>
 			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -163,7 +167,7 @@
 		<navigation-case>
 			<from-action>#{trip.registrar(user.currentUser)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{trips.listadoRelacionados}</from-action>
@@ -182,7 +186,7 @@
 		<navigation-case>
 			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -214,7 +218,7 @@
 		<navigation-case>
 			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -249,7 +253,7 @@
 		<navigation-case>
 			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -271,7 +275,13 @@
 		<navigation-case>
 			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<lifecycle>
+		<phase-listener>
+			uo.sdi.presentation.listener.LoginListener
+		</phase-listener>
+	</lifecycle>
 </faces-config>
