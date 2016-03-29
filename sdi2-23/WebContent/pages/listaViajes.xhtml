@@ -10,9 +10,7 @@
 	</ui:define>
 	
     <ui:define name="cuerpo">
-        	 <ui:include src="#{user.publico ? 
-        	'/pages/snippets/listaViajesPublico.xhtml' : 
-        	'/pages/snippets/listaViajesRegistrado.xhtml'}" />
+        	<ui:include src="/pages/snippets/viajes.xhtml" />
     </ui:define>
     
 </ui:composition>

@@ -4,7 +4,10 @@ import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
+import alb.util.log.Log;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
 
@@ -46,11 +49,51 @@ public class BeanUser {
         return user.getPromotedTrips();
     }
 
+    public UserDTO getCurrentUser(){
+	return user;
+    }
+    
     public void setCurrentUser(UserDTO user){
 	this.user = user;
     }
     
-    public String closeSession(){
-	return null; //TODO
+    public String cerrarSesion(){
+	 FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	 return "exito";
+    }
+    
+    public String cancelarPlaza(TripDTO viaje){
+	try{
+            Factories.services.createUserService()
+                    .cancelSeat(user.getId(), viaje);
+            Log.info("Se está cancelando la plaza para el viaje " +
+                    "[%d] al usuario [%d]", viaje.getId(), user.getId());
+            return "exito";
+	} catch (Exception e){
+	    Log.debug("Ha ocurrido una [%s] cancelando la plaza "
+	    	+ "del usuario [%d] en el viaje [%d]: [%s]", 
+	    	e.getClass().toString(),
+	    	user.getId(),
+	    	viaje.getId(),
+	    	e.getMessage());
+	    return "error";
+	}
+    }
+    
+    public String solicitarPlaza(TripDTO viaje){
+	try{
+	    Log.info("Se está solicitando plaza para el viaje " +
+                    "[%d] al usuario [%d]", viaje.getId(), user);
+            Factories.services.createUserService().requestSeat(user, viaje);
+            return "exito";
+	} catch (Exception e){
+	    Log.debug("Ha ocurrido una [%s] solicitando plaza "
+	    	+ "para el usuario [%d] en el viaje [%d]: [%s]", 
+	    	e.getClass().toString(),
+	    	user.getId(),
+	    	viaje.getId(),
+	    	e.getMessage());
+	    return "error";
+	}
     }
 }

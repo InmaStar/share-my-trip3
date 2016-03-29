@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import alb.util.log.Log;
+import uo.sdi.business.TripService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.transport.TripDTO;
@@ -22,13 +23,20 @@ public class BeanTrips {
     public List<TripDTO> getListaViajes() {
 	return viajes;
     }
-
-    public String cancelarPlaza(Long tripId) {
-	return null; // TODO
-    }
     
-    public String cancelarViaje(Long tripId) {
-	return null; // TODO
+    public String cancelarViaje(TripDTO viaje) {
+	try{
+	    TripService tripServ = Factories.services.createTripService();
+	    tripServ.cancel(viaje);
+	    Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
+	    return "exito";
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]", 
+		    e.getClass().toString(),
+		    viaje.getId(),
+		    e.getMessage());
+	    return "error";
+	}
     }
 
     public String listado() {
@@ -36,7 +44,9 @@ public class BeanTrips {
 	    viajes = cargarViajes();
 	    return "exito";
 	} catch (Exception e) {
-	    e.printStackTrace();
+	    Log.debug("Ha ocurrido una [%s] listando viajes: [%s]", 
+		    e.getClass().toString(),
+		    e.getMessage());
 	    return "error";
 	}
     }
@@ -44,7 +54,7 @@ public class BeanTrips {
     private List<TripDTO> cargarViajes() throws BusinessException {
 	List<TripDTO> listaViajes = Factories.services.createTripService()
 		.findAll();
-	Log.debug("Obtenida lista de viajes conteniendo [%d] viajes",
+	Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
 		viajes.size());
 	return listaViajes;
     }

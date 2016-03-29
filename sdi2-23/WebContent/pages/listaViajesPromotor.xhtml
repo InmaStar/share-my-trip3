@@ -5,12 +5,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/templates/plantillaGeneral.xhtml">
 	
-        <h:form>
-        	<ui:include src="/pages/snippets/viajes.xhtml" />
-        </h:form>
-        
-        <h:form>
-        	<ui:include src="/pages/snippets/viajesPromotor.xhtml" />
-        </h:form>
-        
+	<ui:define name="titleParam">
+		<f:param value="#{msgs.promoter_trips_title}" />
+	</ui:define>
+	
+    <ui:define name="cuerpo">
+        <ui:include src="/pages/snippets/viajesPromotor.xhtml" />
+    </ui:define>
+    
 </ui:composition>

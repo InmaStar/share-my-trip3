@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<p:panel header="#{msgs.related_trips }">
+		<p:dataTable id="listadoViajesRelacionados" var="entry"
+				value="#{trips.listaViajes}" border="1">
+				<p:row rendered="#{entry.hasRelationship(user.id)}">
+		<p:column>
+		<f:facet>#{msgs.trip_id }</f:facet> #{entry.id}
+		</p:column>
+		<p:column>
+			<f:facet>#{msgs.departure}</f:facet> #{entry.departure.city}
+			</p:column>
+			<p:column>
+			<f:facet>#{msgs.destination}</f:facet> #{entry.destination.city }
+			</p:column>
+			<p:column>
+			<f:facet>#{msgs.max_seats}</f:facet> #{entry.maxPax }
+			</p:column>
+			<p:column>
+			<f:facet>#{msgs.available_seats}</f:facet> #{entry.availablePax }
+			</p:column>
+			<p:column>
+			<f:facet>#{msgs.trip_status}</f:facet> #{entry.status }
+			</p:column>
+			<p:column>
+			<f:facet>#{msgs.relationship}</f:facet> #{entry.getRelationship(user.id) }
+			</p:column>
+			</p:row>
+		</p:dataTable>
+</p:panel>
+</ui:composition>

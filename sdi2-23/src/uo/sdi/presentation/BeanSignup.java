@@ -9,31 +9,32 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
+import alb.util.log.Log;
+import uo.sdi.business.exception.BusinessException;
+import uo.sdi.infrastructure.Factories;
+import uo.sdi.transport.UserDTO;
+
 @ManagedBean(name = "signup")
 @ViewScoped
 public class BeanSignup {
 
-    private String login;
-    private String password1;
+    private UserDTO userToBeRegistered;
     private String password2;
-    private String nombre;
-    private String apellidos;
-    private String email;
     
     public String getLogin() {
-        return login;
+        return userToBeRegistered.getLogin();
     }
 
     public void setLogin(String login) {
-        this.login = login;
+	userToBeRegistered.setLogin(login);;
     }
 
     public String getPassword1() {
-        return password1;
+        return userToBeRegistered.getPassword();
     }
 
     public void setPassword1(String password1) {
-        this.password1 = password1;
+        userToBeRegistered.setPassword(password1);
     }
 
     public String getPassword2() {
@@ -45,37 +46,45 @@ public class BeanSignup {
     }
 
     public String getNombre() {
-        return nombre;
+        return userToBeRegistered.getName();
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+	userToBeRegistered.setName(nombre);
     }
 
     public String getApellidos() {
-        return apellidos;
+        return userToBeRegistered.getSurname();
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+       userToBeRegistered.setSurname(apellidos);
     }
 
     public String getEmail() {
-        return email;
+        return userToBeRegistered.getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+       userToBeRegistered.setEmail(email);
     }
 
     public void existsUsername(FacesContext context, 
-	    UIComponent componentToValidate, Object value){
-	//TODO
+	    UIComponent componentToValidate, Object value) throws BusinessException{
+	if(Factories.services.createUserService()
+		.findByLogin(userToBeRegistered)==null){
+	    FacesContext facesContext = FacesContext.getCurrentInstance();
+	    ResourceBundle bundle = facesContext.getApplication()
+			.getResourceBundle(facesContext, "msgs");
+	    FacesMessage message = new FacesMessage(
+		    bundle.getString("username_does_not_exist"));
+	    throw new ValidatorException(message);
+	}
     }
     
     public void repeatedPassword(FacesContext context, 
 	    UIComponent componentToValidate, Object value){
-	if(!password1.equals(password2)){
+	if(!userToBeRegistered.getPassword().equals(password2)){
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
 	    ResourceBundle bundle = facesContext.getApplication()
 			.getResourceBundle(facesContext, "msgs");
@@ -85,7 +94,18 @@ public class BeanSignup {
 	}
     }
     
-    public String register(){
-	return null; //TODO
+    public String registrar(){
+	try{
+	    Factories.services.createUserService().save(userToBeRegistered);
+	    Log.info("Se ha registrado el usuario [%s]",
+		    userToBeRegistered.getLogin());
+	    return "exito";
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] registrando al usuario [%s]: [%s]", 
+		    e.getClass().toString(),
+		    userToBeRegistered.getLogin(),
+		    e.getMessage());
+	    return "error";
+	}
     }
 }

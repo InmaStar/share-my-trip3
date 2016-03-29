@@ -5,7 +5,9 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	
 		<p:menuitem disabled="true" id="rol" value="#{msgs.public_user}" />
-		<p:menuitem id="validarse" value="#{msgs.login}" action="login"/>
-		<p:menuitem id="registrarse" value="#{msgs.signup}" action="signUp" />
+		<p:menuitem id="validarse" value="#{msgs.login}" inmediate="true"
+			action="login"/>
+		<p:menuitem id="registrarse" value="#{msgs.signup}" 
+			inmediate="true" action="signUp" />
 
 </ui:composition>

@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config
-    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
-    version="2.2">
-    
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
 	<managed-bean>
 		<managed-bean-name>localeSettings</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanLocaleSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanUser</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>trips</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanTrips</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>login</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanLogin</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>signup</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanSignup</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>trip</managed-bean-name>
 		<managed-bean-class>uo.sdi.presentation.BeanTrip</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<application>
 		<resource-bundle>
 			<base-name>messages</base-name>
 			<var>msgs</var>
 		</resource-bundle>
 	</application>
-	
+
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -63,27 +62,14 @@
 	<navigation-rule>
 		<from-view-id>/pages/listaViajes.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trips.cancelarPlaza(entry.id)}</from-action>
+			<from-action>#{user.cancelarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.solicitarPlaza(entry.id)}</from-action>
+			<from-action>#{user.solicitarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>solicitudes</from-outcome>
-			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>modificarViaje</from-outcome>
-			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{trips.cancelarViaje(entry.id)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajes.xthml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
@@ -92,6 +78,16 @@
 		<navigation-case>
 			<from-outcome>signUp</from-outcome>
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarViaje</from-outcome>
@@ -122,7 +118,7 @@
 	<navigation-rule>
 		<from-view-id>/pages/signUp.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{signup.register}</from-action>
+			<from-action>#{signup.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
@@ -143,6 +139,16 @@
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>registrarViaje</from-outcome>
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
@@ -155,16 +161,26 @@
 	<navigation-rule>
 		<from-view-id>/pages/registrarViaje.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trip.registrar}</from-action>
+			<from-action>#{trip.registrar(user.currentUser)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarViaje</from-outcome>
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
@@ -177,9 +193,76 @@
 			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trip.excluirPasajero(entry.id)}</from-action>
+			<from-action>#{trip.excluirPasajero(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/listaViajesPromotor.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>solicitudes</from-outcome>
+			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>modificarViaje</from-outcome>
+			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.cancelarViaje(entry)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xthml</to-view-id>
+		</navigation-case>
+				<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/listaViajesRelacionados.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>registrarViaje</from-outcome>
