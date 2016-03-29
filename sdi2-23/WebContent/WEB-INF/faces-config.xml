@@ -86,6 +86,22 @@
 			<to-view-id>/pages/listaViajes.xthml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{login.validar}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/signUp.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{signup.register}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<!-- 
 	<navigation-rule>
 		<from-view-id>/pages/index.xhtml</from-view-id>
