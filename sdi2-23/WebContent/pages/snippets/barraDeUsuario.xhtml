@@ -5,11 +5,13 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	
 		<p:menubar id="navbar">
-			<p:menuitem disabled="true" id="nombre_app"> 
+			<p:menuitem id="nombre_app" action="#{trips.listado}"> 
 				<strong>#{msgs.app_name}</strong> 
 			</p:menuitem>
 
-			<ui:include src="#{user.publico ? '/pages/snippets/opcionesPublico.xhtml' : '/pages/snippets/opcionesRegistrado.xhtml'}" />
+			<ui:include src="#{user.publico 
+			? '/pages/snippets/opcionesPublico.xhtml' 
+			: '/pages/snippets/opcionesRegistrado.xhtml'}" />
 			
 			<p:submenu style="float:right" label="#{msgs.language}">
 				<p:menuitem id="linkespa" value="#{msgs.spanish_link}"

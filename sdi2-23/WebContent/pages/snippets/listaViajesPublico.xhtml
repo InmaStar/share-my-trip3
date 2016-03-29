@@ -5,14 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/templates/plantillaGeneral.xhtml">
 	
-	<ui:define name="titleParam">
-		<f:param value="#{msgs.trips_list_title}" />
-	</ui:define>
-	
-    <ui:define name="cuerpo">
         <h:form>
-        	<ui:include src="/pages/snippets/listaViajes.xhtml" />
+        	<ui:include src="/pages/snippets/viajes.xhtml" />
         </h:form>
-    </ui:define>
     
 </ui:composition>

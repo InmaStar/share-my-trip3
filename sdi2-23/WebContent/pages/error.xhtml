@@ -17,10 +17,15 @@
 			<p:messages id="errorMessage" showDetail="true" autoUpdate="true"
 				severity="error" />
 		</div>
+	</ui:define>
+	
+	<ui:define name="pie">
 		<div class="well well-sm">
 			<h:form>
-				<h:commandLink id="listarViajes">#{msgs.back_link}</h:commandLink>
+				<h:commandLink id="listarViajes" 
+				action="#{trips.listado}">#{msgs.back_link}</h:commandLink>
 			</h:form>
 		</div>
 	</ui:define>
+	
 </ui:composition>

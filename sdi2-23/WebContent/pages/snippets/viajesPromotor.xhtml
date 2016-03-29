@@ -27,15 +27,21 @@
 			<f:facet>#{msgs.trip_status}</f:facet> #{entry.status }
 			</p:column>
 			<p:column>
-			<p:commandLink action="" inmediate="true" >
-				#{msgs.check_seat_requests }</p:commandLink>
+			<p:commandLink action="solicitudes" inmediate="true" 
+				value="#{msgs.check_seat_requests }"/>
+				<f:setPropertyActionListener target="#{trip.viaje}"
+						value="#{entry}" />
+				</p:commandLink>
 			</p:column>
 			<p:column>
-               <p:commandLink action="" inmediate="true" rendered="#{entry.open }">
-               #{msgs.modify_trip }</p:commandLink>
+               <p:commandLink action="modificarViaje" inmediate="true" rendered="#{entry.open }"
+               value="#{msgs.modify_trip }" />
+               <f:setPropertyActionListener target="#{trip.viaje}"
+						value="#{entry}" />
+				</p:commandLink>
 			</p:column>
 			<p:column>
-                <p:commandLink action="" rendered="#{entry.open }">
+                <p:commandLink action="#{trips.cancelarViaje(entry.id)}" rendered="#{entry.open }">
 				#{msgs.cancel_trip }</p:commandLink>
 			</p:column>
 		</p:row>

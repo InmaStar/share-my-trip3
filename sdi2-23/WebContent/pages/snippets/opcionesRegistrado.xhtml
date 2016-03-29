@@ -4,10 +4,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-		<p:menuitem id="rol" value="Nombre usuario" disabled="true"/>
-		<p:menuitem id="perfil">#{msgs.profile}</p:menuitem>
-		<p:menuitem>#{msgs.my_trip}</p:menuitem>
-		<p:menuitem id="nuevoViaje">#{msgs.new_trip}</p:menuitem>
-		<p:menuitem id="cerrarSesion">#{msgs.signout}</p:menuitem>
+		<p:menuitem id="rol" value="#{user.login}" disabled="true"/>
+		<p:menuitem id="nuevoViaje" action="registrarViaje" value="#{msgs.new_trip}">
+			<f:setPropertyActionListener target="#{trip.viaje}"
+						value="#{null}" />
+		</p:menuitem>
+		<p:menuitem id="cerrarSesion" action="#{user.closeSession}">#{msgs.signout}</p:menuitem>
 
 </ui:composition>
