@@ -100,8 +100,11 @@ public class BeanSignup {
 	    Log.info("Se ha registrado el usuario [%s]",
 		    userToBeRegistered.getLogin());
 	    return "exito";
-	} catch(BusinessException e){
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] registrando al usuario [%s]: [%s]", 
+		    e.getClass().toString(),
+		    userToBeRegistered.getLogin(),
+		    e.getMessage());
 	    return "error";
 	}
     }

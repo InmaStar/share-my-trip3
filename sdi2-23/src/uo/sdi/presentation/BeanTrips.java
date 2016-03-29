@@ -30,8 +30,11 @@ public class BeanTrips {
 	    tripServ.cancel(viaje);
 	    Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
 	    return "exito";
-	} catch(BusinessException e){
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]", 
+		    e.getClass().toString(),
+		    viaje.getId(),
+		    e.getMessage());
 	    return "error";
 	}
     }
@@ -40,8 +43,10 @@ public class BeanTrips {
 	try {
 	    viajes = cargarViajes();
 	    return "exito";
-	} catch (BusinessException e) {
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando viajes: [%s]", 
+		    e.getClass().toString(),
+		    e.getMessage());
 	    return "error";
 	}
     }
@@ -49,7 +54,7 @@ public class BeanTrips {
     private List<TripDTO> cargarViajes() throws BusinessException {
 	List<TripDTO> listaViajes = Factories.services.createTripService()
 		.findAll();
-	Log.debug("Obtenida lista de viajes conteniendo [%d] viajes",
+	Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
 		viajes.size());
 	return listaViajes;
     }

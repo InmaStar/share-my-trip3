@@ -75,10 +75,13 @@ public class BeanLogin {
 	    user.setCurrentUser(Factories.services.createUserService()
 		    .findByLogin(userToBeLogged));
 	    Log.info("El usuario [%s] se ha validado sin problemas",
-		    user.getLogin());
+		    userToBeLogged.getLogin());
 	    return "exito";
-	} catch (BusinessException e) {
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] validando al usuario [%s]: [%s]", 
+		    e.getClass().toString(),
+		    userToBeLogged.getLogin(),
+		    e.getMessage());
 	    return "error";
 	}
     }

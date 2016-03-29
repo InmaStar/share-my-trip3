@@ -101,8 +101,11 @@ public class BeanTrip {
 	    Factories.services.createTripService().update(viaje);
 	    Log.info("Se ha modificado el viaje [%d] con éxito", viaje.getId());
 	    return "exito";
-	} catch(BusinessException e){
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] modificando el viaje [%d]: [%s]", 
+		    e.getClass().toString(),
+		    viaje.getId(),
+		    e.getMessage());
 	    return "error";
 	}
     }
@@ -114,9 +117,10 @@ public class BeanTrip {
                     + "un nuevo viaje [%d] con éxito", promotor.getLogin(),
                     viaje.getId());
 	    return "exito";
-	} catch(BusinessException e){
-	    Log.debug("Ha ocurrido una [%s] registrando el viaje: [%s]", 
+	} catch(Exception e){
+	    Log.debug("Ha ocurrido una [%s] registrando el viaje [%d]: [%s]", 
 		    e.getClass().toString(),
+		    viaje.getId(),
 		    e.getMessage());
 	    return "error";
 	}

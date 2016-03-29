@@ -7,7 +7,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import alb.util.log.Log;
-import uo.sdi.business.exception.BusinessException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -70,8 +69,13 @@ public class BeanUser {
             Log.info("Se está cancelando la plaza para el viaje " +
                     "[%d] al usuario [%d]", viaje.getId(), user.getId());
             return "exito";
-	} catch (BusinessException e){
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch (Exception e){
+	    Log.debug("Ha ocurrido una [%s] cancelando la plaza "
+	    	+ "del usuario [%d] en el viaje [%d]: [%s]", 
+	    	e.getClass().toString(),
+	    	user.getId(),
+	    	viaje.getId(),
+	    	e.getMessage());
 	    return "error";
 	}
     }
@@ -83,8 +87,13 @@ public class BeanUser {
             Factories.services.createUserService()
                     .confirmApplication(user.getId(), viaje);
             return "exito";
-	} catch (BusinessException e){
-	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	} catch (Exception e){
+	    Log.debug("Ha ocurrido una [%s] soliciando plaza "
+	    	+ "para el usuario [%d] en el viaje [%d]: [%s]", 
+	    	e.getClass().toString(),
+	    	user.getId(),
+	    	viaje.getId(),
+	    	e.getMessage());
 	    return "error";
 	}
     }
