@@ -110,6 +110,14 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xthml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>signUp</from-outcome>
+			<to-view-id>/pages/signUp.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/pages/signUp.xhtml</from-view-id>
@@ -117,6 +125,14 @@
 			<from-action>#{signup.register}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xthml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>signUp</from-outcome>
+			<to-view-id>/pages/signUp.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -126,11 +142,29 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/pages/registrarViaje.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{trip.registrar}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
@@ -146,6 +180,15 @@
 			<from-action>#{trip.excluirPasajero(entry.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
