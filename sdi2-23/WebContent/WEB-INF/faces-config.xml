@@ -60,6 +60,32 @@
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/listaViajes.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{trips.cancelarPlaza(entry.id)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.solicitarPlaza(entry.id)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>solicitudes</from-outcome>
+			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>modificarViaje</from-outcome>
+			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{trips.cancelarViaje(entry.id)}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xthml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<!-- 
 	<navigation-rule>
 		<from-view-id>/pages/index.xhtml</from-view-id>
