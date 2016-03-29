@@ -49,7 +49,7 @@ public class BeanLogin {
 		ResourceBundle bundle = facesContext.getApplication()
 			.getResourceBundle(facesContext, "msgs");
 		FacesMessage message = new FacesMessage(
-			bundle.getString("username_does_not_exists"));
+			bundle.getString("username_does_not_exist"));
 		throw new ValidatorException(message);
 	}
     }

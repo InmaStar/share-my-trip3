@@ -118,7 +118,7 @@
 	<navigation-rule>
 		<from-view-id>/pages/signUp.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{signup.register}</from-action>
+			<from-action>#{signup.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
@@ -180,7 +180,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>

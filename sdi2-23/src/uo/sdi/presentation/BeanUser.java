@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -50,7 +51,8 @@ public class BeanUser {
 	this.user = user;
     }
     
-    public String closeSession(){
-	return null; //TODO
+    public String cerrarSesion(){
+	 FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	 return "exito";
     }
 }
