@@ -5,7 +5,10 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 		<p:menuitem id="rol" value="#{user.login}" disabled="true"/>
-		<p:menuitem id="nuevoViaje" action="#{trip.register}">#{msgs.new_trip}</p:menuitem>
+		<p:menuitem id="nuevoViaje" action="registrarViaje" value="#{msgs.new_trip}">
+			<f:setPropertyActionListener target="#{trip.viaje}"
+						value="#{null}" />
+		</p:menuitem>
 		<p:menuitem id="cerrarSesion" action="#{user.closeSession}">#{msgs.signout}</p:menuitem>
 
 </ui:composition>

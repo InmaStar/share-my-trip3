@@ -85,6 +85,23 @@
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xthml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xthml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>signUp</from-outcome>
+			<to-view-id>/pages/signUp.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>registrarViaje</from-outcome>
+			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{user.closeSession}</from-action>
+			<from-outcome>exito</from-outcome>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/pages/login.xhtml</from-view-id>
@@ -102,73 +119,33 @@
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<!-- 
 	<navigation-rule>
-		<from-view-id>/pages/index.xhtml</from-view-id>
+		<from-view-id>/pages/modificarViaje.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
+			<from-action>#{trip.modificar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/listado.xhtml</from-view-id>
+		<from-view-id>/pages/registrarViaje.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.baja(valumno)}</from-action>
+			<from-action>#{trip.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>editar</from-outcome>
-			<to-view-id>/editForm.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/altaForm.xhtml</from-view-id>
+		<from-view-id>/pages/solicitudes.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
+			<from-action>#{trip.confirmarPasajero(entry.id)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
+			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
+			<from-action>#{trip.excluirPasajero(entry.id)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
+			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<navigation-rule>
-		<from-view-id>/editForm.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{controller.salva}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{controller.listado}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/listado.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>alta</from-outcome>
-			<to-view-id>/altaForm.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	 -->
 </faces-config>
