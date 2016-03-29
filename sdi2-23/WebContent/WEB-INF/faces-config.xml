@@ -62,12 +62,12 @@
 	<navigation-rule>
 		<from-view-id>/pages/listaViajes.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trips.cancelarPlaza(entry.id)}</from-action>
+			<from-action>#{user.cancelarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.solicitarPlaza(entry.id)}</from-action>
+			<from-action>#{user.solicitarPlaza(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
