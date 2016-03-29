@@ -82,13 +82,12 @@ public class BeanUser {
     
     public String solicitarPlaza(TripDTO viaje){
 	try{
-	    Log.info("Se está dando plaza para el viaje " +
-                    "[%d] al usuario [%d]", viaje.getId(), user.getId());
-            Factories.services.createUserService()
-                    .confirmApplication(user.getId(), viaje);
+	    Log.info("Se está solicitando plaza para el viaje " +
+                    "[%d] al usuario [%d]", viaje.getId(), user);
+            Factories.services.createUserService().requestSeat(user, viaje);
             return "exito";
 	} catch (Exception e){
-	    Log.debug("Ha ocurrido una [%s] soliciando plaza "
+	    Log.debug("Ha ocurrido una [%s] solicitando plaza "
 	    	+ "para el usuario [%d] en el viaje [%d]: [%s]", 
 	    	e.getClass().toString(),
 	    	user.getId(),
@@ -97,5 +96,4 @@ public class BeanUser {
 	    return "error";
 	}
     }
-   
 }

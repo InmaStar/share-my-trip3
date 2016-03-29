@@ -19,13 +19,13 @@
 		#{entry.apellidos}
 	</p:column>
 	<p:column rendered="#{trip.visible}">
-		<h:commandButton rendered="#{trip.isExcluded(entry.id) || trip.isPending(entry.id)}" 
+		<h:commandButton rendered="#{trip.isExcludedOrPending(entry.id)}" 
 		action="#{trip.confirmarPasajero(entry.id)}">
 		#{msgs.confirm}
 		</h:commandButton>
 		
-		<h:commandButton rendered="#{!trip.isExcluded(entry.id) && !trip.isPending(entry.id))}" 
-		action="#{trip.excluirPasajero(entry.id)}">
+		<h:commandButton rendered="#{!isExcludedOrPending(entry.id)}" 
+		action="#{trip.excluirPasajero(entry)}">
 		#{msgs.exclude}
 		</h:commandButton>
 		
