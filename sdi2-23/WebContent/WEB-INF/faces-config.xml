@@ -161,7 +161,7 @@
 	<navigation-rule>
 		<from-view-id>/pages/registrarViaje.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trip.registrar}</from-action>
+			<from-action>#{trip.registrar(user.currentUser)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajes.xhtml</to-view-id>
 		</navigation-case>
@@ -228,7 +228,7 @@
 			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.cancelarViaje(entry.id)}</from-action>
+			<from-action>#{trips.cancelarViaje(entry)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xthml</to-view-id>
 		</navigation-case>

@@ -50,6 +50,10 @@ public class BeanUser {
         return user.getPromotedTrips();
     }
 
+    public UserDTO getCurrentUser(){
+	return user;
+    }
+    
     public void setCurrentUser(UserDTO user){
 	this.user = user;
     }

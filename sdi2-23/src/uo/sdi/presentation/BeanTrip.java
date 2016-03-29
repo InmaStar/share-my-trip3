@@ -6,6 +6,10 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import alb.util.log.Log;
+import uo.sdi.business.exception.BusinessException;
+import uo.sdi.entrega1.acciones.RegistrarViajeAction;
+import uo.sdi.infrastructure.Factories;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -93,11 +97,29 @@ public class BeanTrip {
     }
     
     public String modificar(){
-	return null; //TODO
+	try{
+	    Factories.services.createTripService().update(viaje);
+	    Log.info("Se ha modificado el viaje [%d] con éxito", viaje.getId());
+	    return "exito";
+	} catch(BusinessException e){
+	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
+	    return "error";
+	}
     }
     
-    public String registrar(){
-	return null; //TODO
+    public String registrar(UserDTO promotor){
+	try{
+	    Factories.services.createTripService().insert(viaje, promotor);
+	    Log.info("El promotor [%s] ha registrado "
+                    + "un nuevo viaje [%d] con éxito", promotor.getLogin(),
+                    viaje.getId());
+	    return "exito";
+	} catch(BusinessException e){
+	    Log.debug("Ha ocurrido una [%s] registrando el viaje: [%s]", 
+		    e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
+	}
     }
     
     public boolean isVisible(){

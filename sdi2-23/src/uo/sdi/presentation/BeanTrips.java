@@ -24,11 +24,11 @@ public class BeanTrips {
 	return viajes;
     }
     
-    public String cancelarViaje(Long idViaje) {
+    public String cancelarViaje(TripDTO viaje) {
 	try{
 	    TripService tripServ = Factories.services.createTripService();
-	    tripServ.cancel(new TripDTO(idViaje));
-	    Log.info("El viaje [%d] ha sido cancelado", idViaje);
+	    tripServ.cancel(viaje);
+	    Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
 	    return "exito";
 	} catch(BusinessException e){
 	    Log.debug("Ha ocurrido una excepción: [%s]", e.getMessage());
