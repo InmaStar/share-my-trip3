@@ -3,18 +3,16 @@ package uo.sdi.presentation.impl;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
-
 import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.exception.UserNotFoundException;
 import uo.sdi.infrastructure.Factories;
+import uo.sdi.presentation.validator.Validations;
 import uo.sdi.transport.UserDTO;
+import uo.sdi.util.bundle.BundleLoader;
 
 @ManagedBean(name = "signup")
 @ViewScoped
@@ -25,6 +23,7 @@ public class BeanSignup implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private UserDTO userToBeRegistered;
+    private UserDTO userToBeChecked;
     private String password2;
 
     public BeanSignup() {
@@ -82,31 +81,43 @@ public class BeanSignup implements Serializable {
     public void existeLogin(FacesContext context,
 	    UIComponent componentToValidate, Object value)
 	    throws BusinessException {
-	try {
-	    Factories.services.createUserService()
-	    	.findByLogin(userToBeRegistered);
-	} catch (UserNotFoundException e) {
-	    Log.info("El nombre de usuario [%s] no existe", 
-		    userToBeRegistered.getLogin());
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    ResourceBundle bundle = facesContext.getApplication()
-		    .getResourceBundle(facesContext, "msgs");
-	    FacesMessage message = new FacesMessage(
-		    bundle.getString("username_does_not_exist"));
-	    throw new ValidatorException(message);
-	}
+	userToBeChecked = new UserDTO(); 
+	ResourceBundle bundle = BundleLoader.load("msgs"); 
+	String username = (String) value;
+	
+	Validations.emptyString(
+		username, bundle.getString("login_form_login_required"));
+	
+	userToBeChecked.setLogin(username);
+	Validations.existsLogin(userToBeChecked, 
+		bundle.getString("username_does_not_exist"));
     }
 
+    public void passwordVacia(FacesContext context,
+    	UIComponent componentToValidate, Object value){
+	String password = (String)value;
+	ResourceBundle bundle = BundleLoader.load("msgs");
+	
+	Validations.emptyString(
+		password, bundle.getString("login_form_password_required"));
+	
+	userToBeChecked.setPassword(password);
+    }
+    
     public void passwordRepetida(FacesContext context,
 	    UIComponent componentToValidate, Object value) {
-	if (!userToBeRegistered.getPassword().equals(password2)) {
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    ResourceBundle bundle = facesContext.getApplication()
-		    .getResourceBundle(facesContext, "msgs");
-	    FacesMessage message = new FacesMessage(
-		    bundle.getString("different_passwords"));
-	    throw new ValidatorException(message);
+	String password = (String)value;
+	ResourceBundle bundle = BundleLoader.load("msgs");
+	
+	Validations.emptyString(
+		password, bundle.getString("signup_form_password2_required"));
+	
+	if(userToBeChecked!=null && userToBeChecked.getPassword()!=null){
+	Validations.repeatedPassword(userToBeChecked.getPassword(),
+		password,
+		bundle.getString("different_passwords"));
 	}
+	
     }
 
     public String registrar() {

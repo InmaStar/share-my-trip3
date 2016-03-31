@@ -37,6 +37,13 @@ public class Validations {
 	}
     }
 
+    public static void repeatedPassword(String password1, String password2,
+	    String errorMessage){
+	if (!password1.equals(password2)) {
+	    throwValidatorException(errorMessage);
+	}
+    }
+    
     private static void throwValidatorException(String errorMessage) {
 	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 		errorMessage, null);

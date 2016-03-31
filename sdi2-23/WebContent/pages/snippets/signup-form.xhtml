@@ -17,7 +17,8 @@
 		<h:panelGroup>
 		<p:outputLabel value="#{msgs.login_form_password_label}:" for="password1"/> 
 			<p:password id="password1" value="#{signup.password1}" required="true"
-				requiredMessage="#{msgs.login_form_password_required}" />
+				requiredMessage="#{msgs.login_form_password_required}" 
+				validator="#{signup.passwordVacia}"/>
 			<p:message for="password1" />
 		</h:panelGroup>
 
@@ -32,14 +33,20 @@
 		<h:panelGroup>
 			<p:outputLabel value="#{msgs.signup_form_name_label}:" for="nombre"/>
 			<p:inputText id="nombre" value="#{signup.nombre}" required="true"
-			requiredMessage="#{msgs.signup_form_name_required}"/>
+			requiredMessage="#{msgs.signup_form_name_required}"
+			validatorMessage="#{msgs.signup_form_name_required}">
+				<f:validateLength minimum="1"/>
+			</p:inputText>
 			<p:message for="nombre"/>
 		</h:panelGroup>
 		
         <h:panelGroup>
         	<p:outputLabel value="#{msgs.signup_form_surname_label}:" for="apellidos"/>
         	<p:inputText id="apellidos" value="#{signup.apellidos}" required="true"
-        		requiredMessage="#{msgs.signup_form_surname_required}"/>
+        		requiredMessage="#{msgs.signup_form_surname_required}"
+				validatorMessage="#{msgs.signup_form_surname_required}">
+        		<f:validateLength minimum="1"/>
+        		</p:inputText>
         	<p:message for="apellidos"/>
         </h:panelGroup>
         

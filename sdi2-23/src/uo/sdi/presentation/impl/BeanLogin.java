@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
-
 import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.UserNotFoundException;
