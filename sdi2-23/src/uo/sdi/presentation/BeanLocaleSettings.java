@@ -1,6 +1,8 @@
 package uo.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.Locale;
+
 import alb.util.log.Log;
 
 import javax.faces.bean.ManagedBean;
@@ -10,7 +12,11 @@ import javax.faces.event.ActionEvent;
 
 @ManagedBean(name = "localeSettings")
 @SessionScoped
-public class BeanLocaleSettings {
+public class BeanLocaleSettings  implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final Locale ENGLISH = new Locale("en");
     private static final Locale SPANISH = new Locale("es");
     private Locale locale;

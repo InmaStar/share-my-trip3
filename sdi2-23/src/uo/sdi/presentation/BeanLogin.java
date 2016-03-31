@@ -1,5 +1,6 @@
 package uo.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -17,7 +18,11 @@ import uo.sdi.transport.UserDTO;
 
 @ManagedBean(name = "login")
 @ViewScoped
-public class BeanLogin {
+public class BeanLogin implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     @ManagedProperty("#{user}")
     private BeanUser user;
     private UserDTO userToBeLogged = new UserDTO();

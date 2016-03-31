@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
-<h1>#{msgs.signup_form_title}</h1>
+	<h1>#{msgs.signup_form_title}</h1>
 	<p:panelGrid id="grid" columns="2" cellpadding="5">
 		<h:panelGroup>
 			<p:outputLabel value="#{msgs.login_form_login_label}:" for="login"/>
@@ -23,7 +23,7 @@
 
 		<h:panelGroup>
 			<p:outputLabel value="#{msgs.signup_form_password2_label}:" for="password2" />
-			<p:password id="password2" value="#{signup.password2" required="true"
+			<p:password id="password2" value="#{signup.password2}" required="true"
 				requiredMessage="#{msgs.signup_form_password2_required}" 
 				validator="#{signup.repeatedPassword}"/>
 			<p:message for="password2" />

@@ -4,7 +4,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 	
-	<p:panel header="#{msgs.list_of_trips}">
+	<h1>#{msgs.list_of_trips}</h1>
+	<!--  <p:panel header="#{msgs.list_of_trips}">-->
 		<p:dataTable id="listadoViajesDisponibles" var="entry"
 				value="#{trips.listaViajes}" border="1">
 		<p:column>
@@ -24,6 +25,6 @@
 				#{msgs.request_seat}</p:commandButton>
 		</p:column>
 		</p:dataTable>
-	</p:panel>
+	<!-- </p:panel> -->
 
 </ui:composition>

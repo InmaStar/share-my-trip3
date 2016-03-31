@@ -1,5 +1,6 @@
 package uo.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
@@ -13,8 +14,12 @@ import uo.sdi.transport.UserDTO;
 
 @ManagedBean(name = "user")
 @SessionScoped
-public class BeanUser {
+public class BeanUser implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private UserDTO user;
 
     public boolean isPublico() {

@@ -1,5 +1,6 @@
 package uo.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,8 +15,12 @@ import uo.sdi.transport.UserDTO;
 
 @ManagedBean(name = "trip")
 @SessionScoped
-public class BeanTrip {
+public class BeanTrip implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private TripDTO viaje;
 
     public void setViaje(TripDTO viaje) {

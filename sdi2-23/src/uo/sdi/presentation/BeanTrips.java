@@ -1,5 +1,6 @@
 package uo.sdi.presentation;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,11 @@ import uo.sdi.transport.TripDTO;
 
 @ManagedBean(name = "trips")
 @SessionScoped
-public class BeanTrips {
+public class BeanTrips implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     List<TripDTO> viajes;
 
     public BeanTrips() throws BusinessException {
@@ -55,7 +60,7 @@ public class BeanTrips {
 	List<TripDTO> listaViajes = Factories.services.createTripService()
 		.findAll();
 	Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
-		viajes.size());
+		listaViajes.size());
 	return listaViajes;
     }
 }

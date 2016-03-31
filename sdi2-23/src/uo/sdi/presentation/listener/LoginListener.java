@@ -15,8 +15,9 @@ public class LoginListener implements PhaseListener {
 	FacesContext fc = event.getFacesContext();
 	String view = fc.getViewRoot().getViewId();
 	// Check if we are in are in a page restricted to logged users
-	if (!(view.contains("login") || (view.contains("signUp") || (view
-		.contains("listaViajesDisponibles"))))) {
+	if (!(view.contains("login") || view.contains("signUp") 
+		|| view.contains("listaViajesDisponibles") 
+		|| view.contains("index"))) {
 	    if (notLoggedIn()) {
 		NavigationHandler nh = fc.getApplication()
 			.getNavigationHandler();
