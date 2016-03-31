@@ -62,7 +62,6 @@ public class BeanLogin implements Serializable {
 	    throws BusinessException {
 	String username = (String) value;
 	try {
-
 	    userToBeChecked = new UserDTO();
 	    userToBeChecked.setLogin(username);
 	    userToBeChecked = Factories.services.createUserService()
@@ -87,8 +86,8 @@ public class BeanLogin implements Serializable {
 	/*comprobar que se ha cargado el usuario en la validacion de nombre 
 	 * de usuario
 	 */
-	if (!(userToBeChecked.getLogin().equals("") || userToBeChecked
-		.getLogin() == null)) {
+	if (userToBeChecked.getLogin() != null 
+		&& !userToBeChecked.getLogin().equals("")) {
 	    if (!userToBeChecked.getPassword().equals(password)) {
 		Log.info("La contraseña [%s] es incorrecta",
 			userToBeLogged.getPassword());

@@ -79,7 +79,7 @@ public class BeanSignup implements Serializable {
 	userToBeRegistered.setEmail(email);
     }
 
-    public void existsUsername(FacesContext context,
+    public void existeLogin(FacesContext context,
 	    UIComponent componentToValidate, Object value)
 	    throws BusinessException {
 	try {
@@ -97,7 +97,7 @@ public class BeanSignup implements Serializable {
 	}
     }
 
-    public void repeatedPassword(FacesContext context,
+    public void passwordRepetida(FacesContext context,
 	    UIComponent componentToValidate, Object value) {
 	if (!userToBeRegistered.getPassword().equals(password2)) {
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
