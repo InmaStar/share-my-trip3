@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<h1>#{msgs.signup_form_title}</h1>
-	<p:panelGrid id="grid" columns="2" cellpadding="5">
+	<p:panelGrid id="grid" columns="1" cellpadding="5">
 		<h:panelGroup>
 			<p:outputLabel value="#{msgs.login_form_login_label}:" for="login"/>
 			<p:inputText id="login" value="#{signup.login}" required="true"
@@ -38,9 +38,8 @@
 		
         <h:panelGroup>
         	<p:outputLabel value="#{msgs.signup_form_surname_label}:" for="apellidos"/>
-        	<p:inputText id="surname" value="#{signup.apellidos}" required="true"
+        	<p:inputText id="apellidos" value="#{signup.apellidos}" required="true"
         		requiredMessage="#{msgs.signup_form_surname_required}"/>
-        		</p:inputText>
         	<p:message for="apellidos"/>
         </h:panelGroup>
         

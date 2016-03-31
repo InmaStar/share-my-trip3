@@ -5,7 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	
 		<p:menubar id="navbar">
-			<p:menuitem id="nombre_app" action="#{trips.listado}" inmediate="true"> 
+			<p:menuitem id="nombre_app" action="#{trips.listado}" 
+			inmediate="true" ajax="false"> 
 				<strong>#{msgs.app_name}</strong> 
 			</p:menuitem>
 

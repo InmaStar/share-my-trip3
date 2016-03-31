@@ -26,6 +26,10 @@ public class BeanSignup implements Serializable{
     private UserDTO userToBeRegistered;
     private String password2;
     
+    public BeanSignup(){
+	userToBeRegistered = new UserDTO();
+    }
+    
     public String getLogin() {
         return userToBeRegistered.getLogin();
     }
