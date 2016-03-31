@@ -3,6 +3,8 @@ package uo.sdi.util.random;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
+
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
 
@@ -15,16 +17,17 @@ public class DatabaseScriptGenerator {
 	    + "'%s', %e, %e, '%s', "
 	    + "'%tY-%<tm-%<td %<tH:%<tM:0.000000', '%s', '%s', '%s', '%s', "
 	    + "%e, %e, '%s', %e, %d, %d, %d;";
+    private static Locale locale = Locale.ENGLISH;
     private static PrintWriter writer;
 
     private static String formatUser(UserDTO user) {
-	return String.format(USER_TEMPLATE, user.getId(), user.getEmail(),
+	return String.format(locale, USER_TEMPLATE, user.getId(), user.getEmail(),
 		user.getLogin(), user.getName(), user.getPassword(),
 		user.getStatus().ordinal(), user.getSurname());
     }
 
     private static String formatTrip(TripDTO trip) {
-	return String.format(TRIP_TEMPLATE, trip.getId(), trip.getArrivalDate(),
+	return String.format(locale, TRIP_TEMPLATE, trip.getId(), trip.getArrivalDate(),
 		trip.getAvailablePax(), trip.getClosingDate(), 
 		trip.getComments(), trip.getDeparture().getAddress(), 
 		trip.getDeparture().getCity(), trip.getDeparture().getCountry(),

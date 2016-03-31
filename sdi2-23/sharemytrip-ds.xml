@@ -6,7 +6,7 @@
 		use-java-context="true" 
 		pool-name="ShareMyTripDS">
 		
-		<connection-url>jdbc:hsqldb:hsql://localhost</connection-url>
+		<connection-url>jdbc:hsqldb:hsql://localhost/localDB</connection-url>
 		<driver>hsqldb.jar</driver>
 		<pool></pool>
 		<security>
