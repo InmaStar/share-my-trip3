@@ -1,4 +1,4 @@
-package uo.sdi.presentation;
+package uo.sdi.presentation.impl;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;

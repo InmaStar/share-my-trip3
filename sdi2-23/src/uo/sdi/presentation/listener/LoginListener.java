@@ -5,7 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import uo.sdi.presentation.BeanUser;
+
+import uo.sdi.presentation.impl.BeanUser;
 
 public class LoginListener implements PhaseListener {
     private static final long serialVersionUID = 1551644597845911013L;

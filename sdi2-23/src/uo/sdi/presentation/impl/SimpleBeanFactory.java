@@ -4,9 +4,8 @@ import java.util.Map;
 
 import javax.faces.context.FacesContext;
 
-import alb.util.log.Log;
 import uo.sdi.presentation.BeanFactory;
-import uo.sdi.presentation.BeanUser;
+import alb.util.log.Log;
 
 public class SimpleBeanFactory implements BeanFactory {
 

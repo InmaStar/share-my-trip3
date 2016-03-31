@@ -1,4 +1,4 @@
-package uo.sdi.presentation;
+package uo.sdi.presentation.impl;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -16,7 +16,9 @@ import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.UserNotFoundException;
 import uo.sdi.infrastructure.Factories;
+import uo.sdi.presentation.validator.Validations;
 import uo.sdi.transport.UserDTO;
+import uo.sdi.util.bundle.BundleLoader;
 
 @ManagedBean(name = "login")
 @ViewScoped
@@ -28,15 +30,21 @@ public class BeanLogin implements Serializable {
     @ManagedProperty("#{user}")
     private BeanUser user;
     private UserDTO userToBeLogged;
-    private UserDTO userToBeChecked; //necesario para hacer las validaciones
+    private UserDTO userToBeChecked; // necesario para hacer las validaciones
 
-    public BeanUser getAlumno() { return user; }
-    public void setAlumno(BeanUser user) {this.user = user;}
+    public BeanUser getAlumno() {
+	return user;
+    }
+
+    public void setAlumno(BeanUser user) {
+	this.user = user;
+    }
+
     @PostConstruct
-    public void init() {     
+    public void init() {
 	user = Factories.beans.createBeanUser();
     }
-    
+
     public BeanLogin() {
 	userToBeLogged = new UserDTO();
     }
@@ -60,45 +68,34 @@ public class BeanLogin implements Serializable {
     public void existeLogin(FacesContext context,
 	    UIComponent componentToValidate, Object value)
 	    throws BusinessException {
+	
+	userToBeChecked = new UserDTO(); 
+	ResourceBundle bundle = BundleLoader.load("msgs"); 
 	String username = (String) value;
-	try {
-	    userToBeChecked = new UserDTO();
-	    userToBeChecked.setLogin(username);
-	    userToBeChecked = Factories.services.createUserService()
-		    .findByLogin(userToBeChecked);
-	} catch (UserNotFoundException e) {
-	    Log.info("El nombre de usuario [%s] no existe", username);
-	    FacesContext facesContext = FacesContext.getCurrentInstance();
-	    ResourceBundle bundle = facesContext.getApplication()
-		    .getResourceBundle(facesContext, "msgs");
-	    FacesMessage message = new FacesMessage(
-		    bundle.getString("username_does_not_exist"));
-	    throw new ValidatorException(message);
-	}
+	
+	Validations.emptyString(
+		username, bundle.getString("login_form_login_required"));
+	
+	userToBeChecked.setLogin(username);
+	Validations.existsLogin(userToBeChecked, 
+		bundle.getString("username_does_not_exist"));
     }
 
     public void passwordCorrecta(FacesContext context,
 	    UIComponent componentToValidate, Object value)
 	    throws BusinessException {
+
+	String password = (String) value;
+	ResourceBundle bundle = BundleLoader.load("msgs"); 
+
+	Validations.emptyString(
+		password, bundle.getString("login_form_password_required"));
 	
-	String password = (String)value;
-	
-	/*comprobar que se ha cargado el usuario en la validacion de nombre 
-	 * de usuario
-	 */
-	if (userToBeChecked.getLogin() != null 
-		&& !userToBeChecked.getLogin().equals("")) {
-	    if (!userToBeChecked.getPassword().equals(password)) {
-		Log.info("La contraseña [%s] es incorrecta",
-			userToBeLogged.getPassword());
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ResourceBundle bundle = facesContext.getApplication()
-			.getResourceBundle(facesContext, "msgs");
-		FacesMessage message = new FacesMessage(
-			bundle.getString("incorrect_password"));
-		throw new ValidatorException(message);
-	    }
-	}
+	userToBeChecked.setPassword(password);
+	try{ 
+	    Validations.correctPassword(userToBeChecked,
+		    bundle.getString("incorrect_password"));
+	} catch(UserNotFoundException e) {}
     }
 
     public String validar() {

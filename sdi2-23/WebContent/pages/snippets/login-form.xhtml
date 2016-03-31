@@ -6,16 +6,17 @@
 
 	<h1>#{msgs.login_form_title}</h1>
 	<p:panelGrid id="grid" columns="2" cellpadding="5">
-	<p:outputLabel value="#{msgs.login_form_login_label}:" for="login" />
+		<p:outputLabel value="#{msgs.login_form_login_label}:" for="login" />
 		<h:panelGroup>
 			<p:inputText id="login" value="#{login.username}" required="true"
 				requiredMessage="#{msgs.login_form_login_required}"
-				validator="#{login.existeLogin}" />
+				validator="#{login.existeLogin}" >
+				</p:inputText>
 			<p:message for="login" />
 		</h:panelGroup>
 
-<p:outputLabel value="#{msgs.login_form_password_label}:"
-				for="password" />
+		<p:outputLabel value="#{msgs.login_form_password_label}:"
+			for="password" />
 		<h:panelGroup>
 			<p:password id="password" value="#{login.password}" required="true"
 				requiredMessage="#{msgs.login_form_password_required}"
@@ -23,7 +24,8 @@
 			<p:message for="password" />
 		</h:panelGroup>
 
-		<p:commandButton value="#{msgs.button_send}" action="#{login.validar}">
+		<p:commandButton value="#{msgs.button_send}" action="#{login.validar}"
+			update="grid" process="@form">
 		</p:commandButton>
 	</p:panelGrid>
 

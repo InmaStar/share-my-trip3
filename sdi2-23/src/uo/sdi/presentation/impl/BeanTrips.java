@@ -1,4 +1,4 @@
-package uo.sdi.presentation;
+package uo.sdi.presentation.impl;
 
 import java.io.Serializable;
 import java.util.List;
