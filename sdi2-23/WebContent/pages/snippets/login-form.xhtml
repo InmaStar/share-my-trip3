@@ -10,7 +10,7 @@
 			<p:outputLabel value="#{msgs.login_form_login_label}:" for="login" />
 			<p:inputText id="login" value="#{login.username}" required="true"
 				requiredMessage="#{msgs.login_form_login_required}"
-				validator="#{login.existsUsername}" />
+				validator="#{login.existeLogin}" />
 			<p:message for="login" />
 		</h:panelGroup>
 
@@ -19,7 +19,7 @@
 				for="password" />
 			<p:password id="password" value="#{login.password}" required="true"
 				requiredMessage="#{msgs.login_form_password_required}"
-				validator="#{login.correctPassword}" />
+				validator="#{login.passwordCorrecta}" />
 			<p:message for="password" />
 		</h:panelGroup>
 

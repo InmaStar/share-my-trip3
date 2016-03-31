@@ -4,7 +4,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 	
-<p:panel header="#{msgs.related_trips }">
+	<h1>#{msgs.related_trips}</h1>
+<!-- <p:panel header="#{msgs.related_trips }"> -->
 		<p:dataTable id="listadoViajesRelacionados" var="entry"
 				value="#{trips.listaViajes}" border="1">
 				<p:row rendered="#{entry.hasRelationship(user.id)}">
@@ -31,5 +32,5 @@
 			</p:column>
 			</p:row>
 		</p:dataTable>
-</p:panel>
+<!-- </p:panel> -->
 </ui:composition>

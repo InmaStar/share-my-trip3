@@ -4,7 +4,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 	
-	<p:panel header="#{msgs.promoter_trips }">
+	<h1>#{msgs.promoter_trips }</h1>
+<!-- <p:panel header="#{msgs.promoter_trips }"> -->
 		<p:dataTable id="listadoViajesPromotor" var="entry"
 				value="#{trips.listaViajes}" border="1">
 		<p:row rendered="#{entry.promoter(user.id) }"> <!--  id="promoterTrip#{trips.listaViajes.index(entry)} -->
@@ -46,6 +47,6 @@
 			</p:column>
 		</p:row>
 		</p:dataTable>
-	</p:panel>
+<!-- 	</p:panel> -->
 
 </ui:composition>
