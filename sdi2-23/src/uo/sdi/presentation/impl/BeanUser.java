@@ -84,7 +84,7 @@ public class BeanUser implements Serializable{
 		    + "[%d] al usuario [%d]", viaje.getId(), user.getId());
 	    setCurrentUser(Factories.services.createUserService()
 		    .cancelApplication(user, viaje));
-	    trips.listado();
+	    trips.listadoDisponibles();
 	    return "exito";
 	} catch (Exception e) {
 	    Log.debug("Ha ocurrido una [%s] cancelando la plaza "
@@ -100,7 +100,7 @@ public class BeanUser implements Serializable{
 		    + "[%d] al usuario [%d]", viaje.getId(), user.getId());
 	    setCurrentUser(Factories.services.createUserService()
 		    .requestSeat(user, viaje));
-	    trips.listado();
+	    trips.listadoDisponibles();
 	    return "exito";
 	} catch (Exception e) {
 	    Log.debug("Ha ocurrido una [%s] solicitando plaza "

@@ -23,7 +23,7 @@ public class BeanTrips implements Serializable{
     List<TripDTO> viajes = new ArrayList<TripDTO>();
 
     public BeanTrips() {
-	actualizar();
+	listadoDisponibles();
     }
 
     public List<TripDTO> getListaViajes() {
@@ -45,28 +45,61 @@ public class BeanTrips implements Serializable{
 	}
     }
 
-    public String listado() {
+    public String listadoDisponibles() {
 	try {
-	    viajes = cargarViajes();
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for(TripDTO viaje : listaViajes){
+		if(viaje.isVisible()){
+		    viajes.add(viaje);
+		}
+	    }
 	    return "exito";
 	} catch (Exception e) {
-	    Log.debug("Ha ocurrido una [%s] listando viajes: [%s]", 
+	    Log.debug("Ha ocurrido una [%s] listando "
+	    	+ "los viajes disponibles: [%s]", 
 		    e.getClass().toString(),
 		    e.getMessage());
 	    return "error";
 	}
     }
     
-    public String listadoRelacionados() {
-	return listado();
+    public String listadoRelacionados(Long userId) {
+	try {
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for(TripDTO viaje : listaViajes){
+		if(viaje.hasRelationship(userId)){
+		    viajes.add(viaje);
+		}
+	    }
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando "
+	    	+ "los viajes relacionados: [%s]", 
+		    e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
+	}
     }
 
-    public String listadoPromotor() {
-	return listado();
-    }
-    
-    public void actualizar(){
-	listado();
+    public String listadoPromotor(Long userId) {
+	try {
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for(TripDTO viaje : listaViajes){
+		if(viaje.isPromoter(userId)){
+		    viajes.add(viaje);
+		}
+	    }
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando "
+	    	+ "los viajes relacionados: [%s]", 
+		    e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
+	}
     }
 
     private List<TripDTO> cargarViajes() throws BusinessException {

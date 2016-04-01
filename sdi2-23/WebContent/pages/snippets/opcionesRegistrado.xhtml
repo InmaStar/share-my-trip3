@@ -6,10 +6,10 @@
 
 		<p:menuitem id="rol" value="#{user.login}" disabled="true"/>
 		<p:menuitem id="viajesRelacionados" value="#{msgs.related_trips}"
-			action="#{trips.listadoRelacionados}" inmediate="true"
+			action="#{trips.listadoRelacionados(user.id)}" inmediate="true"
 			ajax="false"/>
 		<p:menuitem id="viajesPromotor" value="#{msgs.promoter_trips}"
-			action="#{trips.listadoPromotor}" inmediate="true"
+			action="#{trips.listadoPromotor(user.id)}" inmediate="true"
 			ajax="false"/>
 		<p:menuitem id="nuevoViaje" action="registrarViaje" 
 			inmediate="true" value="#{msgs.new_trip}"

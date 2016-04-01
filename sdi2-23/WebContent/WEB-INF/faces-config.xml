@@ -84,12 +84,12 @@
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -143,12 +143,12 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -170,12 +170,12 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -202,12 +202,12 @@
 			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -237,12 +237,12 @@
 			<to-view-id>/pages/listaViajesPromotor.xthml</to-view-id>
 		</navigation-case>
 				<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -259,12 +259,12 @@
 	<navigation-rule>
 		<from-view-id>/pages/listaViajesRelacionados.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
