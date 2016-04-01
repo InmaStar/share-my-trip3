@@ -17,13 +17,23 @@ public class Validations {
 	}
     }
 
-    public static void existsLogin(UserDTO user, String errorMessage)
+    public static void nonExistingLogin(UserDTO user, String errorMessage)
 	    throws BusinessException {
 	try {
 	    Factories.services.createUserService().findByLogin(user);
 	} catch (UserNotFoundException e) {
 	    Log.info("El nombre de usuario [%s] no existe", user.getLogin());
 	    throwValidatorException(errorMessage);
+	}
+    }
+    
+    public static void alreadyExistingLogin(UserDTO user, String errorMessage)
+	    throws BusinessException {
+	try {
+	    Factories.services.createUserService().findByLogin(user);
+	    Log.info("El nombre de usuario [%s] ya existe", user.getLogin());
+	    throwValidatorException(errorMessage);
+	} catch (UserNotFoundException e) {
 	}
     }
 

@@ -1,6 +1,7 @@
 package uo.sdi.presentation.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -19,10 +20,10 @@ public class BeanTrips implements Serializable{
      * 
      */
     private static final long serialVersionUID = 1L;
-    List<TripDTO> viajes;
+    List<TripDTO> viajes = new ArrayList<TripDTO>();
 
-    public BeanTrips() throws BusinessException {
-	viajes = cargarViajes();
+    public BeanTrips() {
+	listado();
     }
 
     public List<TripDTO> getListaViajes() {

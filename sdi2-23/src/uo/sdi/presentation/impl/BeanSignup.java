@@ -23,8 +23,8 @@ public class BeanSignup implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private UserDTO userToBeRegistered;
-    private UserDTO userToBeChecked;
     private String password2;
+    private String passwordToBeChecked;
 
     public BeanSignup() {
 	userToBeRegistered = new UserDTO();
@@ -81,7 +81,7 @@ public class BeanSignup implements Serializable {
     public void existeLogin(FacesContext context,
 	    UIComponent componentToValidate, Object value)
 	    throws BusinessException {
-	userToBeChecked = new UserDTO(); 
+	UserDTO userToBeChecked = new UserDTO(); 
 	ResourceBundle bundle = BundleLoader.load("msgs"); 
 	String username = (String) value;
 	
@@ -89,8 +89,8 @@ public class BeanSignup implements Serializable {
 		username, bundle.getString("login_form_login_required"));
 	
 	userToBeChecked.setLogin(username);
-	Validations.existsLogin(userToBeChecked, 
-		bundle.getString("username_does_not_exist"));
+	Validations.alreadyExistingLogin(userToBeChecked, 
+		bundle.getString("username_already_exists"));
     }
 
     public void passwordVacia(FacesContext context,
@@ -101,7 +101,7 @@ public class BeanSignup implements Serializable {
 	Validations.emptyString(
 		password, bundle.getString("login_form_password_required"));
 	
-	userToBeChecked.setPassword(password);
+	passwordToBeChecked = password;
     }
     
     public void passwordRepetida(FacesContext context,
@@ -112,8 +112,8 @@ public class BeanSignup implements Serializable {
 	Validations.emptyString(
 		password, bundle.getString("signup_form_password2_required"));
 	
-	if(userToBeChecked!=null && userToBeChecked.getPassword()!=null){
-	Validations.repeatedPassword(userToBeChecked.getPassword(),
+	if(passwordToBeChecked!=null){
+	Validations.repeatedPassword(passwordToBeChecked,
 		password,
 		bundle.getString("different_passwords"));
 	}

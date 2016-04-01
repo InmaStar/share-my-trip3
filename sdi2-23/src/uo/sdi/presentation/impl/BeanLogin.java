@@ -74,7 +74,7 @@ public class BeanLogin implements Serializable {
 		username, bundle.getString("login_form_login_required"));
 	
 	userToBeChecked.setLogin(username);
-	Validations.existsLogin(userToBeChecked, 
+	Validations.nonExistingLogin(userToBeChecked, 
 		bundle.getString("username_does_not_exist"));
     }
 
