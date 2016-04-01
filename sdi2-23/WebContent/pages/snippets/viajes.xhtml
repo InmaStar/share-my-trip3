@@ -7,15 +7,19 @@
 	<h1>#{msgs.list_of_trips}</h1>
 	<!--  <p:panel header="#{msgs.list_of_trips}">-->
 		<p:dataTable id="listadoViajesDisponibles" var="entry"
-				value="#{trips.listaViajes}" border="1">
-		<p:column>
-			<f:facet name="header">#{msgs.departure}</f:facet>#{entry.departure.city}</p:column>
-		<p:column>
-			<f:facet name="header">#{msgs.destination}</f:facet>#{entry.destination.city}</p:column>
-		<p:column> 
-			<f:facet name="header">#{msgs.available_seats}</f:facet>#{entry.availablePax}</p:column>
-		<p:column>
-			<f:facet name="header">#{msgs.promoter}</f:facet>#{entry.promoter.login}</p:column>
+				value="#{trips.listaViajes}" border="1"
+				rows="10" sortMode="multiple" paginator="true"
+                paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="10,20,30">
+		<p:column headerText="#{msgs.departure}" sortBy="#{entry.departure.city}">
+			#{entry.departure.city}
+		</p:column>
+		<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}">
+			#{entry.destination.city}</p:column>
+		<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}"> 
+			#{entry.availablePax}</p:column>
+		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}">
+			#{entry.promoter.login}</p:column>
 		<p:column rendered="#{!user.publico}">
 			<p:commandButton action="#{user.cancelarPlaza(entry) }" inmediate="true" 
 				rendered="#{entry.isPending(user.id)}"

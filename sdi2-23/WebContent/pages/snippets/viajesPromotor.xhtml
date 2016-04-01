@@ -7,25 +7,28 @@
 	<h1>#{msgs.promoter_trips }</h1>
 <!-- <p:panel header="#{msgs.promoter_trips }"> -->
 		<p:dataTable id="listadoViajesPromotor" var="entry"
-				value="#{trips.listaViajes}" border="1">
+				value="#{trips.listaViajes}" border="1"
+				rows="10" sortMode="multiple" paginator="true"
+                paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="10,20,30">
 		<p:row rendered="#{entry.promoter(user.id) }"> <!--  id="promoterTrip#{trips.listaViajes.index(entry)} -->
-			<p:column>
-			<f:facet>#{msgs.trip_id }</f:facet> #{entry.id}
+			<p:column headerText="#{msgs.trip_id }" sortBy="#{entry.id}">
+			#{entry.id}
 			</p:column>
-			<p:column>
-			<f:facet>#{msgs.departure}</f:facet> #{entry.departure.city}
+			<p:column headerText="#{msgs.departure}" sortBy="#{entry.departure.city}">
+			#{entry.departure.city}
 			</p:column>
-			<p:column>
-			<f:facet>#{msgs.destination}</f:facet> #{entry.destination.city }
+			<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}">
+			#{entry.destination.city }
 			</p:column>
-			<p:column>
-			<f:facet>#{msgs.max_seats}</f:facet> #{entry.maxPax }
+			<p:column headerText="#{msgs.max_seats}" sortBy="#{entry.maxPax}">
+			#{entry.maxPax }
 			</p:column>
-			<p:column>
-			<f:facet>#{msgs.available_seats}</f:facet> #{entry.availablePax }
+			<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.vailablePax}">
+			#{entry.availablePax }
 			</p:column>
-			<p:column>
-			<f:facet>#{msgs.trip_status}</f:facet> #{entry.status }
+			<p:column headerText="#{msgs.trip_status}" sortBy="#{entry.status}">
+			#{entry.status }
 			</p:column>
 			<p:column>
 			<p:commandLink action="solicitudes" inmediate="true" 
