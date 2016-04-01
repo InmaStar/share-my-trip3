@@ -26,8 +26,8 @@
 			<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.vailablePax}">
 			#{entry.availablePax }
 			</p:column>
-			<p:column headerText="#{msgs.trip_status}" sortBy="#{entry.status}">
-			#{entry.status }
+			<p:column headerText="#{msgs.trip_status}" sortBy="#{trips.localizarTripStatus(entry.status) }">
+			#{trips.localizarTripStatus(entry.status) }
 			</p:column>
 			<p:column>
 			<p:commandButton action="solicitudes" inmediate="true" 

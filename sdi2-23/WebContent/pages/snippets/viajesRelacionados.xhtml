@@ -26,11 +26,11 @@
 			<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax }">
 			#{entry.availablePax }
 			</p:column>
-			<p:column headerText="#{msgs.trip_status}" sortBy="#{entry.status }">
-			#{entry.status }
+			<p:column headerText="#{msgs.trip_status}" sortBy="#{trips.localizarTripStatus(entry.status) }">
+			#{trips.localizarTripStatus(entry.status) }
 			</p:column>
-			<p:column headerText="#{msgs.relationship}" sortBy="#{entry.getRelationship(user.id) }">
-			#{entry.getRelationship(user.id) }
+			<p:column headerText="#{msgs.relationship}" sortBy="#{trips.localizarTripRelationship(entry.getRelationship(user.id)) }">
+			#{trips.localizarTripRelationship(entry.getRelationship(user.id))}
 			</p:column>
 		</p:dataTable>
 <!-- </p:panel> -->

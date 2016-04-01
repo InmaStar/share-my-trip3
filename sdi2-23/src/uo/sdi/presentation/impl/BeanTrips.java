@@ -3,6 +3,7 @@ package uo.sdi.presentation.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -11,7 +12,10 @@ import alb.util.log.Log;
 import uo.sdi.business.TripService;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.infrastructure.Factories;
+import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.TripDTO;
+import uo.sdi.transport.UserTripRelationship;
+import uo.sdi.util.bundle.BundleLoader;
 
 @ManagedBean(name = "trips")
 @SessionScoped
@@ -101,6 +105,16 @@ public class BeanTrips implements Serializable{
 	    return "error";
 	}
     }
+    
+    public String localizarTripStatus(TripStatus status){
+	ResourceBundle bundle = BundleLoader.load("msgs");
+	return bundle.getString(status.name());
+    }
+    
+    public String localizarTripRelationship(UserTripRelationship relationship){
+   	ResourceBundle bundle = BundleLoader.load("msgs");
+   	return bundle.getString(relationship.name());
+       }
 
     private List<TripDTO> cargarViajes() throws BusinessException {
 	List<TripDTO> listaViajes = Factories.services.createTripService()
