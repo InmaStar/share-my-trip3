@@ -13,10 +13,7 @@
 			ajax="false"/>
 		<p:menuitem id="nuevoViaje" action="registrarViaje" 
 			inmediate="true" value="#{msgs.new_trip}"
-			ajax="false">
-			<f:setPropertyActionListener target="#{trip.viaje}"
-						value="#{null}" />
-		</p:menuitem>
+			ajax="false" actionListener="#{trip.initViaje}" />
 		<p:menuitem id="cerrarSesion" 
 			inmediate="true" action="#{user.cerrarSesion}"
 			ajax="false">

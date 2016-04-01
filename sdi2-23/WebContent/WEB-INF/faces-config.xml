@@ -54,7 +54,7 @@
 			<to-view-id>/pages/error.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listado}</from-action>
+			<from-action>#{trips.listadoDisponibles}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -65,20 +65,6 @@
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/pages/listaViajesDisponibles.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{user.cancelarPlaza(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{user.solicitarPlaza(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
-		</navigation-case>
 		<navigation-case>
 			<from-outcome>signUp</from-outcome>
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
@@ -111,10 +97,6 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>signUp</from-outcome>
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
 		</navigation-case>
@@ -125,10 +107,6 @@
 			<from-action>#{signup.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>signUp</from-outcome>

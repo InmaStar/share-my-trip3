@@ -23,6 +23,10 @@ public class BeanTrip implements Serializable{
     private static final long serialVersionUID = 1L;
     private TripDTO viaje;
 
+    public void initViaje(){
+	this.viaje = new TripDTO();
+    }
+    
     public void setViaje(TripDTO viaje) {
 	this.viaje = viaje;
     }
