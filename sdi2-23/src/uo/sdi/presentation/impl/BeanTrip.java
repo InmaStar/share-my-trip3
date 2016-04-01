@@ -148,7 +148,7 @@ public class BeanTrip implements Serializable{
 	try {
 	    Log.info("El usuario [%d] está cancelando plaza para el viaje "
 		    + "[%d]", user.getId(), viaje.getId());
-	    Factories.services.createUserService().cancelApplication(user,
+	    Factories.services.createUserService().cancelSeat(user.getId(),
 		    viaje);
 	    return "exito";
 	} catch (Exception e) {
