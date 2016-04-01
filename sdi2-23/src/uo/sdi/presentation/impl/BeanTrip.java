@@ -22,6 +22,10 @@ public class BeanTrip implements Serializable{
      */
     private static final long serialVersionUID = 1L;
     private TripDTO viaje;
+    public final static double MIN_LAT = -90;
+    public final static double MAX_LAT = 90;
+    public final static double MIN_LON = -180;
+    public final static double MAX_LON = 180; 
 
     public void initViaje(){
 	this.viaje = new TripDTO();
@@ -166,6 +170,23 @@ public class BeanTrip implements Serializable{
 	}
     }
 
+    
+    public double getMinLat(){
+	return MIN_LAT;
+    }
+    
+    public double getMaxLat(){
+	return MAX_LAT;
+    }
+    
+    public double getMinLon(){
+	return MIN_LON;
+    }
+    
+    public double getMaxLon(){
+	return MAX_LON;
+    }
+    
     public boolean isVisible() {
 	return viaje.isVisible();
     }
