@@ -23,7 +23,7 @@ public class BeanTrips implements Serializable{
     List<TripDTO> viajes = new ArrayList<TripDTO>();
 
     public BeanTrips() {
-	listado();
+	actualizar();
     }
 
     public List<TripDTO> getListaViajes() {
@@ -56,6 +56,18 @@ public class BeanTrips implements Serializable{
 	    return "error";
 	}
     }
+    
+    public String listadoRelacionados() {
+	return listado();
+    }
+
+    public String listadoPromotor() {
+	return listado();
+    }
+    
+    public void actualizar(){
+	listado();
+    }
 
     private List<TripDTO> cargarViajes() throws BusinessException {
 	List<TripDTO> listaViajes = Factories.services.createTripService()
@@ -64,4 +76,5 @@ public class BeanTrips implements Serializable{
 		listaViajes.size());
 	return listaViajes;
     }
+    
 }

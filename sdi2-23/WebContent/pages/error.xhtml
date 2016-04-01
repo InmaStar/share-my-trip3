@@ -21,8 +21,9 @@
 	<ui:define name="pie">
 		<div class="well well-sm">
 			<h:form>
-				<h:commandLink id="listarViajes" 
-				action="#{trips.listado}">#{msgs.back_link}</h:commandLink>
+				<p:commandLink id="listarViajes" 
+				action="#{trips.listado}" value="#{msgs.back_link}"
+				ajax="false"/>
 			</h:form>
 		</div>
 	</ui:define>

@@ -216,8 +216,10 @@ public class TripDTO {
             if (seat.getUser().getId().equals(userId)) {
                 if (seat.getStatus() == TravelStatus.ACCEPTED) {
                     return "ADMITIDO";
-                } else {
+                } else if (seat.getStatus() == TravelStatus.EXCLUDED){
                     return "EXCLUIDO";
+                } else {
+                    return "CANCELADO";
                 }
             }
         }
@@ -229,5 +231,13 @@ public class TripDTO {
         }
 
         return "";
+    }
+    
+    public boolean canRequestSeat(Long userId){
+	return !isPromoter(userId) && !isPending(userId);
+    }
+    
+    public boolean canCancelSeat(Long userId){
+	return !isPromoter(userId) && isPending(userId);
     }
 }

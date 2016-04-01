@@ -24,4 +24,19 @@ public class SimpleBeanFactory implements BeanFactory {
 	return user;
     }
 
+    @Override
+    public BeanTrips createBeanTrips() {
+	BeanTrips trips;
+	Map<String, Object> session = FacesContext.getCurrentInstance()
+		.getExternalContext().getSessionMap();
+	
+	trips = (BeanTrips) session.get("trips");
+	if (trips == null) {
+	    trips = new BeanTrips();
+	    session.put("trips", trips);
+	    Log.info("BeanTrips creado de forma explícita");
+	}
+	return trips;
+    }
+
 }
