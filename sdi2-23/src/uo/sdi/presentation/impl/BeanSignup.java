@@ -3,10 +3,13 @@ package uo.sdi.presentation.impl;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+
 import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.infrastructure.Factories;
@@ -22,6 +25,8 @@ public class BeanSignup implements Serializable {
      * 
      */
     private static final long serialVersionUID = 1L;
+    @ManagedProperty("#{user}")
+    private BeanUser user;
     private UserDTO userToBeRegistered;
     private String password2;
     private String passwordToBeChecked;
@@ -29,7 +34,11 @@ public class BeanSignup implements Serializable {
     public BeanSignup() {
 	userToBeRegistered = new UserDTO();
     }
-
+    @PostConstruct
+    public void init() {
+	user = Factories.beans.createBeanUser();
+    }
+    
     public String getLogin() {
 	return userToBeRegistered.getLogin();
     }
@@ -122,7 +131,8 @@ public class BeanSignup implements Serializable {
 
     public String registrar() {
 	try {
-	    Factories.services.createUserService().save(userToBeRegistered);
+	    user.setCurrentUser(Factories.services.createUserService()
+		    .save(userToBeRegistered));
 	    Log.info("Se ha registrado el usuario [%s]",
 		    userToBeRegistered.getLogin());
 	    return "exito";

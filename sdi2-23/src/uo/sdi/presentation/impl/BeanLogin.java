@@ -29,14 +29,6 @@ public class BeanLogin implements Serializable {
     private UserDTO userToBeLogged;
     private UserDTO userToBeChecked; // necesario para hacer las validaciones
 
-    public BeanUser getAlumno() {
-	return user;
-    }
-
-    public void setAlumno(BeanUser user) {
-	this.user = user;
-    }
-
     @PostConstruct
     public void init() {
 	user = Factories.beans.createBeanUser();

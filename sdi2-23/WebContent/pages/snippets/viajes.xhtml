@@ -18,11 +18,11 @@
 			<f:facet name="header">#{msgs.promoter}</f:facet>#{entry.promoter.login}</p:column>
 		<p:column rendered="#{!user.publico}">
 			<p:commandButton action="#{user.cancelarPlaza(entry) }" inmediate="true" 
-				rendered="#{entry.pending(user.id)}"
-				id="cancelarPlaza#{entry.id}">#{msgs.cancel_seat }</p:commandButton>
+				rendered="#{entry.isPending(user.id)}"
+				id="cancelarPlaza#{entry.id}" value="#{msgs.cancel_seat }"/>
 			<p:commandButton action="#{user.solicitarPlaza(entry) }" inmediate="true"
-				rendered="#{!entry.pending(user.id)}" id="solicitarPlaza#{entry.id}">
-				#{msgs.request_seat}</p:commandButton>
+				rendered="#{!entry.isPending(user.id)}" id="solicitarPlaza#{entry.id}"
+				value="#{msgs.request_seat}"/>
 		</p:column>
 		</p:dataTable>
 	<!-- </p:panel> -->
