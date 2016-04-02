@@ -48,7 +48,7 @@
 			for="codigoPostalSalida" />
 		<h:panelGroup>
 			<p:inputText id="codigoPostalSalida"
-				value="#{trip.departure.zipcode}" required="true"
+				value="#{trip.departure.zipCode}" required="true"
 				requiredMessage="#{msgs.trip_form_zipcode_required}"
 				validatorMessage="#{msgs.trip_form_zipcode_validator}">
 				<f:validateRegex pattern="[0-9]{5}" />
@@ -131,7 +131,7 @@
 			for="codigoPostalDestino" />
 		<h:panelGroup>
 			<p:inputText id="codigoPostalDestino"
-				value="#{trip.destination.zipcode}" required="true"
+				value="#{trip.destination.zipCode}" required="true"
 				requiredMessage="#{msgs.trip_form_zipcode_required}"
 				validatorMessage="#{msgs.trip_form_zipcode_validator}">
 				<f:validateRegex pattern="[0-9]{5}" />

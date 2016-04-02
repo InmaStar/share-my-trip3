@@ -5,29 +5,30 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<p:dataTable id="solicitudes" var="entry" 
-	value="#{trip.applicants}" border=1>
+	value="#{trip.applicants}" border="1">
 	<p:column>
 		<f:facet name="header">#{msgs.user}</f:facet>
 		#{entry.login}
 	</p:column>
 	<p:column>
 		<f:facet name="header">#{msgs.name}</f:facet>
-		#{entry.nombre}
+		#{entry.name}
 	</p:column>
 	<p:column>
 		<f:facet name="header">#{msgs.surname}</f:facet>
-		#{entry.apellidos}
+		#{entry.surname}
+	</p:column>
+	<p:column headerText="#{msgs.applicant_status}" >
+		#{trip.localizarTripRelationship(trip.getRelationship(entry.id))}
 	</p:column>
 	<p:column rendered="#{trip.visible}">
-		<h:commandButton rendered="#{trip.isExcludedOrPending(entry.id)}" 
-		action="#{trip.confirmarPasajero(entry.id)}">
-		#{msgs.confirm}
-		</h:commandButton>
+		<p:commandButton rendered="#{trip.isExcluded(entry.id) or trip.isPending(entry.id)}" 
+		actionListener="#{trip.confirmarPasajero(entry.id)}" value="#{msgs.confirm}"
+		update="solicitudes" process="@this" />
 		
-		<h:commandButton rendered="#{!isExcludedOrPending(entry.id)}" 
-		action="#{trip.excluirPasajero(entry)}">
-		#{msgs.exclude}
-		</h:commandButton>
+		<p:commandButton rendered="#{trip.isAccepted(entry.id) or trip.isPending(entry.id)}" 
+		actionListener="#{trip.excluirPasajero(entry)}" value="#{msgs.exclude}"
+		update="solicitudes" process="@this" />
 		
 	</p:column>
 	</p:dataTable>

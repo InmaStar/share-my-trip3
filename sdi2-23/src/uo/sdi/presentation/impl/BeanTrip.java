@@ -2,6 +2,7 @@ package uo.sdi.presentation.impl;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +13,8 @@ import uo.sdi.infrastructure.Factories;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
+import uo.sdi.transport.UserTripRelationship;
+import uo.sdi.util.bundle.BundleLoader;
 
 @ManagedBean(name = "trip")
 @SessionScoped
@@ -69,7 +72,6 @@ public class BeanTrip implements Serializable{
 
     public void setClosingDate(Date closingDate) {
 	viaje.setClosingDate(closingDate);
-	;
     }
 
     public Integer getAvailablePax() {
@@ -138,7 +140,7 @@ public class BeanTrip implements Serializable{
 	try {
 	    Log.info("Se está dando plaza para el viaje "
 		    + "[%d] al usuario [%d]", viaje.getId(), userId);
-	    Factories.services.createUserService().confirmApplication(userId,
+	    viaje = Factories.services.createTripService().confirmApplication(userId,
 		    viaje);
 	    return "exito";
 	} catch (Exception e) {
@@ -156,7 +158,7 @@ public class BeanTrip implements Serializable{
 	try {
 	    Log.info("El usuario [%d] está cancelando plaza para el viaje "
 		    + "[%d]", user.getId(), viaje.getId());
-	    Factories.services.createUserService().cancelSeat(user.getId(),
+	    viaje = Factories.services.createTripService().cancelSeat(user.getId(),
 		    viaje);
 	    return "exito";
 	} catch (Exception e) {
@@ -190,8 +192,24 @@ public class BeanTrip implements Serializable{
 	return viaje.isVisible();
     }
 
-    public boolean isExcludedOrPending(Long userId) {
-	return viaje.isExcluded(userId) || viaje.isPending(userId);
+    public boolean isExcluded(Long userId) {
+	return viaje.isExcluded(userId);
+    }
+    
+    public boolean isPending(Long userId){
+	return viaje.isPending(userId);
     }
 
+    public boolean isAccepted(Long userId){
+	return viaje.isAccepted(userId);
+    }
+    
+    public String localizarTripRelationship(UserTripRelationship relationship){
+   	ResourceBundle bundle = BundleLoader.load("msgs");
+   	return bundle.getString(relationship.name());
+       }
+    
+    public UserTripRelationship getRelationship(Long userId){
+	return viaje.getRelationship(userId);
+    }
 }

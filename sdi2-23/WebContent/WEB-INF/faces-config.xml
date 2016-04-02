@@ -170,16 +170,6 @@
 	<navigation-rule>
 		<from-view-id>/pages/solicitudes.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trip.confirmarPasajero(entry.id)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{trip.excluirPasajero(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>

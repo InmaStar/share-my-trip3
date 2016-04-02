@@ -31,16 +31,14 @@
 			</p:column>
 			<p:column>
 			<p:commandButton action="solicitudes" inmediate="true" 
-				value="#{msgs.check_seat_requests }">
-				<f:setPropertyActionListener target="#{trip.viaje}"
-						value="#{entry}" />
+				value="#{msgs.check_seat_requests }" ajax="false">
+				<f:setPropertyActionListener target="#{trip.viaje}" value="#{entry}" />
 				</p:commandButton>
 			</p:column>
 			<p:column>
                <p:commandButton action="modificarViaje" inmediate="true" rendered="#{entry.open }"
-               value="#{msgs.modify_trip }" >
-               <f:setPropertyActionListener target="#{trip.viaje}"
-						value="#{entry}" />
+               value="#{msgs.modify_trip }" ajax="false">
+               <f:setPropertyActionListener target="#{trip.viaje}" value="#{entry}" />
 				</p:commandButton>
 			</p:column>
 			<p:column>
