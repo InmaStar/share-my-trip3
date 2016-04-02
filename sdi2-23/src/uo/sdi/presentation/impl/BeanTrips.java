@@ -14,6 +14,7 @@ import uo.sdi.business.exception.BusinessException;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.TripDTO;
+import uo.sdi.transport.UserDTO;
 import uo.sdi.transport.UserTripRelationship;
 import uo.sdi.util.bundle.BundleLoader;
 
@@ -106,6 +107,39 @@ public class BeanTrips implements Serializable{
 	    return "error";
 	}
     }
+    
+    public String cancelarPlaza(TripDTO viaje, UserDTO usuario) {
+   	try {
+   	    Log.info("Se está cancelando la plaza para el viaje "
+   		    + "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
+   	    Factories.services.createUserService()
+   		    .cancelApplication(usuario, viaje);
+   	    listadoDisponibles();
+   	    return "exito";
+   	} catch (Exception e) {
+   	    Log.debug("Ha ocurrido una [%s] cancelando la plaza "
+   		    + "del usuario [%d] en el viaje [%d]: [%s]", e.getClass()
+   		    .toString(), usuario.getId(), viaje.getId(), e.getMessage());
+   	    return "error";
+   	}
+       }
+
+       public String solicitarPlaza(TripDTO viaje, UserDTO usuario) {
+   	try {
+   	    Log.info("Se está solicitando plaza para el viaje "
+   		    + "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
+   	   Factories.services.createUserService()
+   		    .requestSeat(usuario, viaje);
+   	    listadoDisponibles();
+   	    return "exito";
+   	} catch (Exception e) {
+   	    Log.debug("Ha ocurrido una [%s] solicitando plaza "
+   		    + "para el usuario [%d] en el viaje [%d]: [%s]", e
+   		    .getClass().toString(), usuario.getId(), viaje.getId(), e
+   		    .getMessage());
+   	    return "error";
+   	}
+       }
     
     public String localizarTripStatus(TripStatus status){
 	ResourceBundle bundle = BundleLoader.load("msgs");

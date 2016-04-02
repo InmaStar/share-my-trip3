@@ -21,10 +21,10 @@
 		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}">
 			#{entry.promoter.login}</p:column>
 		<p:column rendered="#{!user.publico}">
-			<p:commandButton actionListener="#{user.cancelarPlaza(entry)}" inmediate="true" 
+			<p:commandButton actionListener="#{trips.cancelarPlaza(entry, user.currentUser)}" inmediate="true" 
 				rendered="#{entry.canCancelSeat(user.id)}" update="listadoViajesDisponibles" process="@this"
 				id="cancelarPlaza#{entry.id}" value="#{msgs.cancel_seat }"/>
-			<p:commandButton actionListener="#{user.solicitarPlaza(entry)}" inmediate="true"
+			<p:commandButton actionListener="#{trips.solicitarPlaza(entry, user.currentUser)}" inmediate="true"
 				rendered="#{entry.canRequestSeat(user.id)}" id="solicitarPlaza#{entry.id}"
 				value="#{msgs.request_seat}" update="listadoViajesDisponibles" process="@this"/>
 		</p:column>
