@@ -10,7 +10,9 @@
 		<h2>#{msgs.departure}</h2>
 		<h3>#{msgs.address}</h3>
 
-		<h:panelGroup/>
+		<h:panelGroup>
+			<p:selectBooleanButton id="precarga" />
+		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_street_label}:"
 			for="calleSalida" />
@@ -62,7 +64,8 @@
 		
 		<p:outputLabel value="#{msgs.trip_form_latitude}:" for="latSalida" />
 		<h:panelGroup>
-			<p:inputText id="latSalida" value="#{trip.departure.lat}" />
+			<p:inputNumber id="latSalida" value="#{trip.departure.lat}" 
+				minValue="#{trip.minLat}" maxValue="#{trip.maxLat}"/>
 			<p:slider for="latSalida" minValue="#{trip.minLat}"
 				maxValue="#{trip.maxLat}" />
 			<p:message for="latSalida" />
@@ -70,7 +73,8 @@
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonSalida" />
 		<h:panelGroup>
-			<p:inputText id="lonSalida" value="#{trip.departure.lon}" />
+			<p:inputNumber id="lonSalida" value="#{trip.departure.lon}"
+				minValue="#{trip.minLon}" maxValue="#{trip.maxLon}"/>
 			<p:slider for="lonSalida" minValue="#{trip.minLon}"
 				maxValue="#{trip.maxLon}" />
 			<p:message for="lonSalida" />
@@ -145,7 +149,8 @@
 		
 		<p:outputLabel value="#{msgs.trip_form_latitude}:" for="latDestino" />
 		<h:panelGroup>
-			<p:inputText id="latDestino" value="#{trip.destination.lat}" />
+			<p:inputNumber id="latDestino" value="#{trip.destination.lat}" 
+				minValue="#{trip.minLat}" maxValue="#{trip.maxLat}"/>
 			<p:slider for="latDestino" minValue="#{trip.minLat}"
 				maxValue="#{trip.maxLat}" />
 			<p:message for="latDestino" />
@@ -153,7 +158,8 @@
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonDestino" />
 		<h:panelGroup>
-			<p:inputText id="lonDestino" value="#{trip.destination.lon}" />
+			<p:inputNumber id="lonDestino" value="#{trip.destination.lon}" 
+				minValue="#{trip.minLon}" maxValue="#{trip.maxLon}"/>
 			<p:slider for="lonDestino" minValue="#{trip.minLon}"
 				maxValue="#{trip.maxLon}" />
 			<p:message for="lonDestino" />
