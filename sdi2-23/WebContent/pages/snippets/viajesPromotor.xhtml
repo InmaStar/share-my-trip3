@@ -42,10 +42,18 @@
 				</p:commandButton>
 			</p:column>
 			<p:column>
-                <p:commandButton actionListener="#{trips.cancelarViaje(entry, user.id)}" rendered="#{entry.open }"
+              <!-- <p:commandButton actionListener="#{trips.cancelarViaje(entry, user.id)}" rendered="#{entry.open }"
                 	value="#{msgs.cancel_trip }" update="listadoViajesPromotor" process="@this"/>
+				 -->  
+				<h:outputText value="#{msgs.cancel }" rendered="#{entry.open }"/>
+        		<p:selectBooleanCheckbox value="#{trips.seleccionados[entry]}" 
+        			update="cancelarViajesBtn" process="@this" rendered="#{entry.open }"/>
 			</p:column>
 		</p:dataTable>
-<!-- 	</p:panel> -->
+		
+		<p:commandButton id="cancelarViajesBtn" actionListener="#{trips.cancelarViajes(user.id)}"
+			 disabled="#{trips.ningunSeleccionado()}" value="#{msgs.cancel_trips }" 
+			 update="listadoViajesPromotor" process="listadoViajesPromotor"/>
+<!--</p:panel> -->
 
 </ui:composition>
