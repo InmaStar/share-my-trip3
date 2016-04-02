@@ -169,7 +169,6 @@ public class BeanTrip implements Serializable{
 	    return "error";
 	}
     }
-
     
     public double getMinLat(){
 	return MIN_LAT;

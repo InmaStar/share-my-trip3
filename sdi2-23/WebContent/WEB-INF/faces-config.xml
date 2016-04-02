@@ -210,11 +210,6 @@
 			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.cancelarViaje(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesPromotor.xthml</to-view-id>
-		</navigation-case>
-				<navigation-case>
 			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>

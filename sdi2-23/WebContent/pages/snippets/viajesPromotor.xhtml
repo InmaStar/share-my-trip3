@@ -44,8 +44,8 @@
 				</p:commandButton>
 			</p:column>
 			<p:column>
-                <p:commandButton action="#{trips.cancelarViaje(entry)}" rendered="#{entry.open }"
-                value="#{msgs.cancel_trip }"/>
+                <p:commandButton actionListener="#{trips.cancelarViaje(entry, user.id)}" rendered="#{entry.open }"
+                	value="#{msgs.cancel_trip }" update="listadoViajesPromotor" process="@this"/>
 			</p:column>
 		</p:dataTable>
 <!-- 	</p:panel> -->

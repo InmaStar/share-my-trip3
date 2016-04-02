@@ -34,18 +34,17 @@ public class BeanTrips implements Serializable{
 	return viajes;
     }
     
-    public String cancelarViaje(TripDTO viaje) {
+    public void cancelarViaje(TripDTO viaje, Long userId) {
 	try{
 	    TripService tripServ = Factories.services.createTripService();
 	    tripServ.cancel(viaje);
 	    Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
-	    return "exito";
+	    listadoPromotor(userId);
 	} catch(Exception e){
 	    Log.debug("Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]", 
 		    e.getClass().toString(),
 		    viaje.getId(),
 		    e.getMessage());
-	    return "error";
 	}
     }
 
