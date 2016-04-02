@@ -46,14 +46,15 @@
                 	value="#{msgs.cancel_trip }" update="listadoViajesPromotor" process="@this"/>
 				 -->  
 				<h:outputText value="#{msgs.cancel }" rendered="#{entry.open }"/>
-        		<p:selectBooleanCheckbox value="#{trips.seleccionados[entry]}" 
-        			update="cancelarViajesBtn" process="@this" rendered="#{entry.open }"/>
+        		<p:selectBooleanCheckbox rendered="#{entry.open }">
+        			<p:ajax update="@this :cuerpoForm:cancelarViajesBtn" process="@this" listener="#{trips.seleccionar(entry)}"/>
+        		</p:selectBooleanCheckbox>
 			</p:column>
 		</p:dataTable>
 		
 		<p:commandButton id="cancelarViajesBtn" actionListener="#{trips.cancelarViajes(user.id)}"
 			 disabled="#{trips.ningunSeleccionado()}" value="#{msgs.cancel_trips }" 
-			 update="listadoViajesPromotor" process="listadoViajesPromotor"/>
+			 update="@this listadoViajesPromotor" process="@this"/>
 <!--</p:panel> -->
 
 </ui:composition>

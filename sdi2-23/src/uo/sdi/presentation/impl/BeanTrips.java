@@ -30,23 +30,31 @@ public class BeanTrips implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     List<TripDTO> viajes = new ArrayList<TripDTO>();
-    Map<TripDTO, Boolean> viajesSeleccionados;
+    List<TripDTO> viajesSeleccionados;
 
     public BeanTrips() {
 	listadoDisponibles();
-	viajesSeleccionados = new HashMap<TripDTO, Boolean>();
+	viajesSeleccionados = new ArrayList<TripDTO>();
     }
 
     public List<TripDTO> getListaViajes() {
 	return viajes;
     }
 
-    public Map<TripDTO, Boolean> getSeleccionados() {
+    public List<TripDTO> getSeleccionados() {
 	return viajesSeleccionados;
     }
 
     public boolean ningunSeleccionado() {
 	return viajesSeleccionados.isEmpty();
+    }
+    
+    public void seleccionar(TripDTO viaje){
+	 if(viajesSeleccionados.contains(viaje)){
+	     viajesSeleccionados.remove(viaje);
+	 } else {
+	     viajesSeleccionados.add(viaje);
+	 }
     }
 
     public String cancelarViaje(TripDTO viaje, Long userId) {
@@ -64,11 +72,7 @@ public class BeanTrips implements Serializable {
     }
 
     public void cancelarViajes(Long userId) {
-	Set<TripDTO> viajes = viajesSeleccionados.keySet();
-	TripDTO viaje;
-	Iterator<TripDTO> it = viajes.iterator();
-	while (it.hasNext()) {
-	    viaje = it.next();
+	for(TripDTO viaje : viajesSeleccionados) {
 	    try {
 		Factories.services.createTripService().cancel(viaje);
 		Log.info("El viaje [%d] ha sido cancelado", viaje.getId());

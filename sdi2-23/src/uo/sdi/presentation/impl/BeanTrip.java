@@ -15,6 +15,7 @@ import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
 import uo.sdi.transport.UserTripRelationship;
 import uo.sdi.util.bundle.BundleLoader;
+import uo.sdi.util.random.RandomTripGenerator;
 
 @ManagedBean(name = "trip")
 @SessionScoped
@@ -32,6 +33,10 @@ public class BeanTrip implements Serializable{
 
     public void initViaje(){
 	this.viaje = new TripDTO();
+    }
+    
+    public void randomViaje(){
+	this.viaje = RandomTripGenerator.generateTrip();
     }
     
     public void setViaje(TripDTO viaje) {
