@@ -26,6 +26,7 @@ public class BeanTrip implements Serializable{
      */
     private static final long serialVersionUID = 1L;
     private TripDTO viaje;
+    private boolean generado;
     public final static double MIN_LAT = -90;
     public final static double MAX_LAT = 90;
     public final static double MIN_LON = -180;
@@ -33,10 +34,13 @@ public class BeanTrip implements Serializable{
 
     public void initViaje(){
 	this.viaje = new TripDTO();
+	generado = false;
     }
     
-    public void randomViaje(){
-	this.viaje = RandomTripGenerator.generateTrip();
+    public void generarViaje(){
+	if(generado){
+	    this.viaje = RandomTripGenerator.generateTrip();
+	}
     }
     
     public void setViaje(TripDTO viaje) {
@@ -216,5 +220,13 @@ public class BeanTrip implements Serializable{
     
     public UserTripRelationship getRelationship(Long userId){
 	return viaje.getRelationship(userId);
+    }
+
+    public boolean isGenerado() {
+        return generado;
+    }
+
+    public void setGenerado(boolean generado) {
+        this.generado = generado;
     }
 }
