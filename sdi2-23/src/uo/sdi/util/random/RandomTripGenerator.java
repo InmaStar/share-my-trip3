@@ -3,6 +3,7 @@ package uo.sdi.util.random;
 import java.util.Calendar;
 import java.util.Date;
 
+import uo.sdi.model.types.AddressPoint;
 import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
@@ -14,10 +15,10 @@ public class RandomTripGenerator {
     private static final Long TRIP_ID_INIT_VALUE = 100L;
     private static final int MIN_PAX = 1;
     private static final int MAX_PAX = 4;
-    private static final double MAX_LAT = 90;
-    private static final double MIN_LAT = -90;
-    private static final double MAX_LON = 180;
-    private static final double MIN_LON = -180;
+    private static final double MAX_LAT = AddressPoint.MAX_LAT;
+    private static final double MIN_LAT = AddressPoint.MIN_LAT;
+    private static final double MAX_LON = AddressPoint.MAX_LON;
+    private static final double MIN_LON = AddressPoint.MIN_LON;
     private static final int MIN_ZIPCODE = 99999;
     private static final int MAX_ZIPCODE = 00000;
     private static final double MAX_COST = 100;
