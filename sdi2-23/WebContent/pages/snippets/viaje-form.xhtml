@@ -16,7 +16,11 @@
 			for="calleSalida" />
 		<h:panelGroup>
 			<p:inputText id="calleSalida" value="#{trip.departure.address}"
-				required="true" requiredMessage="#{msgs.trip_form_street_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_street_required}"
+				validatorMessage="#{msgs.trip_form_street_required}">
+				<f:validateLength minimum="1"/>
+			</p:inputText>
 			<p:message for="calleSalida" />
 		</h:panelGroup>
 

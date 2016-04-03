@@ -54,7 +54,9 @@ public class RandomTripGenerator {
 	AddressPointDTO address =  new AddressPointDTO();
 	
 	double lat = MIN_LAT + (Math.random() * (MAX_LAT - MIN_LAT +1));
+	lat = Math.round(lat * 10.0) / 10.0; //redondear a 1 decimal
 	double lon = MIN_LON + (Math.random() * (MAX_LON - MIN_LON +1));
+	lon = Math.round(lon * 10.0) / 10.0; //redondear a 1 decimal
 	address.setLat(lat);
 	address.setLon(lon);
 	
@@ -82,7 +84,8 @@ public class RandomTripGenerator {
 	
 	int maxPax = MIN_PAX + (int)(Math.random() * (MAX_PAX - MIN_PAX +1));
 	double cost = MIN_COST + (Math.random() * (MAX_COST - MIN_COST +1));
-		
+	cost = Math.round(cost * 100.0) / 100.0; //redondear a dos decimales
+	
 	Long tripId = newTripId();
 	newTrip.setId(tripId);
 	
