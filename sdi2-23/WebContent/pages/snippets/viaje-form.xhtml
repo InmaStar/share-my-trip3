@@ -109,7 +109,11 @@
 		<h:panelGroup>
 			<p:calendar id="fechaSalida" value="#{trip.departureDate}"
 				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
-				requiredMessage="#{msgs.trip_form_departure_date_required}" />
+				mindate="#{trip.today}" maxvalue="#{trip.arrivalDate}"
+				requiredMessage="#{msgs.trip_form_departure_date_required}" >
+				<p:ajax update="fechaLlegada fechaLimite" process="@this"
+					event="dateSelect"/>
+			</p:calendar>
 			<p:message for="fechaSalida" />
 		</h:panelGroup>
 
@@ -216,7 +220,11 @@
 		<h:panelGroup>
 			<p:calendar id="fechaLlegada" value="#{trip.arrivalDate}"
 				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
-				requiredMessage="#{msgs.trip_form_arrival_date_required}" />
+				requiredMessage="#{msgs.trip_form_arrival_date_required}" 
+				mindate="#{trip.departureDate}">
+					<p:ajax update="fechaSalida fechaLimite" process="@this"
+					event="dateSelect"/>
+				</p:calendar>
 			<p:message for="fechaLlegada" />
 		</h:panelGroup>
 
@@ -231,6 +239,7 @@
 		<h:panelGroup>
 			<p:calendar id="fechaLimite" value="#{trip.closingDate}"
 				pattern="yyyy-MM-dd" required="true" editable="false"
+				mindate="#{trip.today}" maxdate="#{trip.departureDate}"
 				requiredMessage="#{msgs.trip_form_closing_date_required}" />
 			<p:message for="fechaLimite" />
 		</h:panelGroup>
@@ -239,7 +248,7 @@
 			for="costeEstimado" />
 		<h:panelGroup>
 			<p:spinner id="costeEstimado" value="#{trip.estimatedCost}" min="0"
-				required="true" suffix="€" stepFactor="5.0"
+				required="true" suffix="€" stepFactor="2.5"
 				requiredMessage="#{msgs.trip_form_cost_required}" />
 			<p:message for="costeEstimado" />
 		</h:panelGroup>
@@ -257,7 +266,9 @@
 		<h:panelGroup>
 			<p:spinner id="maxPlazas" value="#{trip.maxPax}" required="true"
 				min="1" update="plazasDisponibles" process="@this"
-				requiredMessage="#{msgs.trip_form_max_seats_required}" />
+				requiredMessage="#{msgs.trip_form_max_seats_required}" >
+					<p:ajax update="plazasDisponibles"/>
+				</p:spinner>
 			<p:message for="maxPlazas" />
 		</h:panelGroup>
 

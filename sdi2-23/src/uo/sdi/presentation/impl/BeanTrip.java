@@ -31,6 +31,8 @@ public class BeanTrip implements Serializable{
 
     public void initViaje(){
 	this.viaje = new TripDTO();
+	setMaxPax(1);
+	setEstimatedCost(0.5);
 	generado = false;
     }
     
@@ -38,8 +40,12 @@ public class BeanTrip implements Serializable{
 	if(generado){
 	    this.viaje = RandomTripGenerator.generateTrip();
 	} else{
-	    this.viaje = new TripDTO();
+	    initViaje();
 	}
+    }
+    
+    public Date getToday(){
+	return new Date();
     }
     
     public void setViaje(TripDTO viaje) {
