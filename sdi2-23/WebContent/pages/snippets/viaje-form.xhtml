@@ -28,7 +28,11 @@
 			for="ciudadSalida" />
 		<h:panelGroup>
 			<p:inputText id="ciudadSalida" value="#{trip.departure.city}"
-				required="true" requiredMessage="#{msgs.trips_form_city_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trips_form_city_required}" 
+				validatorMessage="#{msgs.trip_form_city_required}">
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="ciudadSalida" />
 		</h:panelGroup>
 
@@ -36,7 +40,11 @@
 			for="provinciaSalida" />
 		<h:panelGroup>
 			<p:inputText id="provinciaSalida" value="#{trip.departure.state}"
-				required="true" requiredMessage="#{msgs.trip_form_state_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_state_required}" 
+				validatorMessage="#{msgs.trip_form_state_required}" >
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="provinciaSalida" />
 		</h:panelGroup>
 
@@ -44,7 +52,11 @@
 			for="paisSalida" />
 		<h:panelGroup>
 			<p:inputText id="paisSalida" value="#{trip.departure.country}"
-				required="true" requiredMessage="#{msgs.trip_form_country_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_country_required}" 
+				validatorMessage="#{msgs.trip_form_country_required}">
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="paisSalida" />
 		</h:panelGroup>
 
@@ -66,7 +78,11 @@
 		
 		<p:outputLabel value="#{msgs.trip_form_latitude}:" for="latSalida" />
 		<h:panelGroup>
-			<p:inputText id="latSalida" value="#{trip.departure.lat}" />
+			<p:inputText id="latSalida" value="#{trip.departure.lat}" 
+				converterMessage="#{msgs.trip_form_lat_converter}"
+				validatorMessage="#{msgs.trip_form_lat_validator}">
+			<f:validateDoubleRange minimum="#{trip.minLat}" maximum="#{trip.maxLat}"/>
+			</p:inputText>
 			<p:slider for="latSalida" minValue="#{trip.minLat}"
 				maxValue="#{trip.maxLat}" />
 			<p:message for="latSalida" />
@@ -74,7 +90,11 @@
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonSalida" />
 		<h:panelGroup>
-			<p:inputText id="lonSalida" value="#{trip.departure.lon}"/>
+			<p:inputText id="lonSalida" value="#{trip.departure.lon}"
+				converterMessage="#{msgs.trip_form_lon_converter}"
+				validatorMessage="#{msgs.trip_form_lon_validator}">
+			<f:validateDoubleRange minimum="#{trip.minLon}" maximum="#{trip.maxLon}"/>
+			</p:inputText>
 			<p:slider for="lonSalida" minValue="#{trip.minLon}"
 				maxValue="#{trip.maxLon}" />
 			<p:message for="lonSalida" />
@@ -88,7 +108,7 @@
 			for="fechaSalida" />
 		<h:panelGroup>
 			<p:calendar id="fechaSalida" value="#{trip.departureDate}"
-				pattern="yyyy-MM-dd HH:mm:ss" required="true"
+				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
 				requiredMessage="#{msgs.trip_form_departure_date_required}" />
 			<p:message for="fechaSalida" />
 		</h:panelGroup>
@@ -103,7 +123,11 @@
 			for="calleDestino" />
 		<h:panelGroup>
 			<p:inputText id="calleDestino" value="#{trip.destination.address}"
-				required="true" requiredMessage="#{trip_form_street_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_street_required}" 
+				validatorMessage="#{msgs.trip_form_street_required}">
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="calleDestino" />
 		</h:panelGroup>
 
@@ -111,7 +135,11 @@
 			for="ciudadDestino" />
 		<h:panelGroup>
 			<p:inputText id="ciudadDestino" value="#{trip.destination.city}"
-				required="true" requiredMessage="#{msgs.trips_form_city_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trips_form_city_required}" 
+				validatorMessgae="#{msgs.trips_form_city_required}">
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="ciudadDestino" />
 		</h:panelGroup>
 
@@ -119,7 +147,11 @@
 			for="provinciaDestino" />
 		<h:panelGroup>
 			<p:inputText id="provinciaDestino" value="#{trip.destination.state}"
-				required="true" requiredMessage="#{msgs.trip_form_state_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_state_required}" 
+				validatorMessage="#{msgs.trip_form_state_required}">
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="provinciaDestino" />
 		</h:panelGroup>
 
@@ -127,7 +159,11 @@
 			for="paisDestino" />
 		<h:panelGroup>
 			<p:inputText id="paisDestino" value="#{trip.destination.country}"
-				required="true" requiredMessage="#{msgs.trip_form_country_required}" />
+				required="true" 
+				requiredMessage="#{msgs.trip_form_country_required}" 
+				validatorMessage="#{msgs.trip_form_country_required}" >
+				<f:validateLength minimum="1"/>
+				</p:inputText>
 			<p:message for="paisDestino" />
 		</h:panelGroup>
 
@@ -149,7 +185,11 @@
 		
 		<p:outputLabel value="#{msgs.trip_form_latitude}:" for="latDestino" />
 		<h:panelGroup>
-			<p:inputText id="latDestino" value="#{trip.destination.lat}" />
+			<p:inputText id="latDestino" value="#{trip.destination.lat}" 
+				converterMessage="#{msgs.trip_form_lat_converter}"
+				validatorMessage="#{msgs.trip_form_lat_validator}">
+			<f:validateDoubleRange minimum="#{trip.minLat}" maximum="#{trip.maxLat}"/>
+			</p:inputText>
 			<p:slider for="latDestino" minValue="#{trip.minLat}"
 				maxValue="#{trip.maxLat}" />
 			<p:message for="latDestino" />
@@ -157,7 +197,11 @@
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonDestino" />
 		<h:panelGroup>
-			<p:inputText id="lonDestino" value="#{trip.destination.lon}"/>
+			<p:inputText id="lonDestino" value="#{trip.destination.lon}"
+				converterMessage="#{msgs.trip_form_lon_converter}"
+				validatorMessage="#{msgs.trip_form_lon_validator}">
+			<f:validateDoubleRange minimum="#{trip.minLon}" maximum="#{trip.maxLon}"/>
+			</p:inputText>
 			<p:slider for="lonDestino" minValue="#{trip.minLon}"
 				maxValue="#{trip.maxLon}" />
 			<p:message for="lonDestino" />
@@ -171,7 +215,7 @@
 			for="fechaLlegada" />
 		<h:panelGroup>
 			<p:calendar id="fechaLlegada" value="#{trip.arrivalDate}"
-				pattern="yyyy-MM-dd HH:mm:ss" required="true"
+				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
 				requiredMessage="#{msgs.trip_form_arrival_date_required}" />
 			<p:message for="fechaLlegada" />
 		</h:panelGroup>
@@ -186,7 +230,7 @@
 			for="fechaLimite" />
 		<h:panelGroup>
 			<p:calendar id="fechaLimite" value="#{trip.closingDate}"
-				pattern="yyyy-MM-dd" required="true"
+				pattern="yyyy-MM-dd" required="true" editable="false"
 				requiredMessage="#{msgs.trip_form_closing_date_required}" />
 			<p:message for="fechaLimite" />
 		</h:panelGroup>
