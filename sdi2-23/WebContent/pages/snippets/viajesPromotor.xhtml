@@ -52,7 +52,7 @@
 			</p:column>
 		</p:dataTable>
 		
-		<p:commandButton id="cancelarViajesBtn" actionListener="#{trips.cancelarViajes(user.id)}"
+		<p:commandButton style="float:right" id="cancelarViajesBtn" actionListener="#{trips.cancelarViajes(user.id)}"
 			 disabled="#{trips.ningunSeleccionado()}" value="#{msgs.cancel_trips }" 
 			 update="@this listadoViajesPromotor" process="@this"/>
 <!--</p:panel> -->

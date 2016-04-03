@@ -40,6 +40,8 @@ public class BeanTrip implements Serializable{
     public void generarViaje(){
 	if(generado){
 	    this.viaje = RandomTripGenerator.generateTrip();
+	} else{
+	    this.viaje = new TripDTO();
 	}
     }
     

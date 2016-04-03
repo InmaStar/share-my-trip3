@@ -14,10 +14,10 @@
 			<h1>#{msgs.register_trip_form_title}</h1>
 			
 			<h:panelGroup>
-			<h:outputText value="#{msgs.cancel }"/>
-			<p:selectBooleanButton id="precarga" value="#{trip.generado}">
+			<h:outputText value="#{msgs.generate_trip }"/>
+			<p:selectBooleanCheckbox id="precarga" value="#{trip.generado}">
             	<p:ajax update="@form" listener="#{trip.generarViaje}" />
-        	</p:selectBooleanButton>
+        	</p:selectBooleanCheckbox>
 			</h:panelGroup>
 			
 			<ui:include src="/pages/snippets/viaje-form.xhtml" />
