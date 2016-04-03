@@ -2,16 +2,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/templates/plantillaGeneral.xhtml">
     
 <ui:define name="titleParam">
 		<f:param value="#{msgs.applications_title}" />
 	</ui:define>
 	
    <ui:define name="cuerpo">
-		<h:form>
+   			<h1>#{msgs.applications_header}</h1>
 			<ui:include src="/pages/snippets/listaSolicitudes.xhtml"/>
-		</h:form>
 	</ui:define>
 
 </ui:composition>

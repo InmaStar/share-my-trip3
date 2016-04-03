@@ -16,4 +16,8 @@ public interface TripService {
     TripDTO insert(TripDTO viaje, UserDTO promotor) throws BusinessException;
 
     TripDTO cancel(TripDTO viaje) throws BusinessException;
+
+    TripDTO confirmApplication(Long userId, TripDTO viaje) throws BusinessException;
+
+    TripDTO cancelSeat(Long userId, TripDTO viaje) throws BusinessException;
 }

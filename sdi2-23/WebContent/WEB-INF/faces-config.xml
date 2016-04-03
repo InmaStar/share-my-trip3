@@ -6,37 +6,37 @@
 
 	<managed-bean>
 		<managed-bean-name>localeSettings</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanLocaleSettings</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanLocaleSettings</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanUser</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanUser</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>trips</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanTrips</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanTrips</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>login</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanLogin</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanLogin</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>signup</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanSignup</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanSignup</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>trip</managed-bean-name>
-		<managed-bean-class>uo.sdi.presentation.BeanTrip</managed-bean-class>
+		<managed-bean-class>uo.sdi.presentation.impl.BeanTrip</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
@@ -54,7 +54,7 @@
 			<to-view-id>/pages/error.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listado}</from-action>
+			<from-action>#{trips.listadoDisponibles}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -66,30 +66,16 @@
 	<navigation-rule>
 		<from-view-id>/pages/listaViajesDisponibles.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{user.cancelarPlaza(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{user.solicitarPlaza(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>signUp</from-outcome>
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -111,10 +97,6 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
-		</navigation-case>
-		<navigation-case>
 			<from-outcome>signUp</from-outcome>
 			<to-view-id>/pages/signUp.xhtml</to-view-id>
 		</navigation-case>
@@ -125,10 +107,6 @@
 			<from-action>#{signup.registrar}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/login.xthml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>signUp</from-outcome>
@@ -143,12 +121,12 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -170,12 +148,12 @@
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -192,22 +170,12 @@
 	<navigation-rule>
 		<from-view-id>/pages/solicitudes.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trip.confirmarPasajero(entry.id)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{trip.excluirPasajero(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/solicitudes.xhtml</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -232,17 +200,12 @@
 			<to-view-id>/pages/modificarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.cancelarViaje(entry)}</from-action>
-			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesPromotor.xthml</to-view-id>
-		</navigation-case>
-				<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>
@@ -259,12 +222,12 @@
 	<navigation-rule>
 		<from-view-id>/pages/listaViajesRelacionados.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{trips.listadoRelacionados}</from-action>
+			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{trips.listadoPromotor}</from-action>
+			<from-action>#{trips.listadoPromotor(user.id)}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesPromotor.xhtml</to-view-id>
 		</navigation-case>

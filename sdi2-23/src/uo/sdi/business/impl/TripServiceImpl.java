@@ -34,4 +34,16 @@ public class TripServiceImpl implements TripService {
     public TripDTO cancel(TripDTO viaje) throws BusinessException {
         return CommandExecutor.execute(new CancelTrip(viaje));
     }
+
+    @Override
+    public TripDTO confirmApplication(Long userId, TripDTO viaje)
+	    throws BusinessException {
+	return CommandExecutor.execute(new ConfirmApplication(userId, viaje));
+    }
+
+    @Override
+    public TripDTO cancelSeat(Long userId, TripDTO viaje)
+	    throws BusinessException {
+	return CommandExecutor.execute(new CancelSeat(userId, viaje));
+    }
 }

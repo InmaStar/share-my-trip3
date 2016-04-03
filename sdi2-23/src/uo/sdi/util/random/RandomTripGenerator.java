@@ -3,6 +3,7 @@ package uo.sdi.util.random;
 import java.util.Calendar;
 import java.util.Date;
 
+import uo.sdi.model.types.AddressPoint;
 import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
@@ -14,10 +15,10 @@ public class RandomTripGenerator {
     private static final Long TRIP_ID_INIT_VALUE = 100L;
     private static final int MIN_PAX = 1;
     private static final int MAX_PAX = 4;
-    private static final double MAX_LAT = 90;
-    private static final double MIN_LAT = -90;
-    private static final double MAX_LON = 180;
-    private static final double MIN_LON = -180;
+    private static final double MAX_LAT = AddressPoint.MAX_LAT;
+    private static final double MIN_LAT = AddressPoint.MIN_LAT;
+    private static final double MAX_LON = AddressPoint.MAX_LON;
+    private static final double MIN_LON = AddressPoint.MIN_LON;
     private static final int MIN_ZIPCODE = 99999;
     private static final int MAX_ZIPCODE = 00000;
     private static final double MAX_COST = 100;
@@ -54,7 +55,9 @@ public class RandomTripGenerator {
 	AddressPointDTO address =  new AddressPointDTO();
 	
 	double lat = MIN_LAT + (Math.random() * (MAX_LAT - MIN_LAT +1));
+	lat = Math.round(lat * 10.0) / 10.0; //redondear a 1 decimal
 	double lon = MIN_LON + (Math.random() * (MAX_LON - MIN_LON +1));
+	lon = Math.round(lon * 10.0) / 10.0; //redondear a 1 decimal
 	address.setLat(lat);
 	address.setLon(lon);
 	
@@ -82,7 +85,8 @@ public class RandomTripGenerator {
 	
 	int maxPax = MIN_PAX + (int)(Math.random() * (MAX_PAX - MIN_PAX +1));
 	double cost = MIN_COST + (Math.random() * (MAX_COST - MIN_COST +1));
-		
+	cost = Math.round(cost * 100.0) / 100.0; //redondear a dos decimales
+	
 	Long tripId = newTripId();
 	newTrip.setId(tripId);
 	

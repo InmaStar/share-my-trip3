@@ -11,6 +11,11 @@ public class AddressPoint {
 	private String state;
 	private String country;
 	private String zipCode;
+	public final static double MIN_LAT = -90;
+	public final static double MAX_LAT = 90;
+	public final static double MIN_LON = -180;
+	public final static double MAX_LON = 180; 
+	    
 	@Embedded
 	private Waypoint waypoint = new Waypoint();
 	

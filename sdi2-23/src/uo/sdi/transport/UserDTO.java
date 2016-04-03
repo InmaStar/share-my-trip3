@@ -6,6 +6,7 @@ import uo.sdi.model.User;
 import uo.sdi.model.types.UserStatus;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class UserDTO {
@@ -19,7 +20,6 @@ public class UserDTO {
 
     private Set<SeatDTO> seats = new HashSet<>();
     private Set<TripDTO> promotedTrips = new HashSet<>();
-    @SuppressWarnings("unused")
     private Set<TripDTO> appliedTrips = new HashSet<>();
 
     public UserDTO() {
@@ -185,5 +185,22 @@ public class UserDTO {
 
     public void setPromotedTrips(Set<TripDTO> promotedTrips) {
         this.promotedTrips = promotedTrips;
+    }
+
+    public Set<TripDTO> getAppliedTrips() {
+        return appliedTrips;
+    }
+    
+    public TripDTO findAppliedTrip(Long id){
+	TripDTO result = null;
+	TripDTO trip;
+	 for (Iterator<TripDTO> it = appliedTrips.iterator(); it.hasNext(); ) {
+	        trip = it.next();
+	        if (trip.getId().equals(id)){
+	            result = trip;
+	            break;
+	        }
+	    }
+	 return result;
     }
 }

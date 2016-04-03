@@ -6,16 +6,17 @@
 
 		<p:menuitem id="rol" value="#{user.login}" disabled="true"/>
 		<p:menuitem id="viajesRelacionados" value="#{msgs.related_trips}"
-			action="#{trips.listadoRelacionados}" inmediate="true"/>
-		<p:menuitem id="viajesRelacionados" value="#{msgs.promoter_trips}"
-			action="#{trips.listadoPromotor}" inmediate="true"/>
+			action="#{trips.listadoRelacionados(user.id)}" inmediate="true"
+			ajax="false"/>
+		<p:menuitem id="viajesPromotor" value="#{msgs.promoter_trips}"
+			action="#{trips.listadoPromotor(user.id)}" inmediate="true"
+			ajax="false"/>
 		<p:menuitem id="nuevoViaje" action="registrarViaje" 
-			inmediate="true" value="#{msgs.new_trip}">
-			<f:setPropertyActionListener target="#{trip.viaje}"
-						value="#{null}" />
-		</p:menuitem>
+			inmediate="true" value="#{msgs.new_trip}"
+			ajax="false" actionListener="#{trip.initViaje}" />
 		<p:menuitem id="cerrarSesion" 
-			inmediate="true" action="#{user.cerrarSesion}">
+			inmediate="true" action="#{user.cerrarSesion}"
+			ajax="false">
 			#{msgs.signout}</p:menuitem>
 
 </ui:composition>

@@ -189,45 +189,89 @@ public class TripDTO {
     }
 
     public boolean isPromoter(Long userId) {
-        return getRelationship(userId).equals("PROMOTOR");
+	UserTripRelationship relation = getRelationship(userId);
+        return relation!=null ? relation.equals(UserTripRelationship.PROMOTER) 
+        	: false;
     }
 
     public boolean isPending(Long userId) {
-        return getRelationship(userId).equals("PENDIENTE");
+	UserTripRelationship relation = getRelationship(userId);
+        return relation!=null ? relation.equals(UserTripRelationship.PENDING)
+        	: false;
     }
 
     public boolean isAccepted(Long userId) {
-        return getRelationship(userId).equals("ADMITIDO");
+	UserTripRelationship relation = getRelationship(userId);
+        return relation!=null ? relation.equals(UserTripRelationship.ACCEPTED)
+        	: false;
     }
 
     public boolean isExcluded(Long userId) {
-        return getRelationship(userId).equals("EXCLUIDO");
+	UserTripRelationship relation = getRelationship(userId);
+        return relation!=null ? relation.equals(UserTripRelationship.EXCLUDED)
+        	: false;
     }
 
     public boolean hasRelationship(Long userId) {
-        return !getRelationship(userId).isEmpty();
+        return getRelationship(userId)!=null;
     }
 
-    public String getRelationship(Long userId) {
+    public UserTripRelationship getRelationship(Long userId) {
         if (promoter.getId().equals(userId)) {
-            return "PROMOTOR";
+            return UserTripRelationship.PROMOTER;
         }
         for (SeatDTO seat : seats) {
             if (seat.getUser().getId().equals(userId)) {
                 if (seat.getStatus() == TravelStatus.ACCEPTED) {
-                    return "ADMITIDO";
+                    return UserTripRelationship.ACCEPTED;
+                } else if (seat.getStatus() == TravelStatus.EXCLUDED){
+                    return UserTripRelationship.EXCLUDED;
                 } else {
-                    return "EXCLUIDO";
+                    return UserTripRelationship.CANCELLED;
                 }
             }
         }
 
         for (UserDTO user : applicants) {
             if (user.getId().equals(userId)) {
-                return isFull() ? "SIN PLAZA" : "PENDIENTE";
+                return isFull() ? UserTripRelationship.NO_SEAT 
+                	: UserTripRelationship.PENDING;
             }
         }
 
-        return "";
+        return null;
+    }
+    
+    public boolean canRequestSeat(Long userId){
+	return !isPromoter(userId) && !isPending(userId);
+    }
+    
+    public boolean canCancelSeat(Long userId){
+	return !isPromoter(userId) && isPending(userId);
+    }
+
+    @Override
+    public int hashCode() {
+	final int prime = 31;
+	int result = 1;
+	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	TripDTO other = (TripDTO) obj;
+	if (id == null) {
+	    if (other.id != null)
+		return false;
+	} else if (!id.equals(other.id))
+	    return false;
+	return true;
     }
 }

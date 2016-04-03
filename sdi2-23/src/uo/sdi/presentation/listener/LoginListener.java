@@ -5,7 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import uo.sdi.presentation.BeanUser;
+
+import uo.sdi.presentation.impl.BeanUser;
 
 public class LoginListener implements PhaseListener {
     private static final long serialVersionUID = 1551644597845911013L;
@@ -15,8 +16,9 @@ public class LoginListener implements PhaseListener {
 	FacesContext fc = event.getFacesContext();
 	String view = fc.getViewRoot().getViewId();
 	// Check if we are in are in a page restricted to logged users
-	if (!(view.contains("login") || (view.contains("signUp") || (view
-		.contains("listaViajesDisponibles"))))) {
+	if (!(view.contains("login") || view.contains("signUp") 
+		|| view.contains("listaViajesDisponibles") 
+		|| view.contains("index"))) {
 	    if (notLoggedIn()) {
 		NavigationHandler nh = fc.getApplication()
 			.getNavigationHandler();

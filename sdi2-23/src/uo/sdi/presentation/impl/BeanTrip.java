@@ -1,6 +1,8 @@
-package uo.sdi.presentation;
+package uo.sdi.presentation.impl;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
@@ -8,16 +10,49 @@ import javax.faces.bean.SessionScoped;
 
 import alb.util.log.Log;
 import uo.sdi.infrastructure.Factories;
+import uo.sdi.model.types.AddressPoint;
+import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
+import uo.sdi.transport.UserTripRelationship;
+import uo.sdi.util.bundle.BundleLoader;
+import uo.sdi.util.random.RandomTripGenerator;
 
 @ManagedBean(name = "trip")
 @SessionScoped
-public class BeanTrip {
+public class BeanTrip implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private TripDTO viaje;
+    private boolean generado;
+    private Date today;
 
+    public void initViaje(){
+	this.viaje = new TripDTO();
+	viaje.setDeparture(new AddressPointDTO());
+	viaje.setDestination(new AddressPointDTO());
+	setMaxPax(1);
+	setEstimatedCost(0.5);
+	today = new Date();
+	generado = false;
+    }
+    
+    public void generarViaje(){
+	if(generado){
+	    this.viaje = RandomTripGenerator.generateTrip();
+	} else{
+	    initViaje();
+	}
+    }
+    
+    public Date getToday(){
+	return today;
+    }
+    
     public void setViaje(TripDTO viaje) {
 	this.viaje = viaje;
     }
@@ -56,7 +91,6 @@ public class BeanTrip {
 
     public void setClosingDate(Date closingDate) {
 	viaje.setClosingDate(closingDate);
-	;
     }
 
     public Integer getAvailablePax() {
@@ -97,7 +131,7 @@ public class BeanTrip {
 
     public String modificar() {
 	try {
-	    Factories.services.createTripService().update(viaje);
+	    viaje = Factories.services.createTripService().update(viaje);
 	    Log.info("Se ha modificado el viaje [%d] con éxito", viaje.getId());
 	    return "exito";
 	} catch (Exception e) {
@@ -109,7 +143,8 @@ public class BeanTrip {
 
     public String registrar(UserDTO promotor) {
 	try {
-	    Factories.services.createTripService().insert(viaje, promotor);
+	    viaje.setStatus(TripStatus.OPEN);
+	    viaje = Factories.services.createTripService().insert(viaje, promotor);
 	    Log.info("El promotor [%s] ha registrado "
 		    + "un nuevo viaje [%d] con éxito", promotor.getLogin(),
 		    viaje.getId());
@@ -125,7 +160,7 @@ public class BeanTrip {
 	try {
 	    Log.info("Se está dando plaza para el viaje "
 		    + "[%d] al usuario [%d]", viaje.getId(), userId);
-	    Factories.services.createUserService().confirmApplication(userId,
+	    viaje = Factories.services.createTripService().confirmApplication(userId,
 		    viaje);
 	    return "exito";
 	} catch (Exception e) {
@@ -143,7 +178,7 @@ public class BeanTrip {
 	try {
 	    Log.info("El usuario [%d] está cancelando plaza para el viaje "
 		    + "[%d]", user.getId(), viaje.getId());
-	    Factories.services.createUserService().cancelApplication(user,
+	    viaje = Factories.services.createTripService().cancelSeat(user.getId(),
 		    viaje);
 	    return "exito";
 	} catch (Exception e) {
@@ -156,13 +191,54 @@ public class BeanTrip {
 	    return "error";
 	}
     }
-
+    
+    public double getMinLat(){
+	return AddressPoint.MIN_LAT;
+    }
+    
+    public double getMaxLat(){
+	return AddressPoint.MAX_LAT;
+    }
+    
+    public double getMinLon(){
+	return AddressPoint.MIN_LON;
+    }
+    
+    public double getMaxLon(){
+	return AddressPoint.MAX_LON;
+    }
+    
     public boolean isVisible() {
 	return viaje.isVisible();
     }
 
-    public boolean isExcludedOrPending(Long userId) {
-	return viaje.isExcluded(userId) || viaje.isPending(userId);
+    public boolean isExcluded(Long userId) {
+	return viaje.isExcluded(userId);
+    }
+    
+    public boolean isPending(Long userId){
+	return viaje.isPending(userId);
     }
 
+    public boolean isAccepted(Long userId){
+	return viaje.isAccepted(userId);
+    }
+    
+    public String localizarTripRelationship(UserTripRelationship relationship){
+   	ResourceBundle bundle = BundleLoader.load("msgs");
+   	return bundle.getString(relationship.name());
+       }
+    
+    public UserTripRelationship getRelationship(Long userId){
+	return viaje.getRelationship(userId);
+    }
+
+    public boolean isGenerado() {
+        return generado;
+    }
+
+    public void setGenerado(boolean generado) {
+        this.generado = generado;
+    }
+   
 }
