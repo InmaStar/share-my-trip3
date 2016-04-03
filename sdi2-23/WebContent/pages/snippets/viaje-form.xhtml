@@ -19,9 +19,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_street_required}"
 				validatorMessage="#{msgs.trip_form_street_required}">
+				<p:ajax update="msgCalleSalida" />
 				<f:validateLength minimum="1"/>
 			</p:inputText>
-			<p:message for="calleSalida" />
+			<p:message id="msgCalleSalida" for="calleSalida" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_city_label}:"
@@ -31,9 +32,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trips_form_city_required}" 
 				validatorMessage="#{msgs.trip_form_city_required}">
+				<p:ajax update="msgCiudadSalida" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="ciudadSalida" />
+			<p:message id="msgCiudadSalida" for="ciudadSalida" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_state_label}:"
@@ -43,9 +45,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_state_required}" 
 				validatorMessage="#{msgs.trip_form_state_required}" >
+				<p:ajax update="msgProvinciaSalida" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="provinciaSalida" />
+			<p:message id="msgProvinciaSalida" for="provinciaSalida" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_country_label}:"
@@ -55,9 +58,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_country_required}" 
 				validatorMessage="#{msgs.trip_form_country_required}">
+				<p:ajax update="msgPaisSalida" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="paisSalida" />
+			<p:message id="msgPaisSalida" for="paisSalida" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_zipcode_label}:"
@@ -67,9 +71,10 @@
 				value="#{trip.departure.zipCode}" required="true"
 				requiredMessage="#{msgs.trip_form_zipcode_required}"
 				validatorMessage="#{msgs.trip_form_zipcode_validator}">
+				<p:ajax update="msgCodigoPostalSalida" />
 				<f:validateRegex pattern="[0-9]{5}" />
 			</p:inputText>
-			<p:message for="codigoPostalSalida" />
+			<p:message id="msgCodigoPostalSalida" for="codigoPostalSalida" />
 		</h:panelGroup>
 
 		<h4>#{msgs.coordinates}</h4>
@@ -81,11 +86,14 @@
 			<p:inputText id="latSalida" value="#{trip.departure.lat}" 
 				converterMessage="#{msgs.trip_form_lat_converter}"
 				validatorMessage="#{msgs.trip_form_lat_validator}">
+			<p:ajax update="msgLatSalida" />
 			<f:validateDoubleRange minimum="#{trip.minLat}" maximum="#{trip.maxLat}"/>
 			</p:inputText>
 			<p:slider for="latSalida" minValue="#{trip.minLat}"
-				maxValue="#{trip.maxLat}" />
-			<p:message for="latSalida" />
+				maxValue="#{trip.maxLat}" >
+				<p:ajax update="msgLatSalida" />
+				</p:slider>
+			<p:message id="msgLatSalida" for="latSalida" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonSalida" />
@@ -93,11 +101,14 @@
 			<p:inputText id="lonSalida" value="#{trip.departure.lon}"
 				converterMessage="#{msgs.trip_form_lon_converter}"
 				validatorMessage="#{msgs.trip_form_lon_validator}">
+				<p:ajax update="msgLonSalida" />
 			<f:validateDoubleRange minimum="#{trip.minLon}" maximum="#{trip.maxLon}"/>
 			</p:inputText>
 			<p:slider for="lonSalida" minValue="#{trip.minLon}"
-				maxValue="#{trip.maxLon}" />
-			<p:message for="lonSalida" />
+				maxValue="#{trip.maxLon}" >
+				<p:ajax update="msgLonSalida" />
+				</p:slider>
+			<p:message id="msgLonSalida" for="lonSalida" />
 		</h:panelGroup>
 
 		<h4>#{msgs.trip_form_details}</h4>
@@ -111,10 +122,10 @@
 				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
 				mindate="#{trip.today}" maxvalue="#{trip.arrivalDate}"
 				requiredMessage="#{msgs.trip_form_departure_date_required}" >
-				<p:ajax update="fechaLlegada fechaLimite" process="@this"
-					event="dateSelect"/>
+				<p:ajax update="fechaLlegada fechaLimite msgFechaSalida" 
+					process="@this" event="dateSelect"/>
 			</p:calendar>
-			<p:message for="fechaSalida" />
+			<p:message id="msgFechaSalida" for="fechaSalida" />
 		</h:panelGroup>
 
 		<!-- Destino -->
@@ -130,9 +141,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_street_required}" 
 				validatorMessage="#{msgs.trip_form_street_required}">
+				<p:ajax update="msgCalleDestino" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="calleDestino" />
+			<p:message id="msgCalleDestino" for="calleDestino" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_city_label}:"
@@ -142,9 +154,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trips_form_city_required}" 
 				validatorMessgae="#{msgs.trips_form_city_required}">
+				<p:ajax update="msgCiudadDestino" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="ciudadDestino" />
+			<p:message id="msgCiudadDestino" for="ciudadDestino" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_state_label}:"
@@ -154,9 +167,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_state_required}" 
 				validatorMessage="#{msgs.trip_form_state_required}">
+				<p:ajax update="msgProvinciaDestino" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="provinciaDestino" />
+			<p:message id="msgProvinciaDestino" for="provinciaDestino" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_country_label}:"
@@ -166,9 +180,10 @@
 				required="true" 
 				requiredMessage="#{msgs.trip_form_country_required}" 
 				validatorMessage="#{msgs.trip_form_country_required}" >
+				<p:ajax update="msgPaisDestino" />
 				<f:validateLength minimum="1"/>
 				</p:inputText>
-			<p:message for="paisDestino" />
+			<p:message id="msgPaisDestino" for="paisDestino" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_zipcode_label}:"
@@ -178,9 +193,10 @@
 				value="#{trip.destination.zipCode}" required="true"
 				requiredMessage="#{msgs.trip_form_zipcode_required}"
 				validatorMessage="#{msgs.trip_form_zipcode_validator}">
+				<p:ajax update="msgCodigoPostalDestino" />
 				<f:validateRegex pattern="[0-9]{5}" />
 			</p:inputText>
-			<p:message for="codigoPostalDestino" />
+			<p:message id="msgCodigoPostalDestino" for="codigoPostalDestino" />
 		</h:panelGroup>
 
 		<h4>#{msgs.coordinates}</h4>
@@ -192,11 +208,14 @@
 			<p:inputText id="latDestino" value="#{trip.destination.lat}" 
 				converterMessage="#{msgs.trip_form_lat_converter}"
 				validatorMessage="#{msgs.trip_form_lat_validator}">
+			<p:ajax update="msgLatDestino" />
 			<f:validateDoubleRange minimum="#{trip.minLat}" maximum="#{trip.maxLat}"/>
 			</p:inputText>
 			<p:slider for="latDestino" minValue="#{trip.minLat}"
-				maxValue="#{trip.maxLat}" />
-			<p:message for="latDestino" />
+				maxValue="#{trip.maxLat}" >
+				<p:ajax update="msgLatDestino" />
+				</p:slider>
+			<p:message id="msgLatDestino" for="latDestino" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_longitude}:" for="lonDestino" />
@@ -204,11 +223,14 @@
 			<p:inputText id="lonDestino" value="#{trip.destination.lon}"
 				converterMessage="#{msgs.trip_form_lon_converter}"
 				validatorMessage="#{msgs.trip_form_lon_validator}">
+			<p:ajax update="msgLonDestino" />
 			<f:validateDoubleRange minimum="#{trip.minLon}" maximum="#{trip.maxLon}"/>
 			</p:inputText>
 			<p:slider for="lonDestino" minValue="#{trip.minLon}"
-				maxValue="#{trip.maxLon}" />
-			<p:message for="lonDestino" />
+				maxValue="#{trip.maxLon}" >
+				<p:ajax update="msgLonDestino" />
+				</p:slider>
+			<p:message id="msgLonDestino" for="lonDestino" />
 		</h:panelGroup>
 
 		<h4>#{msgs.trip_form_details}</h4>
@@ -222,10 +244,10 @@
 				pattern="yyyy-MM-dd HH:mm:ss" required="true" editable="false"
 				requiredMessage="#{msgs.trip_form_arrival_date_required}" 
 				mindate="#{trip.departureDate}">
-					<p:ajax update="fechaSalida fechaLimite" process="@this"
-					event="dateSelect"/>
+					<p:ajax update="fechaSalida fechaLimite msgFechaLlegada" 
+					process="@this" event="dateSelect"/>
 				</p:calendar>
-			<p:message for="fechaLlegada" />
+			<p:message id="msgFechaLlegada" for="fechaLlegada" />
 		</h:panelGroup>
 
 
@@ -240,17 +262,22 @@
 			<p:calendar id="fechaLimite" value="#{trip.closingDate}"
 				pattern="yyyy-MM-dd" required="true" editable="false"
 				mindate="#{trip.today}" maxdate="#{trip.departureDate}"
-				requiredMessage="#{msgs.trip_form_closing_date_required}" />
-			<p:message for="fechaLimite" />
+				requiredMessage="#{msgs.trip_form_closing_date_required}">
+				<p:ajax update="msgFechaLimite" 
+					process="@this" event="dateSelect"/>
+				</p:calendar>
+			<p:message id="msgFechaLimite" for="fechaLimite" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_cost_label}:"
 			for="costeEstimado" />
 		<h:panelGroup>
 			<p:spinner id="costeEstimado" value="#{trip.estimatedCost}" min="0"
-				required="true" suffix="€" stepFactor="2.5"
-				requiredMessage="#{msgs.trip_form_cost_required}" />
-			<p:message for="costeEstimado" />
+				required="true" suffix="€" stepFactor="5"
+				requiredMessage="#{msgs.trip_form_cost_required}" >
+				<p:ajax update="msgCosteEstimado"/>
+				</p:spinner>
+			<p:message id="msgCosteEstimado" for="costeEstimado" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_comments_label}:"
@@ -267,9 +294,9 @@
 			<p:spinner id="maxPlazas" value="#{trip.maxPax}" required="true"
 				min="1" update="plazasDisponibles" process="@this"
 				requiredMessage="#{msgs.trip_form_max_seats_required}" >
-					<p:ajax update="plazasDisponibles"/>
+					<p:ajax update="plazasDisponibles msgMaxPlazas"/>
 				</p:spinner>
-			<p:message for="maxPlazas" />
+			<p:message id="msgMaxPlazas" for="maxPlazas" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.trip_form_available_seats_label}:"
@@ -277,8 +304,10 @@
 		<h:panelGroup>
 			<p:spinner id="plazasDisponibles" value="#{trip.availablePax}"
 				required="true" min="0" max="#{trip.maxPax}"
-				requiredMessage="#{msgs.trip_form_available_seats_required}" />
-			<p:message for="plazasDisponibles" />
+				requiredMessage="#{msgs.trip_form_available_seats_required}" >
+				<p:ajax update="msgPlazasDisponibles"/>
+				</p:spinner>
+			<p:message id="msgPlazasDisponibles" for="plazasDisponibles" />
 		</h:panelGroup>
 
 	</p:panelGrid>

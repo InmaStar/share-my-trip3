@@ -1,5 +1,7 @@
 package uo.sdi.presentation.validator;
 
+import java.util.Date;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.validator.ValidatorException;
 
@@ -50,6 +52,18 @@ public class Validations {
     public static void repeatedPassword(String password1, String password2,
 	    String errorMessage){
 	if (!password1.equals(password2)) {
+	    throwValidatorException(errorMessage);
+	}
+    }
+    
+    public static void dateBefore(Date date, Date maxDate, String errorMessage){
+	if (!date.before(maxDate)) {
+	    throwValidatorException(errorMessage);
+	}
+    }
+    
+    public static void dateAfter(Date date, Date minDate, String errorMessage){
+	if (!date.after(minDate)) {
 	    throwValidatorException(errorMessage);
 	}
     }

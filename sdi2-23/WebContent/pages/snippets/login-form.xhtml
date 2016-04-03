@@ -11,8 +11,9 @@
 			<p:inputText id="login" value="#{login.username}" required="true"
 				requiredMessage="#{msgs.login_form_login_required}"
 				validator="#{login.existeLogin}" >
+				<p:ajax update="@this msgLogin"/>
 				</p:inputText>
-			<p:message for="login" />
+			<p:message id="msgLogin" for="login" />
 		</h:panelGroup>
 
 		<p:outputLabel value="#{msgs.login_form_password_label}:"
@@ -20,8 +21,10 @@
 		<h:panelGroup>
 			<p:password id="password" value="#{login.password}" required="true"
 				requiredMessage="#{msgs.login_form_password_required}"
-				validator="#{login.passwordCorrecta}" />
-			<p:message for="password" />
+				validator="#{login.passwordCorrecta}" >
+				<p:ajax update="msgPassword"/>
+				</p:password>
+			<p:message id="msgPassword" for="password" />
 		</h:panelGroup>
 
 		<p:commandButton value="#{msgs.button_send}" action="#{login.validar}"

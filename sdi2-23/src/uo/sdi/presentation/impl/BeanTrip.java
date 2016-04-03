@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import alb.util.log.Log;
 import uo.sdi.infrastructure.Factories;
 import uo.sdi.model.types.AddressPoint;
+import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -28,11 +29,15 @@ public class BeanTrip implements Serializable{
     private static final long serialVersionUID = 1L;
     private TripDTO viaje;
     private boolean generado;
+    private Date today;
 
     public void initViaje(){
 	this.viaje = new TripDTO();
+	viaje.setDeparture(new AddressPointDTO());
+	viaje.setDestination(new AddressPointDTO());
 	setMaxPax(1);
 	setEstimatedCost(0.5);
+	today = new Date();
 	generado = false;
     }
     
@@ -45,7 +50,7 @@ public class BeanTrip implements Serializable{
     }
     
     public Date getToday(){
-	return new Date();
+	return today;
     }
     
     public void setViaje(TripDTO viaje) {
@@ -126,7 +131,7 @@ public class BeanTrip implements Serializable{
 
     public String modificar() {
 	try {
-	    Factories.services.createTripService().update(viaje);
+	    viaje = Factories.services.createTripService().update(viaje);
 	    Log.info("Se ha modificado el viaje [%d] con éxito", viaje.getId());
 	    return "exito";
 	} catch (Exception e) {
@@ -138,7 +143,8 @@ public class BeanTrip implements Serializable{
 
     public String registrar(UserDTO promotor) {
 	try {
-	    Factories.services.createTripService().insert(viaje, promotor);
+	    viaje.setStatus(TripStatus.OPEN);
+	    viaje = Factories.services.createTripService().insert(viaje, promotor);
 	    Log.info("El promotor [%s] ha registrado "
 		    + "un nuevo viaje [%d] con éxito", promotor.getLogin(),
 		    viaje.getId());
@@ -234,4 +240,5 @@ public class BeanTrip implements Serializable{
     public void setGenerado(boolean generado) {
         this.generado = generado;
     }
+   
 }
