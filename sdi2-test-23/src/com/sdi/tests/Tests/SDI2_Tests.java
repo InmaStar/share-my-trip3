@@ -2,8 +2,6 @@ package com.sdi.tests.Tests;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -13,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.sdi.tests.pageobjects.POLoginForm;
+import com.sdi.tests.pageobjects.POSignupForm;
 import com.sdi.tests.utils.SeleniumHelper;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -36,29 +35,40 @@ public class SDI2_Tests {
 	// 1. [RegVal] Registro de Usuario con datos válidos.
 	@Test
 	public void t01_RegVal() {
-		helper.clickNavOption("main-nav:validarse"); 
-		new POLoginForm(driver, "usuario1", "usuario1").submit();
+		helper.clickNavOption("main-nav:registrarse");
+		String username = "usuario10001";
+		new POSignupForm(driver, username, username, username,
+				username, username, username+"@example.org").submit();
 		helper.waitForId("viajes");
-		assertTrue(helper.elementContains("main-nav:rol","usuario1"));
+		assertTrue(helper.elementContains("main-nav:rol", username));
 	}
 
 	// 2. [RegInval] Registro de Usuario con datos inválidos (contraseñas
 	// diferentes).
 	@Test
 	public void t02_RegInval() {
-
+		helper.clickNavOption("main-nav:registrarse");
+		String username = "usuario10001";
+		new POSignupForm(driver, username, username, username+"1",
+				username, username, username+"@example.org").submit();
+		helper.waitForText("The passwords are different");
 	}
 
 	// 3. [IdVal] Identificación de Usuario registrado con datos válidos.
 	@Test
 	public void t03_IdVal() {
-
+		helper.clickNavOption("main-nav:validarse");
+		new POLoginForm(driver, "usuario1", "usuario1").submit();
+		helper.waitForId("viajes");
+		assertTrue(helper.elementContains("main-nav:rol", "usuario1"));
 	}
 
 	// 4. [IdInval] Identificación de usuario registrado con datos inválidos.
 	@Test
 	public void t04_IdInval() {
-
+		helper.clickNavOption("main-nav:validarse");
+		new POLoginForm(driver, "usuario1", "usuario2").submit();
+		helper.waitForText("The password is incorrect");
 	}
 
 	// 5. [AccInval] Intento de acceso con URL desde un usuario no público (no

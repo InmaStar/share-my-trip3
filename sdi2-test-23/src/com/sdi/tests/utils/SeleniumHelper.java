@@ -40,10 +40,21 @@ public class SeleniumHelper {
 	public boolean elementContains(String element, String text) {
 		return driver.findElement(By.id(element)).getText().equals(text);
 	}
+	
+	public boolean elementEmpty(String element) {
+		System.out.println(driver.findElement(By.id(element)).getText());
+		return driver.findElement(By.id(element)).getText().isEmpty();
+	}
 
 	public void waitForId(String id) {
 		new WebDriverWait(driver, 10).until(
 				ExpectedConditions.visibilityOfElementLocated(
 						By.id(id)));
+	}
+	
+	public void waitForText(String text) {
+		new WebDriverWait(driver, 10).until(
+				ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("//*[contains(text(),'" + text + "')]")));
 	}
 }
