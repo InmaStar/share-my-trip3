@@ -123,7 +123,7 @@
 		<navigation-case>
 			<from-action>#{trip.modificar}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
@@ -150,7 +150,7 @@
 		<navigation-case>
 			<from-action>#{trip.registrar(user.currentUser)}</from-action>
 			<from-outcome>exito</from-outcome>
-			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
+			<to-view-id>/pages/listaViajesRelacionados.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{trips.listadoRelacionados(user.id)}</from-action>
