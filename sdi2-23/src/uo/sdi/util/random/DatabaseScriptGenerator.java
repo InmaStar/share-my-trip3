@@ -16,7 +16,7 @@ public class DatabaseScriptGenerator {
 	    + "'%tY-%<tm-%<td %<tH:%<tM:0.000000', '%s', '%s', '%s', '%s', "
 	    + "'%s', %e, %e, '%s', "
 	    + "'%tY-%<tm-%<td %<tH:%<tM:0.000000', '%s', '%s', '%s', '%s', "
-	    + "%e, %e, '%s', %e, %d, %d, %d;";
+	    + "%e, %e, '%s', %e, %d, %d, %d);";
     private static Locale locale = Locale.ENGLISH;
     private static PrintWriter writer;
 

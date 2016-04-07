@@ -42,7 +42,6 @@ public class SeleniumHelper {
 	}
 	
 	public boolean elementEmpty(String element) {
-		System.out.println(driver.findElement(By.id(element)).getText());
 		return driver.findElement(By.id(element)).getText().isEmpty();
 	}
 

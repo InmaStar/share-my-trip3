@@ -30,4 +30,6 @@ public interface UserService {
             throws BusinessException;
 
     UserDTO cancelSeat(Long userId, TripDTO trip) throws BusinessException;
+    
+    void restoreDB() throws BusinessException;
 }

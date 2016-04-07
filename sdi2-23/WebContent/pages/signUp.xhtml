@@ -92,9 +92,13 @@
 				<p:commandButton id="submit" value="#{msgs.button_send}" update="grid"
 					process="@form" action="#{signup.registrar}">
 				</p:commandButton>
+				
 		
 			</p:panelGrid>
 		</h:form>
+		
+				<p:commandButton id="restore-db" value="#{msgs.button_restore}" action="#{signup.restore}">
+				</p:commandButton>
 	</ui:define>
 	
 </ui:composition>

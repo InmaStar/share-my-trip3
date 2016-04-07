@@ -30,7 +30,7 @@ public class BeanSignup implements Serializable {
 	private UserDTO userToBeRegistered;
 	private String password2;
 	private String passwordToBeChecked;
-
+	
 	public BeanSignup() {
 		userToBeRegistered = new UserDTO();
 	}
@@ -139,6 +139,19 @@ public class BeanSignup implements Serializable {
 		} catch (Exception e) {
 			Log.debug("Ha ocurrido una [%s] registrando al usuario [%s]: [%s]",
 					e.getClass().toString(), userToBeRegistered.getLogin(),
+					e.getMessage());
+			return "error";
+		}
+	}
+
+
+	public String restore() {
+		try {
+			Factories.services.createUserService().restoreDB();
+			Log.info("Restaurando base de datos");
+			return "exito";
+		} catch (Exception e) {
+			Log.debug("Ha ocurrido un error restaurando la base de datos: %s",
 					e.getMessage());
 			return "error";
 		}

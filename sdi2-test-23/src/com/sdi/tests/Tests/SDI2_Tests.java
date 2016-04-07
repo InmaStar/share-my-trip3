@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -36,6 +37,9 @@ public class SDI2_Tests {
 	@Test
 	public void t01_RegVal() {
 		helper.clickNavOption("main-nav:registrarse");
+		driver.findElement(By.id("restore-db")).click();
+		helper.clickNavOption("main-nav:registrarse");
+		
 		String username = "usuario10001";
 		new POSignupForm(driver, username, username, username,
 				username, username, username+"@example.org").submit();

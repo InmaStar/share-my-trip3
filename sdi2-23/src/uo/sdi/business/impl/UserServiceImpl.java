@@ -66,4 +66,9 @@ public class UserServiceImpl implements UserService {
     public UserDTO cancelSeat(Long userId, TripDTO trip) throws BusinessException {
         return CommandExecutor.execute(new CancelSeat(userId, trip));
     }
+
+	@Override
+	public void restoreDB() throws BusinessException {
+		CommandExecutor.execute(new RestoreDB());
+	}
 }
