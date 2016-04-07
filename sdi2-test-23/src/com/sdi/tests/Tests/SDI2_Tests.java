@@ -169,14 +169,11 @@ public class SDI2_Tests {
 		helper.click("cuerpoForm:listadoViajesPromotor:3:cancel-checkbox");
 		helper.click("cuerpoForm:cancelarViajesBtn");
 
-		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
-		helper.elementContains("cuerpoForm:listadoViajesPromotor:0:status", 
+		helper.waitUntilValue("cuerpoForm:listadoViajesPromotor:0:status", 
 				"Cancelled");
-		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
-		helper.elementContains("cuerpoForm:listadoViajesPromotor:1:status", 
+		helper.waitUntilValue("cuerpoForm:listadoViajesPromotor:1:status", 
 				"Cancelled");
-		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
-		helper.elementContains("cuerpoForm:listadoViajesPromotor:3:status", 
+		helper.waitUntilValue("cuerpoForm:listadoViajesPromotor:3:status", 
 				"Cancelled");
 	}
 
