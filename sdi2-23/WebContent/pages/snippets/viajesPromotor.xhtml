@@ -53,7 +53,7 @@
 			#{entry.availablePax }
 			</p:column>
 			<p:column headerText="#{msgs.trip_status}" sortBy="#{trips.localizarTripStatus(entry.status) }"  filterBy="#{trips.localizarTripStatus(entry.status) }" filterMatchMode="contains">
-			#{trips.localizarTripStatus(entry.status) }
+			 <h:outputText id="status" value="#{trips.localizarTripStatus(entry.status) }" />
 			</p:column>
 			<p:column>
 			<p:commandButton action="solicitudes" inmediate="true" 
@@ -72,7 +72,7 @@
                 	value="#{msgs.cancel_trip }" update="listadoViajesPromotor" process="@this"/>
 				 -->  
 				<h:outputText value="#{msgs.cancel }" rendered="#{entry.open }"/>
-        		<p:selectBooleanCheckbox rendered="#{entry.open }">
+        		<p:selectBooleanCheckbox  id="cancel-checkbox" rendered="#{entry.open }">
         			<p:ajax update="@this :cuerpoForm:cancelarViajesBtn" process="@this" listener="#{trips.seleccionar(entry)}"/>
         		</p:selectBooleanCheckbox>
 			</p:column>

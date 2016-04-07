@@ -29,7 +29,7 @@ public class SDI2_Tests {
 		helper = new SeleniumHelper(driver);
 		
 
-		helper.clickNavOption("main-nav:registrarse");
+		helper.click("main-nav:registrarse");
 		driver.findElement(By.id("restore-db")).click();
 	}
 
@@ -41,7 +41,7 @@ public class SDI2_Tests {
 	// 1. [RegVal] Registro de Usuario con datos válidos.
 	@Test
 	public void t01_RegVal() {
-		helper.clickNavOption("main-nav:registrarse");
+		helper.click("main-nav:registrarse");
 		
 		POSignupForm form = new POSignupForm(driver);
 		form.submitValidForm();
@@ -53,7 +53,7 @@ public class SDI2_Tests {
 	// diferentes).
 	@Test
 	public void t02_RegInval() {
-		helper.clickNavOption("main-nav:registrarse");
+		helper.click("main-nav:registrarse");
 		new POSignupForm(driver).submitWrongPassword();
 		helper.waitForText("The passwords are different");
 	}
@@ -61,7 +61,7 @@ public class SDI2_Tests {
 	// 3. [IdVal] Identificación de Usuario registrado con datos válidos.
 	@Test
 	public void t03_IdVal() {
-		helper.clickNavOption("main-nav:validarse");
+		helper.click("main-nav:validarse");
 		new POLoginForm(driver, "usuario1", "usuario1").submit();
 		helper.waitForId("viajes");
 		assertTrue(helper.elementContains("main-nav:rol", "usuario1"));
@@ -70,7 +70,7 @@ public class SDI2_Tests {
 	// 4. [IdInval] Identificación de usuario registrado con datos inválidos.
 	@Test
 	public void t04_IdInval() {
-		helper.clickNavOption("main-nav:validarse");
+		helper.click("main-nav:validarse");
 		new POLoginForm(driver, "usuario1", "usuario2").submit();
 		helper.waitForText("The password is incorrect");
 	}
@@ -100,7 +100,7 @@ public class SDI2_Tests {
 	public void t06_RegViajeVal() {
 		login();
 
-		helper.clickNavOption("main-nav:nuevoViaje");
+		helper.click("main-nav:nuevoViaje");
 		POTripForm form = new POTripForm(driver);
 		form.fillForm();
 		form.submitForm();
@@ -112,7 +112,7 @@ public class SDI2_Tests {
 	public void t07_RegViajeInVal() {
 		login();
 
-		helper.clickNavOption("main-nav:nuevoViaje");
+		helper.click("main-nav:nuevoViaje");
 		new POTripForm(driver).submitForm();
 		helper.waitForText("Street is a mandatory field");
 	}
@@ -122,8 +122,8 @@ public class SDI2_Tests {
 	public void t08_EditViajeVal() {
 		login();
 		
-		helper.clickNavOption("main-nav:viajesPromotor");
-		helper.clickNavOption("cuerpoForm:listadoViajesPromotor:0:modify-btn");
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:modify-btn");
 		POTripForm form = new POTripForm(driver);
 		form.submitForm();
 		helper.waitForText("My trips");
@@ -134,8 +134,8 @@ public class SDI2_Tests {
 	public void t09_EditViajeInVal() {
 		login();
 		
-		helper.clickNavOption("main-nav:viajesPromotor");
-		helper.clickNavOption("cuerpoForm:listadoViajesPromotor:0:modify-btn");
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:modify-btn");
 		POTripForm form = new POTripForm(driver);
 		form.invalidateForm();		
 		form.submitForm();
@@ -145,14 +145,35 @@ public class SDI2_Tests {
 	// 10. [CancelViajeVal] Cancelación de un viaje existente por un promotor.
 	@Test
 	public void t10_CancelViajeVal() {
-
+		login();
+		
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:cancel-checkbox");
+		helper.click("cuerpoForm:cancelarViajesBtn");
+		
+//		helper.waitForText("My promoted trips");
+		helper.elementContains("cuerpoForm:listadoViajesPromotor:0:status", 
+				"Cancelled");
 	}
 
 	// 11. [CancelMulViajeVal] Cancelación de múltiples viajes existentes por un
 	// promotor.
 	@Test
 	public void t11_CancelMulViajeVal() {
-
+		login();
+		
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:cancel-checkbox");
+		helper.click("cuerpoForm:listadoViajesPromotor:1:cancel-checkbox");
+		helper.click("cuerpoForm:listadoViajesPromotor:3:cancel-checkbox");
+		helper.click("cuerpoForm:cancelarViajesBtn");
+		
+		helper.elementContains("cuerpoForm:listadoViajesPromotor:0:status", 
+				"Cancelled");
+		helper.elementContains("cuerpoForm:listadoViajesPromotor:1:status", 
+				"Cancelled");
+		helper.elementContains("cuerpoForm:listadoViajesPromotor:3:status", 
+				"Cancelled");
 	}
 
 	// 12. [Ins1ViajeAceptVal] Inscribir en un viaje un solo usuario y ser
@@ -230,7 +251,7 @@ public class SDI2_Tests {
 	}
 	
 	private void login() {
-		helper.clickNavOption("main-nav:validarse");
+		helper.click("main-nav:validarse");
 		new POLoginForm(driver, "usuario1", "usuario1").submit();
 		helper.waitForId("viajes");
 	}

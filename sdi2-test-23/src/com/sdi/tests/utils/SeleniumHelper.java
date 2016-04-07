@@ -18,7 +18,7 @@ public class SeleniumHelper {
 		this.driver = driver;
 	}
 	
-	public void clickNavOption(String option) {
+	public void click(String option) {
 		By locator = By.id(option);
 		driver.findElement(locator).click();
 	}
