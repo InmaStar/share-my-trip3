@@ -50,6 +50,12 @@ public class SeleniumHelper {
 				ExpectedConditions.visibilityOfElementLocated(
 						By.id(id)));
 	}
+
+	public void waitForLeaveId(String id) {
+		new WebDriverWait(driver, 10).until(
+				ExpectedConditions.invisibilityOfElementLocated(
+						By.id(id)));
+	}
 	
 	public void waitForText(String text) {
 		new WebDriverWait(driver, 10).until(

@@ -193,7 +193,7 @@ public class SDI2_Tests {
 		helper.click("cuerpoForm:listadoViajesPromotor:0:check-seats");
 		helper.click("solicitudes:0:accept");
 
-		helper.waitForId("solicitudes:0:status");
+		helper.waitForLeaveId("solicitudes:0:accept");
 		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
 	}
 
@@ -218,9 +218,9 @@ public class SDI2_Tests {
 		helper.click("solicitudes:0:accept");
 		helper.click("solicitudes:1:accept");
 
-		helper.waitForId("solicitudes:0:status");
+		helper.waitForLeaveId("solicitudes:0:accept");
 		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
-		helper.waitForId("solicitudes:1:status");
+		helper.waitForLeaveId("solicitudes:1:accept");
 		assertTrue(helper.elementContains("solicitudes:1:status", "Accepted"));
 
 	}
@@ -264,13 +264,34 @@ public class SDI2_Tests {
 	// 15. [CancelNoPromotorVal] Un usuario no promotor Cancela plaza.
 	@Test
 	public void t15_CancelNoPromotorVal() {
-
+		login("usuario2");
+		helper.click("main-nav:nombre_app");
+		helper.click("viajes:listadoViajesDisponibles:0:solicitarPlaza");
+		helper.waitForId("viajes:listadoViajesDisponibles:0:cancelarPlaza");
+		helper.click("viajes:listadoViajesDisponibles:0:cancelarPlaza");
 	}
 
 	// 16. [Rech1ViajeVal] Inscribir en un viaje un usuario que será admitido y
 	// después rechazarlo por el promotor.
 	@Test
 	public void t16_Rech1ViajeVal() {
+		login("usuario2");
+		
+		helper.click("main-nav:nombre_app");
+		helper.click("viajes:listadoViajesDisponibles:0:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:check-seats");
+		helper.click("solicitudes:0:accept");
+
+		helper.waitForLeaveId("solicitudes:0:accept");
+		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
+		
+		helper.click("solicitudes:0:exclude");
+
+		helper.waitForLeaveId("solicitudes:0:exclude");
+		assertTrue(helper.elementContains("solicitudes:0:status", "Excluded"));
 
 	}
 
@@ -278,13 +299,30 @@ public class SDI2_Tests {
 	// algunas vistas)
 	@Test
 	public void t17_i18N1() {
-
+		helper.waitForText("List of available trips");
+		helper.clickSubnavOption("main-nav:lang", "main-nav:linkespa");
+		helper.waitForText("Lista de viajes disponibles");
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.waitForText("Ver solicitudes");
+		helper.click("main-nav:nuevoViaje");
+		helper.waitForText("Viaje nuevo");	
 	}
 
 	// 18. [i18N2] Cambio del idioma por defecto a un segundo idioma y vuelta al
 	// idioma por defecto. (Probar algunas vistas)
 	@Test
 	public void t18_i18N2() {
+		helper.waitForText("List of available trips");
+		helper.clickSubnavOption("main-nav:lang", "main-nav:linkespa");
+		helper.waitForText("Lista de viajes disponibles");
+		helper.clickSubnavOption("main-nav:lang", "main-nav:linkingles");
+		helper.waitForText("List of available trips");
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.waitForText("Modify trip");
+		helper.click("main-nav:nuevoViaje");
+		helper.waitForText("New trip");	
 
 	}
 

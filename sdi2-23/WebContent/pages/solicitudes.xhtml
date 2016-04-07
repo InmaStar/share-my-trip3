@@ -33,7 +33,7 @@
 					actionListener="#{trip.confirmarPasajero(entry.id)}" value="#{msgs.confirm}"
 					update="solicitudes" process="@this" />
 					
-					<p:commandButton rendered="#{trip.isAccepted(entry.id) or trip.isPending(entry.id)}" 
+					<p:commandButton id="exclude" rendered="#{trip.isAccepted(entry.id) or trip.isPending(entry.id)}" 
 					actionListener="#{trip.excluirPasajero(entry)}" value="#{msgs.exclude}"
 					update="solicitudes" process="@this" />
 					
