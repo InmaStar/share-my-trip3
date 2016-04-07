@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.sdi.tests.pageobjects.POLoginForm;
@@ -329,19 +330,48 @@ public class SDI2_Tests {
 	// 19. [OpFiltrado] Prueba para el filtrado opcional.
 	@Test
 	public void t19_OpFiltrado() {
+		helper.waitForText("List of available trips");
+		assertTrue(helper.elementContains("viajes:listadoViajesDisponibles:0:promoter-value", 
+				"usuario1"));
+		
+		WebElement element = driver.findElement(
+				By.id("viajes:listadoViajesDisponibles:promoter:filter"));
+		element.click();
+		element.clear();
+		element.sendKeys("usuario2");
 
+		helper.waitUntilValue("viajes:listadoViajesDisponibles:0:promoter-value",
+				"usuario2");
 	}
 
 	// 20. [OpOrden] Prueba para la ordenación opcional.
 	@Test
 	public void t20_OpOrden() {
+		helper.waitForText("List of available trips");
+		assertTrue(helper.elementContains(
+				"viajes:listadoViajesDisponibles:0:available-pax", 
+				"4"));
+		
+		WebElement element = driver.findElement(
+				By.id("viajes:listadoViajesDisponibles:available-pax-header"))
+				.findElement(By.className("ui-column-title"));
+		element.click();
 
+		helper.waitUntilValue("viajes:listadoViajesDisponibles:0:available-pax",
+				"1");
 	}
 
 	// 21. [OpPag] Prueba para la paginación opcional.
 	@Test
 	public void t21_OpPag() {
-
+		helper.waitForText("List of available trips");
+		helper.waitForLeaveId("viajes:listadoViajesDisponibles:20:promoter-value");
+		
+		WebElement element = driver.findElement(
+				By.id("viajes:listadoViajesDisponibles_paginator_bottom"))
+				.findElement(By.xpath("//*[contains(text(),'3')]"));
+		element.click();
+		helper.waitForId("viajes:listadoViajesDisponibles:20:promoter-value");
 	}
 
 	// 22. [OpMante] Prueba del mantenimiento programado opcional.

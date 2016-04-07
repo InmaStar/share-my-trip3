@@ -27,7 +27,7 @@
 		</p:column>
 		<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}" filterBy="#{entry.destination.city}" filterMatchMode="contains">
 			#{entry.destination.city}</p:column>
-		<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}" filterBy="#{entry.availablePax}" filterMatchMode="equals">
+		<p:column id="available-pax-header" headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}" filterBy="#{entry.availablePax}" filterMatchMode="equals">
             <f:facet name="filter">
                 <p:spinner onchange="PF('tripsTable').filter()">
                     <f:converter converterId="javax.faces.Integer" />
@@ -35,8 +35,9 @@
             </f:facet>
 			<h:outputText id="available-pax" value="#{entry.availablePax}"/>
 		</p:column>
-		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  filterMatchMode="contains">
-			#{entry.promoter.login}</p:column>
+		<p:column id="promoter" headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  filterMatchMode="contains">
+			<h:outputText id="promoter-value" value="#{entry.promoter.login}" />
+		</p:column>
 		<p:column rendered="#{!user.publico}">
 			<p:commandButton actionListener="#{trips.cancelarPlaza(entry, user.currentUser)}" inmediate="true" 
 				rendered="#{entry.canCancelSeat(user.id)}" update="listadoViajesDisponibles" process="@this"

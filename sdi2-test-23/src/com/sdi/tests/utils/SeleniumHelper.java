@@ -57,6 +57,12 @@ public class SeleniumHelper {
 						By.id(id)));
 	}
 	
+	public void waitUntilValue(String id, String text) {
+		new WebDriverWait(driver, 10).until(
+				ExpectedConditions.textToBePresentInElementLocated(
+						By.id(id), text));
+	}
+	
 	public void waitForText(String text) {
 		new WebDriverWait(driver, 10).until(
 				ExpectedConditions.visibilityOfElementLocated(
