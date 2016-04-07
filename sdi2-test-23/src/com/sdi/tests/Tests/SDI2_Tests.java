@@ -79,7 +79,20 @@ public class SDI2_Tests {
 	// identificado). Intento de acceso a vistas de acceso privado.
 	@Test
 	public void t05_AccInval() {
+		driver.navigate().to(url + "pages/listaViajesPromotor.xhtml");
+		helper.waitForId("login-form");
+		
+		driver.navigate().to(url + "pages/listaViajesRelacionados.xhtml");
+		helper.waitForId("login-form");
 
+		driver.navigate().to(url + "pages/registrarViaje.xhtml");
+		helper.waitForId("login-form");
+
+		driver.navigate().to(url + "pages/solicitudes.xhtml");
+		helper.waitForId("login-form");
+
+		driver.navigate().to(url + "pages/modificarViaje.xhtml");
+		helper.waitForId("login-form");
 	}
 
 	// 6. [RegViajeVal] Registro de un viaje nuevo con datos válidos.
