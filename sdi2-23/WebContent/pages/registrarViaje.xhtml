@@ -10,7 +10,7 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
-		<h:form>
+		<h:form id="trip-form">
 			<h1>#{msgs.register_trip_form_title}</h1>
 			
 			<h:panelGroup>
@@ -21,7 +21,7 @@
 			</h:panelGroup>
 			
 			<ui:include src="/pages/snippets/viaje-form.xhtml" />
-			<p:commandButton value="#{msgs.register}" 
+			<p:commandButton id="submit" value="#{msgs.register}" 
 			action="#{trip.registrar(user.currentUser)}" 
 			update="@form" process="@form"/>
 		</h:form>

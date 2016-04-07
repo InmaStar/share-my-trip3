@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.sdi.tests.pageobjects.POLoginForm;
 import com.sdi.tests.pageobjects.POSignupForm;
+import com.sdi.tests.pageobjects.POTripForm;
 import com.sdi.tests.utils.SeleniumHelper;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -26,6 +27,10 @@ public class SDI2_Tests {
 		driver = new FirefoxDriver();
 		driver.get(url);
 		helper = new SeleniumHelper(driver);
+		
+
+		helper.clickNavOption("main-nav:registrarse");
+		driver.findElement(By.id("restore-db")).click();
 	}
 
 	@After
@@ -37,14 +42,11 @@ public class SDI2_Tests {
 	@Test
 	public void t01_RegVal() {
 		helper.clickNavOption("main-nav:registrarse");
-		driver.findElement(By.id("restore-db")).click();
-		helper.clickNavOption("main-nav:registrarse");
 		
-		String username = "usuario10001";
-		new POSignupForm(driver, username, username, username,
-				username, username, username+"@example.org").submit();
+		POSignupForm form = new POSignupForm(driver);
+		form.submitValidForm();
 		helper.waitForId("viajes");
-		assertTrue(helper.elementContains("main-nav:rol", username));
+		assertTrue(helper.elementContains("main-nav:rol", form.getUsername()));
 	}
 
 	// 2. [RegInval] Registro de Usuario con datos inválidos (contraseñas
@@ -52,9 +54,7 @@ public class SDI2_Tests {
 	@Test
 	public void t02_RegInval() {
 		helper.clickNavOption("main-nav:registrarse");
-		String username = "usuario10001";
-		new POSignupForm(driver, username, username, username+"1",
-				username, username, username+"@example.org").submit();
+		new POSignupForm(driver).submitWrongPassword();
 		helper.waitForText("The passwords are different");
 	}
 
@@ -98,25 +98,48 @@ public class SDI2_Tests {
 	// 6. [RegViajeVal] Registro de un viaje nuevo con datos válidos.
 	@Test
 	public void t06_RegViajeVal() {
+		login();
 
+		helper.clickNavOption("main-nav:nuevoViaje");
+		POTripForm form = new POTripForm(driver);
+		form.fillForm();
+		form.submitForm();
+		helper.waitForText("My trips");
 	}
 
 	// 7. [RegViajeInVal] Registro de un viaje nuevo con datos inválidos.
 	@Test
 	public void t07_RegViajeInVal() {
+		login();
 
+		helper.clickNavOption("main-nav:nuevoViaje");
+		new POTripForm(driver).submitForm();
+		helper.waitForText("Street is a mandatory field");
 	}
 
 	// 8. [EditViajeVal] Edición de viaje existente con datos válidos.
 	@Test
 	public void t08_EditViajeVal() {
-
+		login();
+		
+		helper.clickNavOption("main-nav:viajesPromotor");
+		helper.clickNavOption("cuerpoForm:listadoViajesPromotor:0:modify-btn");
+		POTripForm form = new POTripForm(driver);
+		form.submitForm();
+		helper.waitForText("My trips");
 	}
 
 	// 9. [EditViajeInVal] Edición de viaje existente con datos inválidos.
 	@Test
 	public void t09_EditViajeInVal() {
-
+		login();
+		
+		helper.clickNavOption("main-nav:viajesPromotor");
+		helper.clickNavOption("cuerpoForm:listadoViajesPromotor:0:modify-btn");
+		POTripForm form = new POTripForm(driver);
+		form.invalidateForm();		
+		form.submitForm();
+		helper.waitForText("Street is a mandatory field");
 	}
 
 	// 10. [CancelViajeVal] Cancelación de un viaje existente por un promotor.
@@ -204,5 +227,11 @@ public class SDI2_Tests {
 	@Test
 	public void t22_OpMante() {
 
+	}
+	
+	private void login() {
+		helper.clickNavOption("main-nav:validarse");
+		new POLoginForm(driver, "usuario1", "usuario1").submit();
+		helper.waitForId("viajes");
 	}
 }

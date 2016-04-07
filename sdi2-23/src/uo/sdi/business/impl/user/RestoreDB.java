@@ -11,11 +11,9 @@ public class RestoreDB implements Command<Object> {
 	public Object execute() throws BusinessException {
 		try {
 			for (String query : ScriptReader.getQueries()) {
-				System.out.println(query);
 				Jpa.getManager().createNativeQuery(query).executeUpdate();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new BusinessException(e.getMessage());
 		}
 		return null;

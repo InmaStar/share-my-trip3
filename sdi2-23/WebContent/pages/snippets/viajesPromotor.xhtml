@@ -62,7 +62,7 @@
 				</p:commandButton>
 			</p:column>
 			<p:column>
-               <p:commandButton action="modificarViaje" inmediate="true" rendered="#{entry.open }"
+               <p:commandButton id="modify-btn" action="modificarViaje" inmediate="true" rendered="#{entry.open }"
                value="#{msgs.modify_trip }" ajax="false">
                <f:setPropertyActionListener target="#{trip.viaje}" value="#{entry}" />
 				</p:commandButton>

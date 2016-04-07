@@ -14,7 +14,12 @@ public class POSignupForm {
 	private String name;
 	private String surname;
 	private String email;
-	
+
+	public POSignupForm(WebDriver driver) {
+		this(driver, "usuario30", "usuario30", "usuario30", "usuario30",
+				"usuario30", "usuario30@example.org");
+	}
+
 	public POSignupForm(WebDriver driver, String login, String password,
 			String repeatPassword, String name, String surname, String email) {
 		this.driver = driver;
@@ -25,24 +30,33 @@ public class POSignupForm {
 		this.surname = surname;
 		this.email = email;
 	}
-	
-	public void submit() {
+
+	public void submitWrongPassword() {
+		repeatPassword = password + "1";
+		submitValidForm();
+	}
+
+	public void submitValidForm() {
 		fillField("signup-form:login", login);
 		fillField("signup-form:password1", password);
 		fillField("signup-form:password2", repeatPassword);
 		fillField("signup-form:nombre", name);
 		fillField("signup-form:apellidos", surname);
 		fillField("signup-form:email", email);
-		
+
 		By boton = By.id("signup-form:submit");
 		driver.findElement(boton).click();
 	}
-	
+
 	private void fillField(String fieldName, String value) {
 		WebElement element = driver.findElement(By.id(fieldName));
 		element.click();
 		element.clear();
 		element.sendKeys(value);
 	}
-	
+
+	public String getUsername() {
+		return login;
+	}
+
 }

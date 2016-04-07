@@ -10,10 +10,10 @@
 	</ui:define>
 
 	<ui:define name="cuerpo">
-		<h:form>
+		<h:form id="trip-form">
 			<h1>#{msgs.modify_trip_form_title}</h1>
 			<ui:include src="/pages/snippets/viaje-form.xhtml" />
-			<p:commandButton value="#{msgs.modify}"
+			<p:commandButton id="submit" value="#{msgs.modify}"
 				action="#{trip.modificar}" update="@form" process="@form"/>
 		</h:form>
 	</ui:define>
