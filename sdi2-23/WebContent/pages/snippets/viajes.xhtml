@@ -22,12 +22,12 @@
             </p:outputPanel>
         </f:facet>
         
-		<p:column headerText="#{msgs.departure}" sortBy="#{entry.departure.city}"  filterBy="#{entry.departure.city}" footerText="contains" filterMatchMode="contains">
+		<p:column headerText="#{msgs.departure}" sortBy="#{entry.departure.city}"  filterBy="#{entry.departure.city}" filterMatchMode="contains">
 			#{entry.departure.city}
 		</p:column>
-		<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}" filterBy="#{entry.destination.city}" footerText="contains" filterMatchMode="contains">
+		<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}" filterBy="#{entry.destination.city}" filterMatchMode="contains">
 			#{entry.destination.city}</p:column>
-		<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}" filterBy="#{entry.availablePax}" footerText="equals" filterMatchMode="equals">
+		<p:column headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}" filterBy="#{entry.availablePax}" filterMatchMode="equals">
             <f:facet name="filter">
                 <p:spinner onchange="PF('tripsTable').filter()">
                     <f:converter converterId="javax.faces.Integer" />
@@ -35,7 +35,7 @@
             </f:facet>
 			#{entry.availablePax}
 		</p:column>
-		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  footerText="contains" filterMatchMode="contains">
+		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  filterMatchMode="contains">
 			#{entry.promoter.login}</p:column>
 		<p:column rendered="#{!user.publico}">
 			<p:commandButton actionListener="#{trips.cancelarPlaza(entry, user.currentUser)}" inmediate="true" 
