@@ -19,7 +19,7 @@ import com.sdi.tests.utils.SeleniumHelper;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SDI2_Tests {
-	private static final String url = "http://localhost:8280/sdi2-23/";
+	private static final String url = "http://localhost:8180/sdi2-23/";
 	private WebDriver driver;
 	private SeleniumHelper helper;
 
