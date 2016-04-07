@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h1>#{msgs.list_of_trips}</h1>
-	<h:form>
+	<h:form id="viajes">
 		<p:dataTable id="listadoViajesDisponibles" var="entry"
 				value="#{trips.listaViajes}" border="1"
 				rows="10" sortMode="multiple" paginator="true"

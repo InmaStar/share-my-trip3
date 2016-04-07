@@ -14,7 +14,7 @@
 			? '/pages/snippets/opcionesPublico.xhtml' 
 			: '/pages/snippets/opcionesRegistrado.xhtml'}" />
 			
-			<p:submenu style="float:right" label="#{msgs.language}">
+			<p:submenu id="lang" style="float:right" label="#{msgs.language}">
 				<p:menuitem id="linkespa" value="#{msgs.spanish_link}"
 					actionListener="#{localeSettings.setSpanish}" update="@all" />
 				<p:menuitem id="linkingles" value="#{msgs.english_link}"

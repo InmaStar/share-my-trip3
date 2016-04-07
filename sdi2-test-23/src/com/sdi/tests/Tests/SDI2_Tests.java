@@ -1,6 +1,8 @@
 package com.sdi.tests.Tests;
 
-import java.util.List;
+import static org.junit.Assert.assertTrue;
+
+import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,38 +10,36 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-//Ordenamos las pruebas por el nombre del método
+import com.sdi.tests.pageobjects.POLoginForm;
+import com.sdi.tests.utils.SeleniumHelper;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SDI2_Tests {
-
-	WebDriver driver;
-	List<WebElement> elementos = null;
-
-	public SDI2_Tests() {
-	}
+	private static final String url = "http://localhost:8280/sdi2-23/";
+	private WebDriver driver;
+	private SeleniumHelper helper;
 
 	@Before
-	public void run() {
-		// Creamos el driver para Firefox. Recomendable usar Firefox.
-		// driver = new FirefoxDriver();
-		// Vamos a la página principal de mi aplicación
-		// driver.get("http://localhost:8280/sdi2-n");
+	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.get(url);
+		helper = new SeleniumHelper(driver);
 	}
 
 	@After
-	public void end() {
-		// Cerramos el navegador
-		// driver.quit();
+	public void tearDown() {
+		driver.quit();
 	}
-
-	// PRUEBAS
 
 	// 1. [RegVal] Registro de Usuario con datos válidos.
 	@Test
 	public void t01_RegVal() {
-
+		helper.clickNavOption("main-nav:validarse"); 
+		new POLoginForm(driver, "usuario1", "usuario1").submit();
+		helper.waitForId("viajes");
+		assertTrue(helper.elementContains("main-nav:rol","usuario1"));
 	}
 
 	// 2. [RegInval] Registro de Usuario con datos inválidos (contraseñas
