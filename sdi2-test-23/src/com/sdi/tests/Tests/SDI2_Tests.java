@@ -151,7 +151,7 @@ public class SDI2_Tests {
 		helper.click("cuerpoForm:listadoViajesPromotor:0:cancel-checkbox");
 		helper.click("cuerpoForm:cancelarViajesBtn");
 		
-//		helper.waitForText("My promoted trips");
+		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
 		helper.elementContains("cuerpoForm:listadoViajesPromotor:0:status", 
 				"Cancelled");
 	}
@@ -167,11 +167,14 @@ public class SDI2_Tests {
 		helper.click("cuerpoForm:listadoViajesPromotor:1:cancel-checkbox");
 		helper.click("cuerpoForm:listadoViajesPromotor:3:cancel-checkbox");
 		helper.click("cuerpoForm:cancelarViajesBtn");
-		
+
+		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
 		helper.elementContains("cuerpoForm:listadoViajesPromotor:0:status", 
 				"Cancelled");
+		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
 		helper.elementContains("cuerpoForm:listadoViajesPromotor:1:status", 
 				"Cancelled");
+		helper.waitForId("cuerpoForm:listadoViajesPromotor:0:status");
 		helper.elementContains("cuerpoForm:listadoViajesPromotor:3:status", 
 				"Cancelled");
 	}
@@ -180,13 +183,45 @@ public class SDI2_Tests {
 	// admitido por el promotor.
 	@Test
 	public void t12_Ins1ViajeAceptVal() {
+		login("usuario2");
+		
+		helper.click("main-nav:nombre_app");
+		helper.click("viajes:listadoViajesDisponibles:0:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:check-seats");
+		helper.click("solicitudes:0:accept");
 
+		helper.waitForId("solicitudes:0:status");
+		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
 	}
 
 	// 13. [Ins2ViajeAceptVal] Inscribir en un viaje dos usuarios y ser
 	// admitidos los dos por el promotor.
 	@Test
 	public void t13_Ins2ViajeAceptVal() {
+		login("usuario2");
+		
+		helper.click("main-nav:nombre_app");
+		helper.click("viajes:listadoViajesDisponibles:0:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		
+		login("usuario3");
+		
+		helper.click("main-nav:nombre_app");
+		helper.click("viajes:listadoViajesDisponibles:0:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:0:check-seats");
+		helper.click("solicitudes:0:accept");
+		helper.click("solicitudes:1:accept");
+
+		helper.waitForId("solicitudes:0:status");
+		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
+		helper.waitForId("solicitudes:1:status");
+		assertTrue(helper.elementContains("solicitudes:1:status", "Accepted"));
 
 	}
 
@@ -195,7 +230,35 @@ public class SDI2_Tests {
 	// ese mismo viaje pero ya no pueda por falta de plazas.
 	@Test
 	public void t14_Ins3ViajeAceptInval() {
-
+		login("usuario2");
+		helper.click("main-nav:nombre_app");
+		assertTrue(helper.elementContains("viajes:listadoViajesDisponibles:2:available-pax", 
+				"2"));
+		helper.click("viajes:listadoViajesDisponibles:2:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		
+		login("usuario3");
+		helper.click("main-nav:nombre_app");
+		assertTrue(helper.elementContains("viajes:listadoViajesDisponibles:2:available-pax", 
+				"2"));
+		helper.click("viajes:listadoViajesDisponibles:2:solicitarPlaza");
+		helper.click("main-nav:cerrarSesion");
+		
+		login();
+		helper.click("main-nav:viajesPromotor");
+		helper.click("cuerpoForm:listadoViajesPromotor:2:check-seats");
+		helper.click("solicitudes:0:accept");
+		helper.click("solicitudes:1:accept");
+		helper.waitForId("solicitudes:0:status");
+		assertTrue(helper.elementContains("solicitudes:0:status", "Accepted"));
+		helper.waitForId("solicitudes:1:status");
+		assertTrue(helper.elementContains("solicitudes:1:status", "Accepted"));
+		helper.click("main-nav:cerrarSesion");
+		
+		login("usuario4");
+		helper.click("main-nav:nombre_app");
+		assertTrue(helper.elementContains("viajes:listadoViajesDisponibles:2:available-pax", 
+				"3"));
 	}
 
 	// 15. [CancelNoPromotorVal] Un usuario no promotor Cancela plaza.
@@ -251,8 +314,12 @@ public class SDI2_Tests {
 	}
 	
 	private void login() {
+		login("usuario1");
+	}
+	
+	private void login(String login) {
 		helper.click("main-nav:validarse");
-		new POLoginForm(driver, "usuario1", "usuario1").submit();
-		helper.waitForId("viajes");
+		new POLoginForm(driver, login, login).submit();
+		helper.waitForId("viajes");		
 	}
 }

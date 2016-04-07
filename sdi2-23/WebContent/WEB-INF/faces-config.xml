@@ -84,7 +84,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -140,7 +140,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -189,7 +189,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -219,7 +219,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>
@@ -241,7 +241,7 @@
 			<to-view-id>/pages/registrarViaje.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-action>#{user.closeSession}</from-action>
+			<from-action>#{user.cerrarSesion}</from-action>
 			<from-outcome>exito</from-outcome>
 			<to-view-id>/pages/listaViajesDisponibles.xhtml</to-view-id>
 		</navigation-case>

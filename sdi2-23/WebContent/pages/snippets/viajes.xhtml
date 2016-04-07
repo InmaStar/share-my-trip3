@@ -33,7 +33,7 @@
                     <f:converter converterId="javax.faces.Integer" />
                 </p:spinner>
             </f:facet>
-			#{entry.availablePax}
+			<h:outputText id="available-pax" value="#{entry.availablePax}"/>
 		</p:column>
 		<p:column headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  filterMatchMode="contains">
 			#{entry.promoter.login}</p:column>

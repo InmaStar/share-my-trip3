@@ -56,7 +56,7 @@
 			 <h:outputText id="status" value="#{trips.localizarTripStatus(entry.status) }" />
 			</p:column>
 			<p:column>
-			<p:commandButton action="solicitudes" inmediate="true" 
+			<p:commandButton id="check-seats" action="solicitudes" inmediate="true" 
 				value="#{msgs.check_seat_requests }" ajax="false">
 				<f:setPropertyActionListener target="#{trip.viaje}" value="#{entry}" />
 				</p:commandButton>

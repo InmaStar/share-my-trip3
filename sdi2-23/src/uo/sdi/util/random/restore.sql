@@ -37,3 +37,4 @@ INSERT INTO TTRIPS VALUES(128, '2016-04-15 03:07:0.000000', 1, '2016-04-09 02:46
 INSERT INTO TTRIPS VALUES(129, '2016-05-08 02:42:0.000000', 4, '2016-04-17 01:02:0.000000', '', 'Calle Mayor', 'Valencia', 'España', 'Comunidad Valenciana', 3.435936e+01, -2.663751e+01, '96679', '2016-05-01 01:47:0.000000', 'Calle Nosecuantos', 'Madrid', 'España', 'Madrid', -8.536669e+01, 1.263286e+02, '48492', 1.803434e+01, 4, 0, 503)
 INSERT INTO TTRIPS VALUES(130, '2016-06-20 20:58:0.000000', 3, '2016-05-06 18:22:0.000000', '', 'Calle Nosecuantos', 'Oviedo', 'España', 'Asturias', -1.914172e+01, -1.648558e+02, '48570', '2016-05-18 05:24:0.000000', 'Plaza de España', 'Barcelona', 'España', 'Cataluña', -6.365774e+01, 8.309143e+00, '43967', 6.374307e+01, 3, 0, 503)
 INSERT INTO TUSERS VALUES(504, 'test@mail.com', 'test', 'Name', 'test', 0, 'Surname')
+INSERT INTO TUSERS VALUES(505, 'usuario4@mail.com', 'usuario4', 'Luis', 'usuario4', 0, 'Fernanda')
