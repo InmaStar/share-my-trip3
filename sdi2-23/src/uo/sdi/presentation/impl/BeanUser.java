@@ -12,58 +12,58 @@ import uo.sdi.transport.UserDTO;
 
 @ManagedBean(name = "user")
 @SessionScoped
-public class BeanUser implements Serializable{
+public class BeanUser implements Serializable {
 
-    /**
+	/**
      * 
      */
-    private static final long serialVersionUID = 1L;
-    private UserDTO user;
+	private static final long serialVersionUID = 1L;
+	private UserDTO user;
 
-    public boolean isPublico() {
-	return user == null;
-    }
+	public boolean isPublico() {
+		return user == null;
+	}
 
-    public Long getId() {
-	return user.getId();
-    }
+	public Long getId() {
+		return user.getId();
+	}
 
-    public String getLogin() {
-	return user.getLogin();
-    }
+	public String getLogin() {
+		return user.getLogin();
+	}
 
-    public String getPassword() {
-	return user.getPassword();
-    }
+	public String getPassword() {
+		return user.getPassword();
+	}
 
-    public String getName() {
-	return user.getName();
-    }
+	public String getName() {
+		return user.getName();
+	}
 
-    public String getSurname() {
-	return user.getSurname();
-    }
+	public String getSurname() {
+		return user.getSurname();
+	}
 
-    public String getEmail() {
-	return user.getEmail();
-    }
+	public String getEmail() {
+		return user.getEmail();
+	}
 
-    public Set<TripDTO> getPromotedTrips() {
-	return user.getPromotedTrips();
-    }
+	public Set<TripDTO> getPromotedTrips() {
+		return user.getPromotedTrips();
+	}
 
-    public UserDTO getCurrentUser() {
-	return user;
-    }
+	public UserDTO getCurrentUser() {
+		return user;
+	}
 
-    public void setCurrentUser(UserDTO user) {
-	this.user = user;
-    }
+	public void setCurrentUser(UserDTO user) {
+		this.user = user;
+	}
 
-    public String cerrarSesion() {
-	user = null;
-	FacesContext.getCurrentInstance().getExternalContext()
-		.invalidateSession();
-	return "exito";
-    }
+	public String cerrarSesion() {
+		user = null;
+		FacesContext.getCurrentInstance().getExternalContext()
+				.invalidateSession();
+		return "exito";
+	}
 }

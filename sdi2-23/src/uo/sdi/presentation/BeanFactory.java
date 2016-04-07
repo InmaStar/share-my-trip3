@@ -4,7 +4,7 @@ import uo.sdi.presentation.impl.BeanTrips;
 import uo.sdi.presentation.impl.BeanUser;
 
 public interface BeanFactory {
-    BeanUser createBeanUser();
+	BeanUser createBeanUser();
 
-    BeanTrips createBeanTrips();
+	BeanTrips createBeanTrips();
 }
