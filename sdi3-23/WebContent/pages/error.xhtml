@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/templates/plantillaGeneral.xhtml">
+
+	<ui:define name="titleParam">
+		<f:param value="#{msgs.error_title}" />
+	</ui:define>
+
+	<ui:define name="barraNavegacion">
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<div class="jumbotron">
+			<h1>#{msgs.error_message}</h1>
+		</div>
+	</ui:define>
+	
+	<ui:define name="pie">
+			<h:form>
+				<p:commandButton id="listarViajes" 
+				action="#{trips.listadoDisponibles}" value="#{msgs.back_link}"
+				ajax="false"/>
+			</h:form>
+	</ui:define>
+	
+</ui:composition>

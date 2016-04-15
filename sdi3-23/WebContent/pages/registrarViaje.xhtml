@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/templates/plantillaGeneral.xhtml">
+
+	<ui:define name="titleParam">
+		<f:param value="#{msgs.register_trip_title}" />
+	</ui:define>
+
+	<ui:define name="cuerpo">
+		<h:form id="trip-form">
+			<h1>#{msgs.register_trip_form_title}</h1>
+			
+			<h:panelGroup>
+			<h:outputText value="#{msgs.generate_trip }"/>
+			<p:selectBooleanCheckbox id="precarga" value="#{trip.generado}">
+            	<p:ajax update="@form" listener="#{trip.generarViaje}" />
+        	</p:selectBooleanCheckbox>
+			</h:panelGroup>
+			
+			<ui:include src="/pages/snippets/viaje-form.xhtml" />
+			<p:commandButton id="submit" value="#{msgs.register}" 
+			action="#{trip.registrar(user.currentUser)}" 
+			update="@form" process="@form"/>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

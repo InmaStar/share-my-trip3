@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h1>#{msgs.list_of_trips}</h1>
+	<h:form id="viajes">
+		<p:dataTable id="listadoViajesDisponibles" var="entry"
+				value="#{trips.listaViajes}" border="1"
+				rows="10" sortMode="multiple" paginator="true"
+                paginatorTemplate="{PreviousPageLink} {PageLinks} {NextPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="10,20,30"
+                emptyMessage="#{msgs.no_trips_found}" 
+                filteredValue="#{trips.filteredTrips}"
+                widgetVar="tripsTable">
+ 
+        <f:facet name="header">
+            <p:outputPanel>
+                #{msgs.search_all}:
+                <p:inputText id="globalFilter" onkeyup="PF('tripsTable').filter()"/>
+            </p:outputPanel>
+        </f:facet>
+        
+		<p:column headerText="#{msgs.departure}" sortBy="#{entry.departure.city}"  filterBy="#{entry.departure.city}" filterMatchMode="contains">
+			#{entry.departure.city}
+		</p:column>
+		<p:column headerText="#{msgs.destination}" sortBy="#{entry.destination.city}" filterBy="#{entry.destination.city}" filterMatchMode="contains">
+			#{entry.destination.city}</p:column>
+		<p:column id="available-pax-header" headerText="#{msgs.available_seats}" sortBy="#{entry.availablePax}" filterBy="#{entry.availablePax}" filterMatchMode="equals">
+            <f:facet name="filter">
+                <p:spinner onchange="PF('tripsTable').filter()">
+                    <f:converter converterId="javax.faces.Integer" />
+                </p:spinner>
+            </f:facet>
+			<h:outputText id="available-pax" value="#{entry.availablePax}"/>
+		</p:column>
+		<p:column id="promoter" headerText="#{msgs.promoter}" sortBy="#{entry.promoter.login}" filterBy="#{entry.promoter.login}"  filterMatchMode="contains">
+			<h:outputText id="promoter-value" value="#{entry.promoter.login}" />
+		</p:column>
+		<p:column rendered="#{!user.publico}">
+			<p:commandButton actionListener="#{trips.cancelarPlaza(entry, user.currentUser)}" inmediate="true" 
+				rendered="#{entry.canCancelSeat(user.id)}" update="listadoViajesDisponibles" process="@this"
+				id="cancelarPlaza#{entry.id}" value="#{msgs.cancel_seat }"/>
+			<p:commandButton actionListener="#{trips.solicitarPlaza(entry, user.currentUser)}" inmediate="true"
+				rendered="#{entry.canRequestSeat(user.id)}" id="solicitarPlaza#{entry.id}"
+				value="#{msgs.request_seat}" update="listadoViajesDisponibles" process="@this"/>
+		</p:column>
+		</p:dataTable>
+	</h:form>
+</ui:composition>

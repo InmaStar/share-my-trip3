@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/templates/plantillaGeneral.xhtml">
+	
+	<ui:define name="titleParam">
+		<f:param value="#{msgs.signup_title}" />
+	</ui:define>
+	
+   <ui:define name="cuerpo">
+		<h:form id="signup-form">
+			<h1>#{msgs.signup_form_title}</h1>
+			<p:panelGrid id="grid" columns="2" cellpadding="5" class="ui-noborder">
+		
+				<p:outputLabel value="#{msgs.login_form_login_label}:" for="login" />
+				<h:panelGroup>
+					<p:inputText id="login" value="#{signup.login}" required="true"
+						requiredMessage="#{msgs.login_form_login_required}"
+						validator="#{signup.existeLogin}" >
+						<p:ajax update="@this msgLogin"/>
+						</p:inputText>
+					<p:message id="msgLogin" for="login" />
+				</h:panelGroup>
+		
+		
+				<p:outputLabel value="#{msgs.login_form_password_label}:"
+					for="password1" />
+				<h:panelGroup>
+					<p:password id="password1" value="#{signup.password1}"
+						required="true"
+						requiredMessage="#{msgs.login_form_password_required}"
+						validator="#{signup.passwordVacia}" >
+						<p:ajax update="msgPassword1"/>
+						</p:password>
+					<p:message id="msgPassword1" for="password1" />
+				</h:panelGroup>
+		
+		
+				<p:outputLabel value="#{msgs.signup_form_password2_label}:"
+					for="password2" />
+				<h:panelGroup>
+					<p:password id="password2" value="#{signup.password2}"
+						required="true"
+						requiredMessage="#{msgs.signup_form_password2_required}"
+						validator="#{signup.passwordRepetida}" >
+						<p:ajax update="msgPassword2"/>
+						</p:password>
+					<p:message id="msgPassword2" for="password2" />
+				</h:panelGroup>
+		
+		
+				<p:outputLabel value="#{msgs.signup_form_name_label}:" for="nombre" />
+				<h:panelGroup>
+					<p:inputText id="nombre" value="#{signup.nombre}" required="true"
+						requiredMessage="#{msgs.signup_form_name_required}"
+						validatorMessage="#{msgs.signup_form_name_required}">
+						<p:ajax update="msgNombre"/>
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					<p:message id="msgNombre" for="nombre" />
+				</h:panelGroup>
+		
+		
+				<p:outputLabel value="#{msgs.signup_form_surname_label}:"
+					for="apellidos" />
+				<h:panelGroup>
+					<p:inputText id="apellidos" value="#{signup.apellidos}"
+						required="true"
+						requiredMessage="#{msgs.signup_form_surname_required}"
+						validatorMessage="#{msgs.signup_form_surname_required}">
+						<p:ajax update="msgApellidos"/>
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					<p:message id="msgApellidos" for="apellidos" />
+				</h:panelGroup>
+		
+		
+				<p:outputLabel value="#{msgs.signup_form_email_label}:" for="email" />
+				<h:panelGroup>
+					<p:inputText id="email" value="#{signup.email}" required="true"
+						requiredMessage="#{msgs.signup_form_email_required}"
+						validatorMessage="#{msgs.signup_form_email_validator}">
+						<p:ajax update="@this msgEmail"/>
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</p:inputText>
+					<p:message id="msgEmail" for="email" />
+				</h:panelGroup>
+		
+				<p:commandButton id="submit" value="#{msgs.button_send}" update="grid"
+					process="@form" action="#{signup.registrar}">
+				</p:commandButton>
+				
+		
+			</p:panelGrid>
+		</h:form>
+		
+				<p:commandButton id="restore-db" value="#{msgs.button_restore}" action="#{signup.restore}">
+				</p:commandButton>
+	</ui:define>
+	
+</ui:composition>
