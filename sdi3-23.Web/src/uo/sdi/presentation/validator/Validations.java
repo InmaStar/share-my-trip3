@@ -7,7 +7,7 @@ import javax.faces.validator.ValidatorException;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.UserNotFoundException;
-import uo.sdi.infrastructure.Factories;
+import uo.sdi.infrastructure.BusinessFactories;
 import uo.sdi.transport.UserDTO;
 import alb.util.log.Log;
 
@@ -22,7 +22,7 @@ public class Validations {
 	public static void nonExistingLogin(UserDTO user, String errorMessage)
 			throws BusinessException {
 		try {
-			Factories.services.createUserService().findByLogin(user);
+			BusinessFactories.services.createUserService().findByLogin(user);
 		} catch (UserNotFoundException e) {
 			Log.info("El nombre de usuario [%s] no existe", user.getLogin());
 			throwValidatorException(errorMessage);
@@ -32,7 +32,7 @@ public class Validations {
 	public static void alreadyExistingLogin(UserDTO user, String errorMessage)
 			throws BusinessException {
 		try {
-			Factories.services.createUserService().findByLogin(user);
+		    	BusinessFactories.services.createUserService().findByLogin(user);
 			Log.info("El nombre de usuario [%s] ya existe", user.getLogin());
 			throwValidatorException(errorMessage);
 		} catch (UserNotFoundException e) {
@@ -41,7 +41,7 @@ public class Validations {
 
 	public static void correctPassword(UserDTO user, String errorMessage)
 			throws BusinessException {
-		UserDTO userFromDB = Factories.services.createUserService()
+		UserDTO userFromDB = BusinessFactories.services.createUserService()
 				.findByLogin(user);
 		if (!user.getPassword().equals(userFromDB.getPassword())) {
 			Log.info("La contraseña [%s] es incorrecta", user.getPassword());

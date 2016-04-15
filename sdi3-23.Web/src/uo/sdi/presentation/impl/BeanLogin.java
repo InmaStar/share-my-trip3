@@ -9,10 +9,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+
 import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.UserNotFoundException;
-import uo.sdi.infrastructure.Factories;
+import uo.sdi.infrastructure.BusinessFactories;
+import uo.sdi.infrastructure.PresentationFactories;
 import uo.sdi.presentation.validator.Validations;
 import uo.sdi.transport.UserDTO;
 import uo.sdi.util.bundle.BundleLoader;
@@ -31,7 +33,7 @@ public class BeanLogin implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		user = Factories.beans.createBeanUser();
+		user = PresentationFactories.beans.createBeanUser();
 	}
 
 	public BeanLogin() {
@@ -90,7 +92,7 @@ public class BeanLogin implements Serializable {
 
 	public String validar() {
 		try {
-			user.setCurrentUser(Factories.services.createUserService()
+			user.setCurrentUser(BusinessFactories.services.createUserService()
 					.findByLogin(userToBeLogged));
 			Log.info("El usuario [%s] se ha validado sin problemas",
 					userToBeLogged.getLogin());

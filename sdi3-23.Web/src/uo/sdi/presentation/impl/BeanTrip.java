@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import alb.util.log.Log;
-import uo.sdi.infrastructure.Factories;
+import uo.sdi.infrastructure.BusinessFactories;
 import uo.sdi.model.types.AddressPoint;
 import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.AddressPointDTO;
@@ -131,7 +131,7 @@ public class BeanTrip implements Serializable {
 
 	public String modificar() {
 		try {
-			viaje = Factories.services.createTripService().update(viaje);
+			viaje = BusinessFactories.services.createTripService().update(viaje);
 			Log.info("Se ha modificado el viaje [%d] con éxito", viaje.getId());
 			return "exito";
 		} catch (Exception e) {
@@ -144,7 +144,7 @@ public class BeanTrip implements Serializable {
 	public String registrar(UserDTO promotor) {
 		try {
 			viaje.setStatus(TripStatus.OPEN);
-			viaje = Factories.services.createTripService().insert(viaje,
+			viaje = BusinessFactories.services.createTripService().insert(viaje,
 					promotor);
 			Log.info("El promotor [%s] ha registrado "
 					+ "un nuevo viaje [%d] con éxito", promotor.getLogin(),
@@ -161,7 +161,7 @@ public class BeanTrip implements Serializable {
 		try {
 			Log.info("Se está dando plaza para el viaje "
 					+ "[%d] al usuario [%d]", viaje.getId(), userId);
-			viaje = Factories.services.createTripService().confirmApplication(
+			viaje = BusinessFactories.services.createTripService().confirmApplication(
 					userId, viaje);
 			return "exito";
 		} catch (Exception e) {
@@ -176,7 +176,7 @@ public class BeanTrip implements Serializable {
 		try {
 			Log.info("El usuario [%d] está cancelando plaza para el viaje "
 					+ "[%d]", user.getId(), viaje.getId());
-			viaje = Factories.services.createTripService().cancelSeat(
+			viaje = BusinessFactories.services.createTripService().cancelSeat(
 					user.getId(), viaje);
 			return "exito";
 		} catch (Exception e) {

@@ -12,7 +12,8 @@ import javax.faces.context.FacesContext;
 
 import alb.util.log.Log;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.infrastructure.Factories;
+import uo.sdi.infrastructure.BusinessFactories;
+import uo.sdi.infrastructure.PresentationFactories;
 import uo.sdi.presentation.validator.Validations;
 import uo.sdi.transport.UserDTO;
 import uo.sdi.util.bundle.BundleLoader;
@@ -37,7 +38,7 @@ public class BeanSignup implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		user = Factories.beans.createBeanUser();
+		user = PresentationFactories.beans.createBeanUser();
 	}
 
 	public String getLogin() {
@@ -131,7 +132,7 @@ public class BeanSignup implements Serializable {
 
 	public String registrar() {
 		try {
-			user.setCurrentUser(Factories.services.createUserService().save(
+			user.setCurrentUser(BusinessFactories.services.createUserService().save(
 					userToBeRegistered));
 			Log.info("Se ha registrado el usuario [%s]",
 					userToBeRegistered.getLogin());
@@ -147,7 +148,7 @@ public class BeanSignup implements Serializable {
 
 	public String restore() {
 		try {
-			Factories.services.createUserService().restoreDB();
+			BusinessFactories.services.createUserService().restoreDB();
 			Log.info("Restaurando base de datos");
 			return "exito";
 		} catch (Exception e) {

@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import alb.util.log.Log;
 import uo.sdi.business.TripService;
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.infrastructure.Factories;
+import uo.sdi.infrastructure.BusinessFactories;
 import uo.sdi.model.types.TripStatus;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -55,7 +56,7 @@ public class BeanTrips implements Serializable {
 
 	public String cancelarViaje(TripDTO viaje, Long userId) {
 		try {
-			TripService tripServ = Factories.services.createTripService();
+			TripService tripServ = BusinessFactories.services.createTripService();
 			tripServ.cancel(viaje);
 			Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
 			listadoPromotor(userId);
@@ -70,7 +71,7 @@ public class BeanTrips implements Serializable {
 	public void cancelarViajes(Long userId) {
 		for (TripDTO viaje : viajesSeleccionados) {
 			try {
-				Factories.services.createTripService().cancel(viaje);
+			    BusinessFactories.services.createTripService().cancel(viaje);
 				Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
 			} catch (Exception e) {
 				Log.debug(
@@ -143,7 +144,7 @@ public class BeanTrips implements Serializable {
 		try {
 			Log.info("Se está cancelando la plaza para el viaje "
 					+ "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
-			Factories.services.createUserService().cancelApplication(usuario,
+			BusinessFactories.services.createUserService().cancelApplication(usuario,
 					viaje);
 			listadoDisponibles();
 			return "exito";
@@ -159,7 +160,7 @@ public class BeanTrips implements Serializable {
 		try {
 			Log.info("Se está solicitando plaza para el viaje "
 					+ "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
-			Factories.services.createUserService().requestSeat(usuario, viaje);
+			BusinessFactories.services.createUserService().requestSeat(usuario, viaje);
 			listadoDisponibles();
 			return "exito";
 		} catch (Exception e) {
@@ -182,7 +183,7 @@ public class BeanTrips implements Serializable {
 	}
 
 	private List<TripDTO> cargarViajes() throws BusinessException {
-		List<TripDTO> listaViajes = Factories.services.createTripService()
+		List<TripDTO> listaViajes = BusinessFactories.services.createTripService()
 				.findAll();
 		Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
 				listaViajes.size());
