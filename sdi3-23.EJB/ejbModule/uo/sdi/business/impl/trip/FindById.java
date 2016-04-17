@@ -2,7 +2,7 @@ package uo.sdi.business.impl.trip;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.TripNotFoundException;
-import uo.sdi.business.impl.Command;
+import uo.sdi.business.impl.command.Command;
 import uo.sdi.persistence.TripFinder;
 import uo.sdi.transport.TripDTO;
 

@@ -1,7 +1,7 @@
 package uo.sdi.business.impl.user;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.impl.Command;
+import uo.sdi.business.impl.command.Command;
 import uo.sdi.persistence.util.Jpa;
 import uo.sdi.util.random.ScriptReader;
 

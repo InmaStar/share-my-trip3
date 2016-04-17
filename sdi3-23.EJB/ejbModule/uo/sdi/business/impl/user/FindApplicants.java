@@ -2,13 +2,14 @@ package uo.sdi.business.impl.user;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.TripNotFoundException;
-import uo.sdi.business.impl.Command;
+import uo.sdi.business.impl.command.Command;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import uo.sdi.persistence.TripFinder;
 import uo.sdi.transport.UserDTO;
 
 import javax.persistence.NoResultException;
+
 import java.util.ArrayList;
 import java.util.List;
 

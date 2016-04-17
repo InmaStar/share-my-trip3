@@ -7,11 +7,11 @@ import uo.sdi.business.UserService;
 public class ServicesFactoryImpl implements ServicesFactory {
     @Override
     public UserService createUserService() {
-        return new UserServiceImpl();
+        return new EjbUserService();
     }
 
     @Override
     public TripService createTripService() {
-        return new TripServiceImpl();
+        return new EjbTripService();
     }
 }

@@ -1,14 +1,16 @@
 package uo.sdi.business.impl;
 
-import uo.sdi.business.TripService;
 import uo.sdi.business.exception.BusinessException;
+import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.business.impl.trip.*;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
 
 import java.util.List;
 
-public class TripServiceImpl implements TripService {
+import javax.ejb.Stateless;
+@Stateless
+public class EjbTripService implements LocalTripService, RemoteTripService {
     @Override
     public TripDTO findById(Long id) throws BusinessException {
         return CommandExecutor.execute(new FindById(id));

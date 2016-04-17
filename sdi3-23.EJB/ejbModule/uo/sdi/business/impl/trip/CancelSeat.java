@@ -4,7 +4,7 @@ import javax.persistence.NoResultException;
 
 import uo.sdi.business.exception.BusinessException;
 import uo.sdi.business.exception.UserNotFoundException;
-import uo.sdi.business.impl.Command;
+import uo.sdi.business.impl.command.Command;
 import uo.sdi.model.Seat;
 import uo.sdi.model.Trip;
 import uo.sdi.model.User;

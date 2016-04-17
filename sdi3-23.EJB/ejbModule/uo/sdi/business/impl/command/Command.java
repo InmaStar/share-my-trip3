@@ -1,4 +1,4 @@
-package uo.sdi.business.impl;
+package uo.sdi.business.impl.command;
 
 import uo.sdi.business.exception.BusinessException;
 
