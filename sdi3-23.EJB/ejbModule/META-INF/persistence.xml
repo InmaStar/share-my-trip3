@@ -4,7 +4,7 @@
     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <persistence-unit name="sharemytrip" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="sharemytrip">
         <jta-data-source>java:jboss/datasources/ShareMyTripDS</jta-data-source>
         <mapping-file>META-INF/orm.xml</mapping-file>
         <properties>

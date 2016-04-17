@@ -1,46 +1,34 @@
 package uo.sdi.persistence.util;
 
+import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 
+@Stateless
 public class Jpa {
-    private static EntityManagerFactory emf = null;
-    private static ThreadLocal<EntityManager> emThread = new ThreadLocal<>();
+    private static final String EJB_JPA_KEY = "<clave JNDI del EJB Jpa>";
 
-    public static EntityManager createEntityManager() {
-        EntityManager entityManager = getEmf().createEntityManager();
-        emThread.set(entityManager);
-        return entityManager;
-
-    }
+    @PersistenceContext
+    private EntityManager mapper;
 
     public static EntityManager getManager() {
-        if (emThread.get() == null) {
-            createEntityManager();
-        }
-        return emThread.get();
+	return Jpa.getInstance().mapper;
     }
 
-    public static EntityManagerFactory getEmf() {
-        if (emf == null){
-            emf = jndiFind("java:/ShareMyTripJpaFactory");
-        }
-        return emf;
+    private static Jpa getInstance() {
+	return (Jpa) jndiFind(EJB_JPA_KEY);
     }
 
-    private static EntityManagerFactory jndiFind(String name) {
-        Context ctx;
-        try {
-            ctx = new InitialContext();
-
-            return (EntityManagerFactory) ctx.lookup(name);
-
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-
+    private static Object jndiFind(String name) {
+	Context ctx;
+	try {
+	    ctx = new InitialContext();
+	    return ctx.lookup(name);
+	} catch (NamingException e) {
+	    throw new RuntimeException(e);
+	}
     }
 }

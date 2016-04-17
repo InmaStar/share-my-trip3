@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 
 public class CommandExecutor {
     public static <T> T execute(Command<T> command) throws BusinessException {
-        EntityManager em = Jpa.createEntityManager();
+        EntityManager em = Jpa.getManager();
         EntityTransaction trx = em.getTransaction();
         trx.begin();
 
