@@ -2,8 +2,8 @@ package uo.sdi.business;
 
 public interface ServicesFactory {
 
-    UserService createUserService();
+    UserService getUserService();
 
-    TripService createTripService();
+    TripService getTripService();
 
 }

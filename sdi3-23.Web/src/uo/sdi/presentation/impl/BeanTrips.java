@@ -21,181 +21,182 @@ import uo.sdi.util.bundle.BundleLoader;
 @ManagedBean(name = "trips")
 @SessionScoped
 public class BeanTrips implements Serializable {
-	/**
+    /**
      * 
      */
-	private static final long serialVersionUID = 1L;
-	List<TripDTO> viajes = new ArrayList<TripDTO>();
-	List<TripDTO> viajesSeleccionados;
-	List<TripDTO> filteredTrips;
+    private static final long serialVersionUID = 1L;
+    List<TripDTO> viajes = new ArrayList<TripDTO>();
+    List<TripDTO> viajesSeleccionados;
+    List<TripDTO> filteredTrips;
 
-	public BeanTrips() {
-		listadoDisponibles();
-		viajesSeleccionados = new ArrayList<TripDTO>();
+    public BeanTrips() {
+	listadoDisponibles();
+	viajesSeleccionados = new ArrayList<TripDTO>();
+    }
+
+    public List<TripDTO> getListaViajes() {
+	return viajes;
+    }
+
+    public List<TripDTO> getSeleccionados() {
+	return viajesSeleccionados;
+    }
+
+    public boolean ningunSeleccionado() {
+	return viajesSeleccionados.isEmpty();
+    }
+
+    public void seleccionar(TripDTO viaje) {
+	if (viajesSeleccionados.contains(viaje)) {
+	    viajesSeleccionados.remove(viaje);
+	} else {
+	    viajesSeleccionados.add(viaje);
 	}
+    }
 
-	public List<TripDTO> getListaViajes() {
-		return viajes;
+    public String cancelarViaje(TripDTO viaje, Long userId) {
+	try {
+	    TripService tripServ = BusinessFactories.services.getTripService();
+	    tripServ.cancel(viaje);
+	    Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
+	    listadoPromotor(userId);
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]", e
+		    .getClass().toString(), viaje.getId(), e.getMessage());
+	    return "error";
 	}
+    }
 
-	public List<TripDTO> getSeleccionados() {
-		return viajesSeleccionados;
+    public void cancelarViajes(Long userId) {
+	for (TripDTO viaje : viajesSeleccionados) {
+	    try {
+		BusinessFactories.services.getTripService().cancel(viaje);
+		Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
+	    } catch (Exception e) {
+		Log.debug(
+			"Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]",
+			e.getClass().toString(), viaje.getId(), e.getMessage());
+	    }
 	}
+	listadoPromotor(userId);
+    }
 
-	public boolean ningunSeleccionado() {
-		return viajesSeleccionados.isEmpty();
-	}
-
-	public void seleccionar(TripDTO viaje) {
-		if (viajesSeleccionados.contains(viaje)) {
-			viajesSeleccionados.remove(viaje);
-		} else {
-			viajesSeleccionados.add(viaje);
+    public String listadoDisponibles() {
+	try {
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for (TripDTO viaje : listaViajes) {
+		if (viaje.isVisible()) {
+		    viajes.add(viaje);
 		}
+	    }
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando "
+		    + "los viajes disponibles: [%s]", e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
 	}
+    }
 
-	public String cancelarViaje(TripDTO viaje, Long userId) {
-		try {
-			TripService tripServ = BusinessFactories.services.createTripService();
-			tripServ.cancel(viaje);
-			Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
-			listadoPromotor(userId);
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]", e
-					.getClass().toString(), viaje.getId(), e.getMessage());
-			return "error";
+    public String listadoRelacionados(Long userId) {
+	try {
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for (TripDTO viaje : listaViajes) {
+		if (viaje.hasRelationship(userId)) {
+		    viajes.add(viaje);
 		}
+	    }
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando "
+		    + "los viajes relacionados: [%s]", e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
 	}
+    }
 
-	public void cancelarViajes(Long userId) {
-		for (TripDTO viaje : viajesSeleccionados) {
-			try {
-			    BusinessFactories.services.createTripService().cancel(viaje);
-				Log.info("El viaje [%d] ha sido cancelado", viaje.getId());
-			} catch (Exception e) {
-				Log.debug(
-						"Ha ocurrido una [%s] cancelando el viaje [%d]: [%s]",
-						e.getClass().toString(), viaje.getId(), e.getMessage());
-			}
+    public String listadoPromotor(Long userId) {
+	try {
+	    List<TripDTO> listaViajes = cargarViajes();
+	    viajes = new ArrayList<TripDTO>();
+	    for (TripDTO viaje : listaViajes) {
+		if (viaje.isPromoter(userId)) {
+		    viajes.add(viaje);
 		}
-		listadoPromotor(userId);
+	    }
+
+	    // inicializar la lista de seleccionados
+	    viajesSeleccionados.clear();
+
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] listando "
+		    + "los viajes relacionados: [%s]", e.getClass().toString(),
+		    e.getMessage());
+	    return "error";
 	}
+    }
 
-	public String listadoDisponibles() {
-		try {
-			List<TripDTO> listaViajes = cargarViajes();
-			viajes = new ArrayList<TripDTO>();
-			for (TripDTO viaje : listaViajes) {
-				if (viaje.isVisible()) {
-					viajes.add(viaje);
-				}
-			}
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] listando "
-					+ "los viajes disponibles: [%s]", e.getClass().toString(),
-					e.getMessage());
-			return "error";
-		}
+    public String cancelarPlaza(TripDTO viaje, UserDTO usuario) {
+	try {
+	    Log.info("Se está cancelando la plaza para el viaje "
+		    + "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
+	    BusinessFactories.services.getUserService().cancelApplication(
+		    usuario, viaje);
+	    listadoDisponibles();
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] cancelando la plaza "
+		    + "del usuario [%d] en el viaje [%d]: [%s]", e.getClass()
+		    .toString(), usuario.getId(), viaje.getId(), e.getMessage());
+	    return "error";
 	}
+    }
 
-	public String listadoRelacionados(Long userId) {
-		try {
-			List<TripDTO> listaViajes = cargarViajes();
-			viajes = new ArrayList<TripDTO>();
-			for (TripDTO viaje : listaViajes) {
-				if (viaje.hasRelationship(userId)) {
-					viajes.add(viaje);
-				}
-			}
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] listando "
-					+ "los viajes relacionados: [%s]", e.getClass().toString(),
-					e.getMessage());
-			return "error";
-		}
+    public String solicitarPlaza(TripDTO viaje, UserDTO usuario) {
+	try {
+	    Log.info("Se está solicitando plaza para el viaje "
+		    + "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
+	    BusinessFactories.services.getUserService().requestSeat(usuario,
+		    viaje);
+	    listadoDisponibles();
+	    return "exito";
+	} catch (Exception e) {
+	    Log.debug("Ha ocurrido una [%s] solicitando plaza "
+		    + "para el usuario [%d] en el viaje [%d]: [%s]", e
+		    .getClass().toString(), usuario.getId(), viaje.getId(), e
+		    .getMessage());
+	    return "error";
 	}
+    }
 
-	public String listadoPromotor(Long userId) {
-		try {
-			List<TripDTO> listaViajes = cargarViajes();
-			viajes = new ArrayList<TripDTO>();
-			for (TripDTO viaje : listaViajes) {
-				if (viaje.isPromoter(userId)) {
-					viajes.add(viaje);
-				}
-			}
+    public String localizarTripStatus(TripStatus status) {
+	ResourceBundle bundle = BundleLoader.load("msgs");
+	return bundle.getString(status.name());
+    }
 
-			// inicializar la lista de seleccionados
-			viajesSeleccionados.clear();
+    public String localizarTripRelationship(UserTripRelationship relationship) {
+	ResourceBundle bundle = BundleLoader.load("msgs");
+	return bundle.getString(relationship.name());
+    }
 
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] listando "
-					+ "los viajes relacionados: [%s]", e.getClass().toString(),
-					e.getMessage());
-			return "error";
-		}
-	}
+    private List<TripDTO> cargarViajes() throws BusinessException {
+	List<TripDTO> listaViajes = BusinessFactories.services.getTripService()
+		.findAll();
+	Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
+		listaViajes.size());
+	return listaViajes;
+    }
 
-	public String cancelarPlaza(TripDTO viaje, UserDTO usuario) {
-		try {
-			Log.info("Se está cancelando la plaza para el viaje "
-					+ "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
-			BusinessFactories.services.createUserService().cancelApplication(usuario,
-					viaje);
-			listadoDisponibles();
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] cancelando la plaza "
-					+ "del usuario [%d] en el viaje [%d]: [%s]", e.getClass()
-					.toString(), usuario.getId(), viaje.getId(), e.getMessage());
-			return "error";
-		}
-	}
+    public List<TripDTO> getFilteredTrips() {
+	return filteredTrips;
+    }
 
-	public String solicitarPlaza(TripDTO viaje, UserDTO usuario) {
-		try {
-			Log.info("Se está solicitando plaza para el viaje "
-					+ "[%d] al usuario [%d]", viaje.getId(), usuario.getId());
-			BusinessFactories.services.createUserService().requestSeat(usuario, viaje);
-			listadoDisponibles();
-			return "exito";
-		} catch (Exception e) {
-			Log.debug("Ha ocurrido una [%s] solicitando plaza "
-					+ "para el usuario [%d] en el viaje [%d]: [%s]", e
-					.getClass().toString(), usuario.getId(), viaje.getId(), e
-					.getMessage());
-			return "error";
-		}
-	}
-
-	public String localizarTripStatus(TripStatus status) {
-		ResourceBundle bundle = BundleLoader.load("msgs");
-		return bundle.getString(status.name());
-	}
-
-	public String localizarTripRelationship(UserTripRelationship relationship) {
-		ResourceBundle bundle = BundleLoader.load("msgs");
-		return bundle.getString(relationship.name());
-	}
-
-	private List<TripDTO> cargarViajes() throws BusinessException {
-		List<TripDTO> listaViajes = BusinessFactories.services.createTripService()
-				.findAll();
-		Log.info("Obtenida lista de viajes conteniendo [%d] viajes",
-				listaViajes.size());
-		return listaViajes;
-	}
-
-	public List<TripDTO> getFilteredTrips() {
-		return filteredTrips;
-	}
-
-	public void setFilteredTrips(List<TripDTO> filteredTrips) {
-		this.filteredTrips = filteredTrips;
-	}
+    public void setFilteredTrips(List<TripDTO> filteredTrips) {
+	this.filteredTrips = filteredTrips;
+    }
 
 }
