@@ -6,11 +6,17 @@ import uo.sdi.model.User;
 import uo.sdi.model.types.TravelStatus;
 import uo.sdi.model.types.TripStatus;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TripDTO {
+public class TripDTO implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 5941148050847162374L;
+    
     private Long id;
     private AddressPointDTO departure;
     private AddressPointDTO destination;

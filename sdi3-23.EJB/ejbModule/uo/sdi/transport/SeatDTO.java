@@ -1,9 +1,16 @@
 package uo.sdi.transport;
 
+import java.io.Serializable;
+
 import uo.sdi.model.Seat;
 import uo.sdi.model.types.TravelStatus;
 
-public class SeatDTO {
+public class SeatDTO implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5142388083062490133L;
+    
     private UserDTO user;
     private TripDTO trip;
     private TravelStatus status;

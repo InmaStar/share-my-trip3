@@ -1,8 +1,15 @@
 package uo.sdi.transport;
 
+import java.io.Serializable;
+
 import uo.sdi.model.types.AddressPoint;
 
-public class AddressPointDTO {
+public class AddressPointDTO implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8105043244168605325L;
+    
     private String address;
     private String city;
     private String state;

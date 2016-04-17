@@ -5,11 +5,17 @@ import uo.sdi.model.Trip;
 import uo.sdi.model.User;
 import uo.sdi.model.types.UserStatus;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1508956227600232980L;
+    
     private Long id;
     private String login;
     private String password;
