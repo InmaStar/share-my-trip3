@@ -14,13 +14,13 @@ public class RemoteEjbServicesLocator implements ServicesFactory {
 	    "sdi3-23/" 
 	    + "sdi3-23.EJB/" 
 	    + "EjbTripService!"
-	    + "com.sdi.business.impl.RemoteTripService";
+	    + "uo.sdi.business.impl.RemoteTripService";
 
     private static final String USER_SERVICE_JNDI_KEY = 
 	    "sdi3-23/" 
 	    + "sdi3-23.EJB/" 
 	    + "EjbUserService!"
-	    + "com.sdi.business.impl.RemoteUserService";
+	    + "uo.sdi.business.impl.RemoteUserService";
 
     @Override
     public UserService getUserService() {
