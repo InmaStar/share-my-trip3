@@ -15,7 +15,6 @@ public class FindById implements Command<TripDTO> {
         this.id = id;
     }
 
-
     @Override
     public TripDTO execute() throws BusinessException {
         try {

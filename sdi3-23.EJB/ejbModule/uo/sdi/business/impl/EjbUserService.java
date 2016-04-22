@@ -1,7 +1,6 @@
 package uo.sdi.business.impl;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.business.impl.user.*;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -13,64 +12,64 @@ import javax.ejb.Stateless;
 public class EjbUserService implements RemoteUserService, LocalUserService {
     @Override
     public UserDTO findById(Long id) throws BusinessException {
-        return CommandExecutor.execute(new FindById(id));
+        return new FindById(id).execute();
     }
 
     @Override
     public UserDTO findByLoginAndPassword(UserDTO user)
             throws BusinessException {
-        return CommandExecutor.execute(new FindByLoginAndPassword(user));
+        return new FindByLoginAndPassword(user).execute();
     }
 
     @Override
     public UserDTO findByLogin(UserDTO user) throws BusinessException {
-        return CommandExecutor.execute(new FindByLogin(user));
+        return new FindByLogin(user).execute();
     }
 
     @Override
     public UserDTO save(UserDTO user) throws BusinessException {
-        return CommandExecutor.execute(new SaveUser(user));
+        return new SaveUser(user).execute();
     }
 
     @Override
     public UserDTO update(UserDTO user) throws BusinessException {
-        return CommandExecutor.execute(new UpdateUser(user));
+        return new UpdateUser(user).execute();
     }
 
     @Override
     public UserDTO requestSeat(UserDTO user, TripDTO trip)
             throws BusinessException {
-        return CommandExecutor.execute(new RequestSeat(user, trip));
+        return new RequestSeat(user, trip).execute();
     }
 
     @Override
     public UserDTO cancelApplication(UserDTO user, TripDTO trip)
             throws BusinessException {
-        return CommandExecutor.execute(new CancelApplication(user, trip));
+        return new CancelApplication(user, trip).execute();
     }
 
     @Override
     public UserDTO delete(UserDTO user) throws BusinessException {
-        return CommandExecutor.execute(new DeleteUser(user));
+        return new DeleteUser(user).execute();
     }
 
     @Override
     public List<UserDTO> findApplicantsByTripId(Long tripId) throws BusinessException {
-        return CommandExecutor.execute(new FindApplicants(tripId));
+        return new FindApplicants(tripId).execute();
     }
 
     @Override
     public UserDTO confirmApplication(Long userId, TripDTO trip) throws BusinessException {
-        return CommandExecutor.execute(new ConfirmApplication(userId, trip));
+        return new ConfirmApplication(userId, trip).execute();
     }
 
     @Override
     public UserDTO cancelSeat(Long userId, TripDTO trip) throws BusinessException {
-        return CommandExecutor.execute(new CancelSeat(userId, trip));
+        return new CancelSeat(userId, trip).execute();
     }
 
 	@Override
 	public void restoreDB() throws BusinessException {
-		CommandExecutor.execute(new RestoreDB());
+		new RestoreDB();
 	}
 }

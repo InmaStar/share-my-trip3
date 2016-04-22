@@ -1,7 +1,6 @@
 package uo.sdi.business.impl;
 
 import uo.sdi.business.exception.BusinessException;
-import uo.sdi.business.impl.command.CommandExecutor;
 import uo.sdi.business.impl.trip.*;
 import uo.sdi.transport.TripDTO;
 import uo.sdi.transport.UserDTO;
@@ -13,39 +12,39 @@ import javax.ejb.Stateless;
 public class EjbTripService implements LocalTripService, RemoteTripService {
     @Override
     public TripDTO findById(Long id) throws BusinessException {
-        return CommandExecutor.execute(new FindById(id));
+        return new FindById(id).execute();
     }
 
     @Override
     public List<TripDTO> findAll() throws BusinessException {
-        return CommandExecutor.execute(new FindAll());
+        return new FindAll().execute();
     }
 
     @Override
     public TripDTO update(TripDTO viaje) throws BusinessException {
-        return CommandExecutor.execute(new UpdateTrip(viaje));
+        return new UpdateTrip(viaje).execute();
     }
 
     @Override
     public TripDTO insert(TripDTO viaje, UserDTO promotor)
             throws BusinessException {
-        return CommandExecutor.execute(new InsertTrip(viaje, promotor));
+        return new InsertTrip(viaje, promotor).execute();
     }
 
     @Override
     public TripDTO cancel(TripDTO viaje) throws BusinessException {
-        return CommandExecutor.execute(new CancelTrip(viaje));
+        return new CancelTrip(viaje).execute();
     }
 
     @Override
     public TripDTO confirmApplication(Long userId, TripDTO viaje)
 	    throws BusinessException {
-	return CommandExecutor.execute(new ConfirmApplication(userId, viaje));
+	return new ConfirmApplication(userId, viaje).execute();
     }
 
     @Override
     public TripDTO cancelSeat(Long userId, TripDTO viaje)
 	    throws BusinessException {
-	return CommandExecutor.execute(new CancelSeat(userId, viaje));
+	return new CancelSeat(userId, viaje).execute();
     }
 }
